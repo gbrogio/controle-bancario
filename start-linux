@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Remove o diretório bin e cria um novo
+rm -rf bin
+mkdir bin
+
+# Encontra todos os arquivos .c no diretório src e seus subdiretórios
+SRC_FILES=$(find src -name '*.c')
+
+# Compila o código-fonte
+gcc -Wall -Wextra -Wpedantic $SRC_FILES -o bin/main
+
+# Verifica o sistema operacional e executa o programa
+if [ "$(uname)" = "Linux" ]; then
+    echo "Executando no Linux..."
+    ./bin/main
+elif [ "$(uname)" = "MINGW32_NT-*" ] || [ "$(uname)" = "MINGW64_NT-*" ]; then
+    echo "Executando no WSL..."
+    ./bin/main
+else
+    echo "Sistema operacional não suportado."
+    exit 1
+fi
