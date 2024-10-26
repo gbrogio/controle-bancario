@@ -11,8 +11,6 @@
 
 // utils
 #include "utils/screen/screen.h"
-#include "utils/cls/cls.h"
-#include "utils/go-to/go-to.h"
 
 // global
 #include "global/global.h"
@@ -20,7 +18,7 @@
 // screens
 #include "screens/help/help.h"
 #include "screens/main/main.h"
-#include "screens/menu/menu.h"
+#include "screens/login/login.h"
 
 int main() {
   setlocale(LC_ALL, "Portuguese");
@@ -33,7 +31,7 @@ int main() {
     else if (c == 'x') break;
     else {
       start = 1;
-      c = menuScreen();
+      c = loginScreen();
       if (c == 'b') c = '0';
       continue;
     }
