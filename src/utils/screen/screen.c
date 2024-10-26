@@ -2,7 +2,6 @@
 #include <string.h>
 
 #include "screen.h"
-#include "../go-to/go-to.h"
 #include "../../global/global.h"
 
 void buildScreenBorder() {
