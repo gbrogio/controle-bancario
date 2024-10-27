@@ -11,8 +11,8 @@ typedef void *GenericType;
 void writeText(char *text, int x, int y, int disableProporcion);
 char command();
 void clearInputBuffer();
-void getInput(char mask[], int length, GenericType input, char err[], int x,
-              int y, int validation());
+void getInput(char mask[], GenericType input, char err[], int x,
+              int y, int validation(GenericType i, GenericType a), GenericType args);
 void printMessage(char msg[]);
 void clearFooter();
 int noValid();

@@ -112,12 +112,13 @@ void printMessage(char msg[]) {
 
   @example
   int input;
-  getInput("%d", 50, &input, "Por favor digite um numero valido", 0, 0);
+  getInput("%d", &input, "Por favor digite um numero valido", 0, 0);
 */
-void getInput(char mask[], int length, GenericType input, char err[], int x,
-              int y, int validation())
+void getInput(char mask[], GenericType input, char err[], int x,
+              int y, int validation(GenericType i, GenericType a), GenericType args)
 {
   int hasError;
+  int validationResult;
   do
   {
     for (int i = 0; i < SCREEN_WIDTH - x - 2; i++)
@@ -130,13 +131,14 @@ void getInput(char mask[], int length, GenericType input, char err[], int x,
     goTo(x, y);
 
     hasError = scanf(mask, input);
-    if (hasError != 1 || validation() == 1)
+    validationResult = validation(input, args);
+    if (hasError != 1 || validationResult == 1)
     {
       printMessage(err);
       continue;
     }
     clearInputBuffer();
-  } while (hasError != 1 || validation() == 1);
+  } while (hasError != 1 || validationResult == 1);
 }
 
 /*

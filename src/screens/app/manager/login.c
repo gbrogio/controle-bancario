@@ -15,9 +15,9 @@ int loginManagerScreen() {
   char code[50];
   char password[50];
 
-  getInput("%s", 50, code, "Digite um codigo valido! Pressione 'Enter' para continuar...", SCREEN_WIDTH / 2, 12, noValid);
+  getInput("%s", code, "Digite um codigo valido! Pressione 'Enter' para continuar...", SCREEN_WIDTH / 2, 12, noValid, NULL);
   if (strcmp(code, "0") == 0) return 2;
-  getInput("%s", 50, password, "Digite uma senha valida! Pressione 'Enter' para continuar...", SCREEN_WIDTH / 2, 14, noValid);
+  getInput("%s", password, "Digite uma senha valida! Pressione 'Enter' para continuar...", SCREEN_WIDTH / 2, 14, noValid, NULL);
   
   clearFooter();
   char confirmation = confirm("Deseja entrar com essas credenciais?");
