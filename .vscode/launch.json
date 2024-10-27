@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/gbrogio/university/data-structure/controle-bancario/src/global",
-      "program": "/home/gbrogio/university/data-structure/controle-bancario/src/global/build/Debug/outDebug",
+      "cwd": "/home/gbrogio/university/data-structure/controle-bancario",
+      "program": "/home/gbrogio/university/data-structure/controle-bancario/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
