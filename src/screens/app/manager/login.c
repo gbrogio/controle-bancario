@@ -21,12 +21,13 @@ int loginManagerScreen() {
   
   clearFooter();
   char confirmation = confirm("Deseja entrar com essas credenciais?");
-  if (confirmation != 's') return 2;
+  if (confirmation != 's') return 0;
 
   if (strcmp(code, ADM_CODE) == 0 && strcmp(password, ADM_PASSWORD) == 0) {
     return 1;
   }
 
-  printError("Codigo ou senha invalidos!");
+  clearFooter();
+  printMessage("Codigo ou senha invalidos!");
   return 0;
 }

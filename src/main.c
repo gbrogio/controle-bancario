@@ -27,7 +27,11 @@ int main() {
 
   do {
     if ((!c || c == 'b') && start == 0) mainScreen();
-    else if (c == 'h') helpScreen();
+    else if (c == 'h') {
+      helpScreen();
+      c = 'b';
+      continue;
+    }
     else if (c == 'x') break;
     else {
       start = 1;
@@ -35,8 +39,8 @@ int main() {
       if (c == 'b') c = '0';
       continue;
     }
-
-    if (!c || c == 'b' || c == 'h') c = command();
+    clearFooter();
+    if (!c || c == 'b') c = command();
   } while (c != 'x');
 
   return 0;

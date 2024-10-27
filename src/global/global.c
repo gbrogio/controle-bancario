@@ -96,8 +96,8 @@ void clearFooter()
     Print an error message on the footer of the terminal
     @param err The error message to be displayed
 */
-void printError(char err[]) { 
-  writeText(err, 0, SCREEN_HEIGHT - 1, 0);
+void printMessage(char msg[]) { 
+  writeText(msg, 0, SCREEN_HEIGHT - 1, 0);
   awaitPressAnyKey();
 }
 
@@ -129,13 +129,13 @@ void getInput(char mask[], int length, GenericType input, char err[], int x,
 
     goTo(x, y);
 
-    clearInputBuffer();
     hasError = scanf(mask, input);
     if (hasError != 1 || validation() == 1)
     {
-      printError(err);
-      getchar();
+      printMessage(err);
+      continue;
     }
+    clearInputBuffer();
   } while (hasError != 1 || validation() == 1);
 }
 
@@ -155,11 +155,19 @@ char confirm(char msg[]) {
     return tolower(c);
 }
 
+/*
+  Go to a specific position on the terminal
+  @param x The x position
+  @param y The y position
+*/
 void goTo(int x, int y)
 {
   printf("\033[%d;%dH", y + 1, x + 1);
 }
 
+/*
+  Await for the user to press any key
+*/
 void awaitPressAnyKey() {
   char c;
   clearInputBuffer();

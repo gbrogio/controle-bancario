@@ -13,7 +13,7 @@ char command();
 void clearInputBuffer();
 void getInput(char mask[], int length, GenericType input, char err[], int x,
               int y, int validation());
-void printError(char err[]);
+void printMessage(char msg[]);
 void clearFooter();
 int noValid();
 char confirm(char msg[]);

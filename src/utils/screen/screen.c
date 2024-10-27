@@ -82,3 +82,15 @@ void buildScreen() {
   buildScreenInfo(APP_NAME);
   buildScreenBorder(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
+
+char controlSubScreen(char screen()) {
+  char option;
+  do {
+    option = screen();
+    if (option == 'h') {
+      helpScreen();
+      continue;
+    }
+  } while (option != 'b' && option != 'x');
+  return option;
+}
