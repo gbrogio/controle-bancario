@@ -1,6 +1,7 @@
 #ifndef MANAGE_H
 #define MANAGE_H
+#include "../../../utils/account/account.h"
 
-char managerScreen();
+char managerScreen(AccountList *list);
 
 #endif

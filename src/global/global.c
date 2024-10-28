@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 
 #include "global.h"
 
@@ -16,6 +17,7 @@ void cls() {
 
 char command() {
   char c;
+  clearFooter();
   writeText("COMANDO:", 0, SCREEN_HEIGHT - 1, 0);
   writeText("x - SAIR", SCREEN_WIDTH, SCREEN_HEIGHT - 1, 0);
   goTo(11, SCREEN_HEIGHT - 1);
@@ -112,7 +114,7 @@ void printMessage(char msg[]) {
 
   @example
   int input;
-  getInput("%d", &input, "Por favor digite um numero valido", 0, 0);
+  getInput("%d", &input, "Por favor digite um numero valido", 0, 0, noValid, NULL;
 */
 void getInput(char mask[], GenericType input, char err[], int x,
               int y, int validation(GenericType i, GenericType a), GenericType args)
@@ -170,8 +172,11 @@ void goTo(int x, int y)
 /*
   Await for the user to press any key
 */
-void awaitPressAnyKey() {
+char awaitPressAnyKey() {
   char c;
-  clearInputBuffer();
+  while ((c = getchar()) != '\n') {
+    if (c != ' ') return c;
+  }
   scanf("%c", &c);
+  return tolower(c);
 }

@@ -1,6 +1,8 @@
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 
+#include "../../global/global.h"
+
 /* Schema of accounts. Used on `AccountListItem` structure */
 typedef struct
 {
@@ -46,6 +48,10 @@ void popAccount(AccountList *list);
 void alterAccountInPostion(AccountList *list, Account account, int position);
 int findAccountPosition(AccountList *list, int code);
 Account getAccountByCode(AccountList *list, int code);
-AccountList initializeAccountList();
+AccountList *initializeAccountList();
+Account createAccount(AccountList *list, int update, int input);
+void printAccount(Account account);
+Account printAccountInPosition(AccountList *list, int position);
+int validationCode(GenericType i, GenericType a);
 
 #endif

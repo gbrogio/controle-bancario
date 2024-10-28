@@ -3,6 +3,8 @@
 
 #include "screen.h"
 #include "../../global/global.h"
+#include "../../screens/help/help.h"
+#include "../account/account.h"
 
 void buildScreenBorder() {
   // header
@@ -83,10 +85,10 @@ void buildScreen() {
   buildScreenBorder(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-char controlSubScreen(char screen()) {
+char controlSubScreen(AccountList *list, char screen(AccountList *list)) {
   char option;
   do {
-    option = screen();
+    option = screen(list);
     if (option == 'h') {
       helpScreen();
       continue;

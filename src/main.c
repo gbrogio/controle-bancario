@@ -19,8 +19,11 @@
 #include "screens/help/help.h"
 #include "screens/main/main.h"
 #include "screens/login/login.h"
+#include "utils/account/account.h"
 
 int main() {
+  AccountList *list = initializeAccountList();
+
   setlocale(LC_ALL, "Portuguese");
   int start = 0;
   char c;
@@ -35,7 +38,7 @@ int main() {
     else if (c == 'x') break;
     else {
       start = 1;
-      c = loginScreen();
+      c = loginScreen(list);
       if (c == 'b') c = '0';
       continue;
     }

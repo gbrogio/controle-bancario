@@ -3,8 +3,9 @@
 #include "../../utils/screen/screen.h"
 #include "../app/manager/login.h"
 #include "../app/manager/screen.h"
+#include "../../utils/account/account.h"
 
-char loginScreen() {
+char loginScreen(AccountList *list) {
   char option;
   cls();
   writeText("ENTRAR", SCREEN_WIDTH / 2, 4, 0);
@@ -21,7 +22,7 @@ char loginScreen() {
       status = loginManagerScreen();
     } while (status == 0);
     if (status != 1) return 'b';
-    return controlSubScreen(managerScreen);
+    return controlSubScreen(list, managerScreen);
   } 
   
   return option;
