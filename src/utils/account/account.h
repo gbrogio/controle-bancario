@@ -8,9 +8,9 @@ typedef struct
 {
   int code;
   char bank[50];
-  char agency[10];
+  char agency[6];
   char number[20];
-  char type[20];
+  char type;
   double balance;
   double limit;
   char status[10];

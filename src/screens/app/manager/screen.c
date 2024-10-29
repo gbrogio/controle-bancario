@@ -18,7 +18,7 @@ void registerAccountAtEnd(AccountList *list)
   {
     cls();
     buildScreen();
-    writeText("CADASTRO DE conta (FINAL)", SCREEN_WIDTH / 2, 4, 0);
+    writeText("CADASTRO DE CONTA (FINAL)", SCREEN_WIDTH / 2, 4, 0);
     Account account = createAccount(list, 0, -1);
     clearFooter();
     if (account.code != 0)
@@ -43,7 +43,7 @@ void registerAccountAtStart(AccountList *list)
   {
     cls();
     buildScreen();
-    writeText("CADASTRO DE conta (INICIO)", SCREEN_WIDTH / 2, 4, 0);
+    writeText("CADASTRO DE CONTA (INICIO)", SCREEN_WIDTH / 2, 4, 0);
     Account account = createAccount(list, 0, -1);
     clearFooter();
     if (account.code != 0)
@@ -75,7 +75,7 @@ void registerAccountAtPosition(AccountList *list)
   {
     cls();
     buildScreen();
-    writeText("CADASTRO DE conta (POSICAO)", SCREEN_WIDTH / 2, 4, 0);
+    writeText("CADASTRO DE CONTA (POSICAO)", SCREEN_WIDTH / 2, 4, 0);
 
     writeText("Posicao..:", SCREEN_WIDTH / 2 - 6, SCREEN_HEIGHT / 2, 0);
     int position;
@@ -87,7 +87,7 @@ void registerAccountAtPosition(AccountList *list)
 
     cls();
     buildScreen();
-    writeText("CADASTRO DE conta (POSICAO)", SCREEN_WIDTH / 2, 4, 0);
+    writeText("CADASTRO DE CONTA (POSICAO)", SCREEN_WIDTH / 2, 4, 0);
     Account account = createAccount(list, 0, -1);
     clearFooter();
     if (account.code != 0)
@@ -113,7 +113,7 @@ void removeAccountAtEnd(AccountList *list)
   {
     cls();
     buildScreen();
-    writeText("REMOVER conta (FINAL)", SCREEN_WIDTH / 2, 4, 0);
+    writeText("REMOVER CONTA (FINAL)", SCREEN_WIDTH / 2, 4, 0);
     printAccountInPosition(list, list->length - 1);
     clearFooter();
     char confirmation = confirm("Deseja remover essa conta?");
@@ -150,7 +150,7 @@ void removeAccountAtStart(AccountList *list)
   {
     cls();
     buildScreen();
-    writeText("REMOVER conta (INICIO)", SCREEN_WIDTH / 2, 4, 0);
+    writeText("REMOVER CONTA (INICIO)", SCREEN_WIDTH / 2, 4, 0);
     printAccountInPosition(list, 0);
     clearFooter();
     char confirmation = confirm("Deseja remover essa conta?");
@@ -179,7 +179,7 @@ void removeAccountAtPosition(AccountList *list)
   {
     cls();
     buildScreen();
-    writeText("REMOVER conta (POSICAO)", SCREEN_WIDTH / 2, 4, 0);
+    writeText("REMOVER CONTA (POSICAO)", SCREEN_WIDTH / 2, 4, 0);
     writeText("Posicao..:", SCREEN_WIDTH / 2 - 6, SCREEN_HEIGHT / 2, 0);
 
     int position;
@@ -190,7 +190,7 @@ void removeAccountAtPosition(AccountList *list)
 
     cls();
     buildScreen();
-    writeText("REMOVER conta (POSICAO)", SCREEN_WIDTH / 2, 4, 0);
+    writeText("REMOVER CONTA (POSICAO)", SCREEN_WIDTH / 2, 4, 0);
     printAccountInPosition(list, position);
     clearFooter();
     char confirmation = confirm("Deseja remover essa conta?");
@@ -284,7 +284,7 @@ void alterAccount(AccountList *list)
         }
         else if (field == 4)
         {
-          strcpy(account.type, newField.type);
+          account.type = newField.type;
         }
         else if (field == 5)
         {
@@ -323,6 +323,7 @@ void alterAccount(AccountList *list)
 void listAccounts(AccountList *list)
 {
   AccountListItemPointer account = list->head;
+  clearInputBuffer();
   for (int i = 0; i < list->length; i++)
   {
     cls();
@@ -335,7 +336,7 @@ void listAccounts(AccountList *list)
     writeText("Pressione 'Enter' para continuar: ", 0, SCREEN_HEIGHT - 1,
               0);
 
-    char option = awaitPressAnyKey();
+    char option = awaitPressAnyKey(0);
     if (option == 'b')
       break;
 

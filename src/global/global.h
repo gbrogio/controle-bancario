@@ -19,6 +19,6 @@ int noValid();
 char confirm(char msg[]);
 void goTo(int x, int y);
 void cls();
-char awaitPressAnyKey();
+char awaitPressAnyKey(int clearBuffer);
 
 #endif

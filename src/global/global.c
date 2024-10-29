@@ -100,7 +100,7 @@ void clearFooter()
 */
 void printMessage(char msg[]) { 
   writeText(msg, 0, SCREEN_HEIGHT - 1, 0);
-  awaitPressAnyKey();
+  awaitPressAnyKey(1);
 }
 
 /*
@@ -172,11 +172,9 @@ void goTo(int x, int y)
 /*
   Await for the user to press any key
 */
-char awaitPressAnyKey() {
+char awaitPressAnyKey(int clearBuffer) {
   char c;
-  while ((c = getchar()) != '\n') {
-    if (c != ' ') return c;
-  }
-  scanf("%c", &c);
+  if (clearBuffer) clearInputBuffer();
+  c = getchar();
   return tolower(c);
 }

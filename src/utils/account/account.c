@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "./account.h"
 #include "../../global/global.h"
-
 
 void pushAccount(AccountList *list, Account data)
 {
@@ -120,8 +120,8 @@ void alterAccountInPostion(AccountList *list, Account account, int position)
   strcpy(currentData->data.bank, account.bank);
   strcpy(currentData->data.agency, account.agency);
   strcpy(currentData->data.number, account.number);
-  strcpy(currentData->data.type, account.type);
   strcpy(currentData->data.status, account.status);
+  currentData->data.type = account.type;
   currentData->data.balance = account.balance;
   currentData->data.limit = account.limit;
 }
@@ -170,7 +170,7 @@ Account getAccountByCode(AccountList *list, int code)
 
 AccountList *initializeAccountList()
 {
-  AccountList *list = (AccountList*) malloc(sizeof(AccountList));
+  AccountList *list = (AccountList *)malloc(sizeof(AccountList));
   list->head = NULL;
   list->tail = NULL;
   list->length = 0;
@@ -196,6 +196,51 @@ int validationCode(GenericType i, GenericType a)
   return code == previousAccount->data.code;
 }
 
+int validadtionAgency(GenericType i, GenericType a)
+{
+  char *agency = (char *)i;
+  if (strlen(agency) != 6)
+    return 1;
+
+  for (int i = 0; i < 4; i++)
+  {
+    if (!isdigit(agency[i]))
+      return 1;
+  }
+
+  if (agency[4] != '-')
+    return 1;
+
+  if (!isdigit(agency[5]))
+    return 1;
+
+  return 0;
+}
+
+int validationType(GenericType i, GenericType a)
+{
+  char *type = (char*) i;
+  char lowerType = tolower(*type);
+
+  if (lowerType != 'c' && lowerType != 'p')
+    return 1;
+  return 0;
+}
+
+int validationStatus(GenericType i, GenericType a)
+{
+  char *status = (char *)i;
+
+  for (int i = 0; i < (int) strlen(status); i++)
+  {
+    status[i] = tolower(status[i]);
+  }
+
+  if (strcmp(status, "ativo") != 0 && strcmp(status, "inativo") != 0)
+    return 1;
+  return 0;
+}
+
 /*
     Create an account
     @param list The list of accounts
@@ -207,20 +252,20 @@ Account createAccount(AccountList *list, int update, int input)
 {
   Account account;
 
-  writeText("    CODIGO..:", 0, 6, 0);
-  writeText("1 - BANCO...:", 0, 8, 0);
-  writeText("2 - AGENCIA.:", 0, 10, 0);
-  writeText("3 - NUMERO..:", 0, 12, 0);
-  writeText("4 - TIPO....:", 0, 14, 0);
-  writeText("5 - SALDO...:", 0, 16, 0);
-  writeText("6 - LIMITE..:", 0, 18, 0);
-  writeText("7 - STATUS..:", 0, 20, 0);
+  writeText("    CODIGO.........:", 0, 6, 0);
+  writeText("1 - BANCO..........:", 0, 8, 0);
+  writeText("2 - AGENCIA........:", 0, 10, 0);
+  writeText("3 - NUMERO.........:", 0, 12, 0);
+  writeText("4 - TIPO (C ou P)..:", 0, 14, 0);
+  writeText("5 - SALDO..........:", 0, 16, 0);
+  writeText("6 - LIMITE.........:", 0, 18, 0);
+  writeText("7 - STATUS.........:", 0, 20, 0);
 
   if (update == 0)
   {
     int *code = &account.code;
 
-    getInput("%d", code, "Digite um numero valido e unico! Pressione 'Enter' para continuar...", 17, 6, validationCode, list);
+    getInput("%d", code, "Digite um numero valido e unico! Pressione 'Enter' para reescrever...", 24, 6, validationCode, list);
 
     if (account.code == 0)
     {
@@ -229,19 +274,27 @@ Account createAccount(AccountList *list, int update, int input)
   }
 
   if (input == 1 || input == -1)
-    getInput("%s", account.bank, "", 17, 8, noValid, NULL);
+    getInput("%s", account.bank, "", 24, 8, noValid, NULL);
   if (input == 2 || input == -1)
-    getInput("%s", account.agency, "", 17, 10, noValid, NULL);
+    getInput("%s", account.agency, "Digite um formato valido (ex. 1234-5)! Pressione 'Enter' para reescrever...", 24, 10, validadtionAgency, NULL);
   if (input == 3 || input == -1)
-    getInput("%s", account.number, "", 17, 12, noValid, NULL);
-  if (input == 4 || input == -1)
-    getInput("%s", account.type, "", 17, 14, noValid, NULL);
+    getInput("%s", account.number, "", 24, 12, noValid, NULL);
+  if (input == 4 || input == -1) {
+    getInput("%c", &account.type, "C = Conta Corrente / P = Conta Poupanca! Pressione 'Enter' para reescrever...", 24, 14, validationType, NULL);
+    account.type = tolower(account.type);
+  }
   if (input == 5 || input == -1)
-    getInput("%lf", &account.balance, "", 17, 16, noValid, NULL);
+    getInput("%lf", &account.balance, "", 24, 16, noValid, NULL);
   if (input == 6 || input == -1)
-    getInput("%lf", &account.limit, "", 17, 18, noValid, NULL);
-  if (input == 7 || input == -1)
-    getInput("%s", account.status, "", 17, 20, noValid, NULL);
+    getInput("%lf", &account.limit, "", 24, 18, noValid, NULL);
+  if (input == 7 || input == -1) {
+    getInput("%s", account.status, "Digite apenas \"ativo\" e \"inativo\"! Pressione 'Enter' para reescrever...", 24, 20, validationStatus, NULL);
+
+    for (int i = 0; i < (int) strlen(account.status); i++)
+    {
+      account.status[i] = tolower(account.status[i]);
+    }
+  }
 
   return account;
 }
@@ -259,19 +312,22 @@ void printAccount(Account account)
 
   goTo(17, 6);
   printf("%d", account.code);
-  goTo(17, 7);
-  puts(account.bank);
   goTo(17, 8);
-  puts(account.agency);
-  goTo(17, 9);
-  puts(account.number);
+  puts(account.bank);
   goTo(17, 10);
-  puts(account.type);
-  goTo(17, 11);
-  printf("%.2f", account.balance);
+  puts(account.agency);
   goTo(17, 12);
+  puts(account.number);
+  goTo(17, 14);
+  if (account.type == 'c')
+    puts("Conta Corrente");
+  else
+    puts("Conta Poupanca");
+  goTo(17, 16);
+  printf("%.2f", account.balance);
+  goTo(17, 18);
   printf("%.2f", account.limit);
-  goTo(17, 13);
+  goTo(17, 20);
   puts(account.status);
 }
 
