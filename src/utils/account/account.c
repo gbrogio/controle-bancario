@@ -217,6 +217,27 @@ int validadtionAgency(GenericType i, GenericType a)
   return 0;
 }
 
+int validadtionNumber(GenericType i, GenericType a)
+{
+  char *number = (char *)i;
+  if (strlen(number) != 8)
+    return 1;
+
+  for (int i = 0; i < 6; i++)
+  {
+    if (!isdigit(number[i]))
+      return 1;
+  }
+
+  if (number[6] != '-')
+    return 1;
+
+  if (!isdigit(number[7]))
+    return 1;
+
+  return 0;
+}
+
 int validationType(GenericType i, GenericType a)
 {
   char *type = (char*) i;
@@ -278,7 +299,7 @@ Account createAccount(AccountList *list, int update, int input)
   if (input == 2 || input == -1)
     getInput("%s", account.agency, "Digite um formato valido (ex. 1234-5)! Pressione 'Enter' para reescrever...", 24, 10, validadtionAgency, NULL);
   if (input == 3 || input == -1)
-    getInput("%s", account.number, "", 24, 12, noValid, NULL);
+    getInput("%s", account.number, "Digite um formato valido (ex. 123456-7)! Pressione 'Enter' para reescrever..", 24, 12, validadtionNumber, NULL);
   if (input == 4 || input == -1) {
     getInput("%c", &account.type, "C = Conta Corrente / P = Conta Poupanca! Pressione 'Enter' para reescrever...", 24, 14, validationType, NULL);
     account.type = tolower(account.type);
