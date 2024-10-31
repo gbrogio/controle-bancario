@@ -168,6 +168,27 @@ Account getAccountByCode(AccountList *list, int code)
   return emptyAccount;
 }
 
+Account getAccountByNumber(AccountList *list, char number[]) {
+  if (list->head == NULL) {
+    Account emptyAccount;
+    emptyAccount.code = -1;
+    return emptyAccount;
+  }
+
+  AccountListItemPointer currentData = list->head;
+
+  while (currentData != NULL)
+  {
+    if (strcmp(currentData->data.number, number) == 0)
+      return currentData->data;
+    currentData = currentData->next;
+  }
+
+  Account emptyAccount;
+  emptyAccount.code = -1;
+  return emptyAccount;
+}
+
 AccountList *initializeAccountList()
 {
   AccountList *list = (AccountList *)malloc(sizeof(AccountList));

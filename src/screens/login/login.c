@@ -3,6 +3,8 @@
 #include "../../utils/screen/screen.h"
 #include "../app/manager/login.h"
 #include "../app/manager/screen.h"
+#include "../app/client/login.h"
+#include "../app/client/screen.h"
 #include "../../utils/account/account.h"
 
 char loginScreen(AccountList *list) {
@@ -24,6 +26,15 @@ char loginScreen(AccountList *list) {
     if (status != 1) return 'b';
     return controlSubScreen(list, managerScreen);
   } 
+
+  if (option == '2') {
+    int status;
+    do {
+      status = loginClientScreen(list);
+    } while (status == 0);
+    if (status != 1) return 'b';
+    return controlSubScreen(list, clientScreen);
+  }
   
   return option;
 }

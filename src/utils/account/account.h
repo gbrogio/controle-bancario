@@ -14,7 +14,7 @@ typedef struct
   double balance;
   double limit;
   char status[10];
-  char password[8];
+  char password[9];
 } Account;
 
 typedef struct AccountListItem *AccountListItemPointer;
@@ -49,11 +49,13 @@ void popAccount(AccountList *list);
 void alterAccountInPostion(AccountList *list, Account account, int position);
 int findAccountPosition(AccountList *list, char number[]);
 Account getAccountByCode(AccountList *list, int code);
+Account getAccountByNumber(AccountList *list, char number[]);
 AccountList *initializeAccountList();
 Account createAccount(AccountList *list, int update, int input);
 void printAccount(Account account);
 Account printAccountInPosition(AccountList *list, int position);
 int validationCode(GenericType i, GenericType a);
 int validationNumberType(GenericType i, GenericType a);
+int validationPassword(GenericType i, GenericType a);
 
 #endif
