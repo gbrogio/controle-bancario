@@ -126,7 +126,7 @@ void alterAccountInPostion(AccountList *list, Account account, int position)
   currentData->data.limit = account.limit;
 }
 
-int findAccountPosition(AccountList *list, int code)
+int findAccountPosition(AccountList *list, char number[])
 {
   if (list->head == NULL)
     return -1;
@@ -136,7 +136,7 @@ int findAccountPosition(AccountList *list, int code)
 
   while (currentData != NULL)
   {
-    if (currentData->data.code == code)
+    if (strcmp(currentData->data.number, number) == 0)
       return position;
     currentData = currentData->next;
     position++;
@@ -196,7 +196,7 @@ int validationCode(GenericType i, GenericType a)
   return code == previousAccount->data.code;
 }
 
-int validadtionAgency(GenericType i, GenericType a)
+int validationAgency(GenericType i, GenericType a)
 {
   char *agency = (char *)i;
   if (strlen(agency) != 6)
@@ -217,7 +217,7 @@ int validadtionAgency(GenericType i, GenericType a)
   return 0;
 }
 
-int validadtionNumber(GenericType i, GenericType a)
+int validationNumberType(GenericType i, GenericType a)
 {
   char *number = (char *)i;
   if (strlen(number) != 8)
@@ -234,6 +234,35 @@ int validadtionNumber(GenericType i, GenericType a)
 
   if (!isdigit(number[7]))
     return 1;
+
+  return 0;
+}
+
+int validationNumber(GenericType i, GenericType a)
+{
+  char *number = (char *)i;
+  int valid = validationNumberType(number, a);
+  if (valid == 1)
+    return 1;
+
+  int position = findAccountPosition((AccountList *)a, number);
+  if (position != -1)
+    return 1;
+
+  return 0;
+}
+
+int validationPassword(GenericType i, GenericType a)
+{
+  char *password = (char *)i;
+  if (strlen(password) != 8)
+    return 1;
+
+  for (int i = 0; i < 8; i++)
+  {
+    if (!isdigit(password[i]))
+      return 1;
+  }
 
   return 0;
 }
@@ -281,6 +310,7 @@ Account createAccount(AccountList *list, int update, int input)
   writeText("5 - SALDO..........:", 0, 16, 0);
   writeText("6 - LIMITE.........:", 0, 18, 0);
   writeText("7 - STATUS.........:", 0, 20, 0);
+  writeText("8 - SENHA:", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 1, 1);
 
   if (update == 0)
   {
@@ -297,9 +327,9 @@ Account createAccount(AccountList *list, int update, int input)
   if (input == 1 || input == -1)
     getInput("%s", account.bank, "", 24, 8, noValid, NULL);
   if (input == 2 || input == -1)
-    getInput("%s", account.agency, "Digite um formato valido (ex. 1234-5)! Pressione 'Enter' para reescrever...", 24, 10, validadtionAgency, NULL);
+    getInput("%s", account.agency, "Digite um formato valido (ex. 1234-5)! Pressione 'Enter' para reescrever...", 24, 10, validationAgency, NULL);
   if (input == 3 || input == -1)
-    getInput("%s", account.number, "Digite um formato valido (ex. 123456-7)! Pressione 'Enter' para reescrever..", 24, 12, validadtionNumber, NULL);
+    getInput("%s", account.number, "Ja usado ou invalido (ex. 123456-7)! Pressione 'Enter' para reescrever..", 24, 12, validationNumber, list);
   if (input == 4 || input == -1) {
     getInput("%c", &account.type, "C = Conta Corrente / P = Conta Poupanca! Pressione 'Enter' para reescrever...", 24, 14, validationType, NULL);
     account.type = tolower(account.type);
@@ -310,12 +340,13 @@ Account createAccount(AccountList *list, int update, int input)
     getInput("%lf", &account.limit, "", 24, 18, noValid, NULL);
   if (input == 7 || input == -1) {
     getInput("%s", account.status, "Digite apenas \"ativo\" e \"inativo\"! Pressione 'Enter' para reescrever...", 24, 20, validationStatus, NULL);
-
     for (int i = 0; i < (int) strlen(account.status); i++)
     {
       account.status[i] = tolower(account.status[i]);
     }
   }
+  if (input == 8 || input == -1) 
+    getInput("%s", account.password, "Senha deve ter 8 números! Pressione 'Enter' para reescrever...", SCREEN_WIDTH / 2 + 12, SCREEN_HEIGHT / 2 + 1, validationPassword, NULL);
 
   return account;
 }
@@ -330,6 +361,7 @@ void printAccount(Account account)
   writeText("5 - SALDO...:", 0, 16, 0);
   writeText("6 - LIMITE..:", 0, 18, 0);
   writeText("7 - STATUS..:", 0, 20, 0);
+  writeText("8 - SENHA:  ********", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 1, 1);
 
   goTo(17, 6);
   printf("%d", account.code);

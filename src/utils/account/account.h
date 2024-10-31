@@ -8,12 +8,13 @@ typedef struct
 {
   int code;
   char bank[50];
-  char agency[6];
-  char number[20];
+  char agency[7];
+  char number[9];
   char type;
   double balance;
   double limit;
   char status[10];
+  char password[8];
 } Account;
 
 typedef struct AccountListItem *AccountListItemPointer;
@@ -46,12 +47,13 @@ void unshiftAccount(AccountList *list, Account data);
 void shiftAccount(AccountList *list);
 void popAccount(AccountList *list);
 void alterAccountInPostion(AccountList *list, Account account, int position);
-int findAccountPosition(AccountList *list, int code);
+int findAccountPosition(AccountList *list, char number[]);
 Account getAccountByCode(AccountList *list, int code);
 AccountList *initializeAccountList();
 Account createAccount(AccountList *list, int update, int input);
 void printAccount(Account account);
 Account printAccountInPosition(AccountList *list, int position);
 int validationCode(GenericType i, GenericType a);
+int validationNumberType(GenericType i, GenericType a);
 
 #endif

@@ -235,21 +235,30 @@ void alterAccount(AccountList *list)
   {
     cls();
     buildScreen();
-    writeText("ALTERAR CADASTRO DE conta", SCREEN_WIDTH / 2, 4, 0);
+    writeText("ALTERAR CADASTRO DE CONTA", SCREEN_WIDTH / 2, 4, 0);
 
-    writeText("Codigo do conta..:", SCREEN_WIDTH / 2 - 18,
+    writeText("Numero da conta..:", SCREEN_WIDTH / 2 - 18,
               SCREEN_HEIGHT / 2, 0);
 
-    int code;
+    char number[8];
     int position = 0;
 
-    getInput("%d", &code,
-             "Digite um codigo valido! Pressione 'Enter' para continuar...",
-             SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, validationCode, list);
+    getInput("%s", number,
+             "Digite um numero valido! Pressione 'Enter' para continuar...",
+             SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, validationNumberType, list);
+    position = findAccountPosition(list, number);
+
+    if (position == -1)
+    {
+      printMessage("Conta nao encontrada! Pressione 'Enter' para continuar...");
+      continue;
+    }
 
     cls();
     buildScreen();
-    writeText("ALTERAR CADASTRO DE conta", SCREEN_WIDTH / 2, 4, 0);
+    writeText("ALTERAR CADASTRO DE CONTA", SCREEN_WIDTH / 2, 4, 0);
+
+
     Account account = printAccountInPosition(list, position);
     char confirmation = confirm("Deseja alterar essa conta?");
     if (confirmation == 's')
@@ -265,39 +274,27 @@ void alterAccount(AccountList *list)
                     SCREEN_HEIGHT - 1, 0);
           goTo(35, SCREEN_HEIGHT - 1);
           scanf("%d", &field);
-          if (field < 1 || field > 7)
-            printMessage("Por favor digite um numero entre 1 e 6!");
-        } while (field < 1 || field > 7);
+          if (field < 1 || field > 8)
+            printMessage("Por favor digite um numero entre 1 e 8!");
+        } while (field < 1 || field > 8);
 
         Account newField = createAccount(list, 1, field);
         if (field == 1)
-        {
           strcpy(account.bank, newField.bank);
-        }
         else if (field == 2)
-        {
           strcpy(account.agency, newField.agency);
-        }
         else if (field == 3)
-        {
           strcpy(account.number, newField.number);
-        }
         else if (field == 4)
-        {
           account.type = newField.type;
-        }
         else if (field == 5)
-        {
           account.balance = newField.balance;
-        }
         else if (field == 6)
-        {
           account.limit = newField.limit;
-        }
         else if (field == 7)
-        {
           strcpy(account.status, newField.status);
-        }
+        else if (field == 8)
+          strcpy(account.password, newField.password);
 
         clearFooter();
         alterAgain = confirm("Deseja alterar outro campo?");
@@ -307,7 +304,6 @@ void alterAccount(AccountList *list)
       char confirmationModify = confirm("Deseja confirmar a alteracao?");
       if (confirmationModify == 's')
       {
-        account.code = code;
         alterAccountInPostion(list, account, position);
       }
     }
