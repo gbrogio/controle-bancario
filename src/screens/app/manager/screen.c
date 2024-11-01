@@ -28,7 +28,7 @@ void registerAccountAtEnd(AccountList *list)
         pushAccount(list, account);
     }
     clearFooter();
-    doAgain = confirm("Deseja cadastrar outro conta?");
+    doAgain = confirm("Deseja cadastrar outra conta?");
   } while (doAgain == 's');
 }
 
@@ -53,7 +53,7 @@ void registerAccountAtStart(AccountList *list)
         unshiftAccount(list, account);
     }
     clearFooter();
-    doAgain = confirm("Deseja cadastrar outro conta?");
+    doAgain = confirm("Deseja cadastrar outra conta?");
   } while (doAgain == 's');
 }
 
@@ -98,7 +98,7 @@ void registerAccountAtPosition(AccountList *list)
     }
 
     clearFooter();
-    doAgain = confirm("Deseja cadastrar outro conta?");
+    doAgain = confirm("Deseja cadastrar outra conta?");
   } while (doAgain == 's');
 }
 
@@ -135,7 +135,7 @@ void removeAccountAtEnd(AccountList *list)
       list->length--;
     }
     clearFooter();
-    doAgain = confirm("Deseja remover outro conta?");
+    doAgain = confirm("Deseja remover outra conta?");
   } while (doAgain == 's');
 }
 
@@ -164,7 +164,7 @@ void removeAccountAtStart(AccountList *list)
       list->length--;
     }
     clearFooter();
-    doAgain = confirm("Deseja remover outro conta?");
+    doAgain = confirm("Deseja remover outra conta?");
   } while (doAgain == 's');
 }
 
@@ -220,7 +220,7 @@ void removeAccountAtPosition(AccountList *list)
     }
 
     clearFooter();
-    doAgain = confirm("Deseja remover outro conta?");
+    doAgain = confirm("Deseja remover outra conta?");
   } while (doAgain == 's');
 }
 
@@ -308,7 +308,7 @@ void alterAccount(AccountList *list)
       }
     }
     clearFooter();
-    doAgain = confirm("Deseja alterar outro conta?");
+    doAgain = confirm("Deseja alterar outra conta?");
   } while (doAgain == 's');
 }
 

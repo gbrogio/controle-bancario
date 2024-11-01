@@ -356,9 +356,9 @@ Account createAccount(AccountList *list, int update, int input)
     account.type = tolower(account.type);
   }
   if (input == 5 || input == -1)
-    getInput("%lf", &account.balance, "", 24, 16, noValid, NULL);
+    getInput("%lf", &account.balance, "Digite um saldo valido! Pressione 'Enter' para reescrever...", 24, 16, noValid, NULL);
   if (input == 6 || input == -1)
-    getInput("%lf", &account.limit, "", 24, 18, noValid, NULL);
+    getInput("%lf", &account.limit, "Digite um limite valido! Pressione 'Enter' para reescrever...", 24, 18, noValid, NULL);
   if (input == 7 || input == -1) {
     getInput("%s", account.status, "Digite apenas \"ativo\" e \"inativo\"! Pressione 'Enter' para reescrever...", 24, 20, validationStatus, NULL);
     for (int i = 0; i < (int) strlen(account.status); i++)
