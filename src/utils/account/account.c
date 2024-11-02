@@ -138,6 +138,10 @@ int validationAgency(GenericType i, GenericType a)
 int validationNumberType(GenericType i, GenericType a)
 {
   char *number = (char *)i;
+
+  if (number[0] == '0')
+    return 0;
+
   if (strlen(number) != 8)
     return 1;
 
@@ -159,6 +163,10 @@ int validationNumberType(GenericType i, GenericType a)
 int validationNumber(GenericType i, GenericType a)
 {
   char *number = (char *)i;
+
+  if (number[0] == '0')
+    return 1;
+
   int valid = validationNumberType(number, a);
   if (valid == 1)
     return 1;

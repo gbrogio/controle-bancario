@@ -45,7 +45,7 @@ void removeAccountByNumber(AccountList *list)
     buildScreen();
     writeText("REMOVER CONTA", SCREEN_WIDTH / 2, 4, 0);
 
-    writeText("Numero da conta..:", SCREEN_WIDTH / 2 - 18,
+    writeText("Numero da conta..:", SCREEN_WIDTH / 2 - 14,
               SCREEN_HEIGHT / 2, 0);
 
     char number[8];
@@ -54,6 +54,13 @@ void removeAccountByNumber(AccountList *list)
     getInput("%s", number,
              "Digite um numero valido! Pressione 'Enter' para continuar...",
              SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, validationNumberType, list);
+
+    if (number[0] == '0') {
+      clearFooter();
+      doAgain = confirm("Deseja remover outra conta?");
+      continue;
+    }
+
     position = findAccountPosition(list, number);
 
     if (position == -1)
@@ -111,7 +118,7 @@ void alterAccount(AccountList *list)
     buildScreen();
     writeText("ALTERAR CADASTRO DE CONTA", SCREEN_WIDTH / 2, 4, 0);
 
-    writeText("Numero da conta..:", SCREEN_WIDTH / 2 - 18,
+    writeText("Numero da conta..:", SCREEN_WIDTH / 2 - 14,
               SCREEN_HEIGHT / 2, 0);
 
     char number[8];
@@ -120,6 +127,13 @@ void alterAccount(AccountList *list)
     getInput("%s", number,
              "Digite um numero valido! Pressione 'Enter' para continuar...",
              SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, validationNumberType, list);
+
+    if (number[0] == '0') {
+      clearFooter();
+      doAgain = confirm("Deseja remover outra conta?");
+      continue;
+    }
+
     position = findAccountPosition(list, number);
 
     if (position == -1)
