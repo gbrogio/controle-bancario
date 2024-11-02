@@ -15,6 +15,7 @@ typedef struct
   double limit;
   char status[10];
   char password[9];
+  int interestDay;
 } Account;
 
 typedef struct AccountListItem *AccountListItemPointer;
@@ -42,13 +43,8 @@ typedef struct
 } AccountList;
 
 void pushAccount(AccountList *list, Account data);
-void insertAccountIn(int position, AccountList *list, Account data);
-void unshiftAccount(AccountList *list, Account data);
-void shiftAccount(AccountList *list);
-void popAccount(AccountList *list);
 void alterAccountInPostion(AccountList *list, Account account, int position);
 int findAccountPosition(AccountList *list, char number[]);
-Account getAccountByCode(AccountList *list, int code);
 Account getAccountByNumber(AccountList *list, char number[]);
 AccountList *initializeAccountList();
 Account createAccount(AccountList *list, int update, int input);

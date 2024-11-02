@@ -21,90 +21,6 @@ void pushAccount(AccountList *list, Account data)
   list->length++;
 }
 
-void insertAccountIn(int position, AccountList *list, Account data)
-{
-  if (list->head == NULL || position < 0 || position > list->length)
-    return;
-
-  AccountListItemPointer newData = (AccountListItemPointer)malloc(sizeof(AccountListItem));
-  newData->data = data;
-
-  AccountListItemPointer currentData = list->head;
-  AccountListItemPointer previousData = NULL;
-
-  for (int i = 0; i < position; i++)
-  {
-    previousData = currentData;
-    currentData = currentData->next;
-  }
-
-  if (previousData == NULL)
-  {
-    newData->next = list->head;
-    list->head = newData;
-  }
-  else
-  {
-    previousData->next = newData;
-    newData->next = currentData;
-  }
-
-  list->length++;
-}
-
-void unshiftAccount(AccountList *list, Account data)
-{
-  AccountListItemPointer newData = (AccountListItemPointer)malloc(sizeof(AccountListItem));
-
-  newData->data = data;
-  newData->next = list->head;
-  list->head = newData;
-  if (list->tail == NULL)
-    list->tail = newData;
-  list->length++;
-}
-
-void shiftAccount(AccountList *list)
-{
-  if (list->head == NULL)
-    return;
-
-  AccountListItemPointer firstData = list->head;
-  list->head = list->head->next;
-  free(firstData);
-  list->length--;
-
-  if (list->head == NULL)
-    list->tail = NULL;
-}
-
-void popAccount(AccountList *list)
-{
-  if (list->head == NULL)
-    return;
-
-  AccountListItemPointer lastData = list->tail;
-  AccountListItemPointer currentData = list->head;
-
-  if (currentData == lastData)
-  {
-    free(lastData);
-    list->head = NULL;
-    list->tail = NULL;
-  }
-  else
-  {
-    while (currentData->next != lastData)
-    {
-      currentData = currentData->next;
-    }
-    currentData->next = NULL;
-    list->tail = currentData;
-    free(lastData);
-  }
-  list->length--;
-}
-
 void alterAccountInPostion(AccountList *list, Account account, int position)
 {
   if (list->head == NULL || position < 0 || position > list->length)
@@ -121,9 +37,11 @@ void alterAccountInPostion(AccountList *list, Account account, int position)
   strcpy(currentData->data.agency, account.agency);
   strcpy(currentData->data.number, account.number);
   strcpy(currentData->data.status, account.status);
+  strcpy(currentData->data.password, account.password);
   currentData->data.type = account.type;
   currentData->data.balance = account.balance;
   currentData->data.limit = account.limit;
+  currentData->data.interestDay = account.interestDay;
 }
 
 int findAccountPosition(AccountList *list, char number[])
@@ -145,31 +63,10 @@ int findAccountPosition(AccountList *list, char number[])
   return -1;
 }
 
-Account getAccountByCode(AccountList *list, int code)
+Account getAccountByNumber(AccountList *list, char number[])
 {
   if (list->head == NULL)
   {
-    Account emptyAccount;
-    emptyAccount.code = -1;
-    return emptyAccount;
-  }
-
-  AccountListItemPointer currentData = list->head;
-
-  while (currentData != NULL)
-  {
-    if (currentData->data.code == code)
-      return currentData->data;
-    currentData = currentData->next;
-  }
-
-  Account emptyAccount;
-  emptyAccount.code = -1;
-  return emptyAccount;
-}
-
-Account getAccountByNumber(AccountList *list, char number[]) {
-  if (list->head == NULL) {
     Account emptyAccount;
     emptyAccount.code = -1;
     return emptyAccount;
@@ -290,7 +187,7 @@ int validationPassword(GenericType i, GenericType a)
 
 int validationType(GenericType i, GenericType a)
 {
-  char *type = (char*) i;
+  char *type = (char *)i;
   char lowerType = tolower(*type);
 
   if (lowerType != 'c' && lowerType != 'p')
@@ -302,13 +199,22 @@ int validationStatus(GenericType i, GenericType a)
 {
   char *status = (char *)i;
 
-  for (int i = 0; i < (int) strlen(status); i++)
+  for (int i = 0; i < (int)strlen(status); i++)
   {
     status[i] = tolower(status[i]);
   }
 
   if (strcmp(status, "ativo") != 0 && strcmp(status, "inativo") != 0)
     return 1;
+  return 0;
+}
+
+int validationDay(GenericType i, GenericType a)
+{
+  int *day = (int *)i;
+  if (*day < 1 || *day > 28)
+    return 1;
+
   return 0;
 }
 
@@ -323,21 +229,22 @@ Account createAccount(AccountList *list, int update, int input)
 {
   Account account;
 
-  writeText("    CODIGO.........:", 0, 6, 0);
-  writeText("1 - BANCO..........:", 0, 8, 0);
-  writeText("2 - AGENCIA........:", 0, 10, 0);
-  writeText("3 - NUMERO.........:", 0, 12, 0);
-  writeText("4 - TIPO (C ou P)..:", 0, 14, 0);
-  writeText("5 - SALDO..........:", 0, 16, 0);
-  writeText("6 - LIMITE.........:", 0, 18, 0);
-  writeText("7 - STATUS.........:", 0, 20, 0);
-  writeText("8 - SENHA:", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 1, 1);
+  writeText("    CODIGO..:", 0, 6, 0);
+  writeText("1 - BANCO...:", 0, 8, 0);
+  writeText("2 - AGENCIA.:", 0, 10, 0);
+  writeText("3 - NUMERO..:", 0, 12, 0);
+  writeText("4 - TIPO....:", 0, 14, 0);
+  writeText("5 - SALDO...:", 0, 16, 0);
+  writeText("6 - LIMITE..:", 0, 18, 0);
+  writeText("7 - STATUS..:", 0, 20, 0);
+  writeText("8 - DIA RENDIMENTOS:", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 1, 1);
+  writeText("9 - SENHA..........:", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 1, 1);
 
   if (update == 0)
   {
     int *code = &account.code;
 
-    getInput("%d", code, "Digite um numero valido e unico! Pressione 'Enter' para reescrever...", 24, 6, validationCode, list);
+    getInput("%d", code, "Digite um numero valido e unico! Pressione 'Enter' para reescrever...", 17, 6, validationCode, list);
 
     if (account.code == 0)
     {
@@ -346,28 +253,46 @@ Account createAccount(AccountList *list, int update, int input)
   }
 
   if (input == 1 || input == -1)
-    getInput("%s", account.bank, "", 24, 8, noValid, NULL);
+    getInput("%s", account.bank, "", 17, 8, noValid, NULL);
   if (input == 2 || input == -1)
-    getInput("%s", account.agency, "Digite um formato valido (ex. 1234-5)! Pressione 'Enter' para reescrever...", 24, 10, validationAgency, NULL);
+    getInput("%s", account.agency, "Digite um formato valido (ex. 1234-5)! Pressione 'Enter' para reescrever...", 17, 10, validationAgency, NULL);
   if (input == 3 || input == -1)
-    getInput("%s", account.number, "Ja usado ou invalido (ex. 123456-7)! Pressione 'Enter' para reescrever..", 24, 12, validationNumber, list);
-  if (input == 4 || input == -1) {
-    getInput("%c", &account.type, "C = Conta Corrente / P = Conta Poupanca! Pressione 'Enter' para reescrever...", 24, 14, validationType, NULL);
+    getInput("%s", account.number, "Ja usado ou invalido (ex. 123456-7)! Pressione 'Enter' para reescrever..", 17, 12, validationNumber, list);
+  if (input == 4 || input == -1)
+  {
+    getInput("%c", &account.type, "C = Conta Corrente / P = Conta Poupanca! Pressione 'Enter' para reescrever..", 17, 14, validationType, NULL);
     account.type = tolower(account.type);
   }
   if (input == 5 || input == -1)
-    getInput("%lf", &account.balance, "Digite um saldo valido! Pressione 'Enter' para reescrever...", 24, 16, noValid, NULL);
-  if (input == 6 || input == -1)
-    getInput("%lf", &account.limit, "Digite um limite valido! Pressione 'Enter' para reescrever...", 24, 18, noValid, NULL);
-  if (input == 7 || input == -1) {
-    getInput("%s", account.status, "Digite apenas \"ativo\" e \"inativo\"! Pressione 'Enter' para reescrever...", 24, 20, validationStatus, NULL);
-    for (int i = 0; i < (int) strlen(account.status); i++)
+    getInput("%lf", &account.balance, "Digite um saldo valido! Pressione 'Enter' para reescrever...", 17, 16, noValid, NULL);
+  if (((input == 6 || input == -1) && account.type == 'c') || (input == 6 && update == 1))
+  {
+    getInput("%lf", &account.limit, "Digite um limite valido! Pressione 'Enter' para reescrever...", 17, 18, noValid, NULL);
+  }
+  else if (account.type == 'p')
+  {
+    account.limit = 0;
+    writeText("N/A", 17, 18, 1);
+  }
+  if (input == 7 || input == -1)
+  {
+    getInput("%s", account.status, "Digite apenas \"ativo\" e \"inativo\"! Pressione 'Enter' para reescrever...", 17, 20, validationStatus, NULL);
+    for (int i = 0; i < (int)strlen(account.status); i++)
     {
       account.status[i] = tolower(account.status[i]);
     }
   }
-  if (input == 8 || input == -1) 
-    getInput("%s", account.password, "Senha deve ter 8 números! Pressione 'Enter' para reescrever...", SCREEN_WIDTH / 2 + 12, SCREEN_HEIGHT / 2 + 1, validationPassword, NULL);
+  if (((input == 8 || input == -1) && account.type == 'p') || (input == 8 && update == 1))
+  {
+    getInput("%d", &account.interestDay, "Digite um dia entre 01 e 28! Pressione 'Enter' para reescrever...", SCREEN_WIDTH / 2 + 22, SCREEN_HEIGHT / 2 - 1, validationDay, NULL);
+  }
+  else if (account.type == 'c')
+  {
+    account.interestDay = 0;
+    writeText("N/A", SCREEN_WIDTH / 2 + 22, SCREEN_HEIGHT / 2 - 1, 1);
+  }
+  if (input == 9 || input == -1)
+    getInput("%s", account.password, "Senha deve ter 8 números! Pressione 'Enter' para reescrever...", SCREEN_WIDTH / 2 + 22, SCREEN_HEIGHT / 2 + 1, validationPassword, NULL);
 
   return account;
 }
@@ -382,7 +307,8 @@ void printAccount(Account account)
   writeText("5 - SALDO...:", 0, 16, 0);
   writeText("6 - LIMITE..:", 0, 18, 0);
   writeText("7 - STATUS..:", 0, 20, 0);
-  writeText("8 - SENHA:  ********", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 1, 1);
+  writeText("8 - DIA RENDIMENTOS:", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 1, 1);
+  writeText("9 - SENHA..........:  ********", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 1, 1);
 
   goTo(17, 6);
   printf("%d", account.code);
@@ -400,9 +326,17 @@ void printAccount(Account account)
   goTo(17, 16);
   printf("%.2f", account.balance);
   goTo(17, 18);
-  printf("%.2f", account.limit);
+  if (account.type == 'p')
+    puts("N/A");
+  else
+    printf("%.2f", account.limit);
   goTo(17, 20);
   puts(account.status);
+  goTo(SCREEN_WIDTH / 2 + 22, SCREEN_HEIGHT / 2 - 1);
+  if (account.type == 'c')
+    puts("N/A");
+  else
+    printf("%d", account.interestDay);
 }
 
 /*
