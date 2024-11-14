@@ -85,10 +85,10 @@ void buildScreen() {
   buildScreenBorder(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-char controlSubScreen(AccountList *list, char screen(AccountList *list)) {
+char controlSubScreen(char screen) {
   char option;
   do {
-    option = screen(list);
+    option = screen;
     if (option == 'h') {
       helpScreen();
       continue;

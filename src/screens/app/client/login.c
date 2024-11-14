@@ -1,11 +1,12 @@
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "../../../global/global.h"
 #include "../../../utils/screen/screen.h"
 #include "./login.h"
 
-int loginClientScreen(AccountList *list) {
+AccountListItemPointer loginClientScreen(AccountList *list) {
   cls();
   buildScreen();
   writeText("ENTRAR COMO CLIENTE", SCREEN_WIDTH / 2, 4, 0);
@@ -16,20 +17,24 @@ int loginClientScreen(AccountList *list) {
   char password[9];
 
   getInput("%s", number, "Digite um numero valido! Pressione 'Enter' para continuar...", SCREEN_WIDTH / 2, 12, validationNumberType, NULL);
-  if (strcmp(number, "0") == 0) return 2;
+  if (strcmp(number, "0") == 0) {
+    AccountListItemPointer account = (AccountListItemPointer) malloc(sizeof(AccountListItem));
+    account->data.code = -1;
+    return account;
+  }
   getInput("%s", password, "Digite uma senha valida! Pressione 'Enter' para continuar...", SCREEN_WIDTH / 2, 14, validationPassword, NULL);
   
   clearFooter();
   char confirmation = confirm("Deseja entrar com essas credenciais?");
-  if (confirmation != 's') return 0;
+  if (confirmation != 's') return NULL;
 
-  Account account = getAccountByNumber(list, number);
+  AccountListItemPointer account = getAccountByNumber(list, number);
 
-  if (account.code != -1 && strcmp(account.password, password) == 0) {
-    return 1;
+  if (account->data.code != -1 && strcmp(account->data.password, password) == 0) {
+    return account;
   }
 
   clearFooter();
   printMessage("Numero ou senha invalidos!");
-  return 0;
+  return NULL;
 }

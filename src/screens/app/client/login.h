@@ -1,6 +1,6 @@
 #ifndef CLIENT_LOGIN_H
 #define CLIENT_LOGIN_H
 
-int loginClientScreen();
+AccountListItemPointer loginClientScreen(AccountList *list);
 
 #endif

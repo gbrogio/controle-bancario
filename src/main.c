@@ -26,11 +26,12 @@ int main() {
 
   setlocale(LC_ALL, "Portuguese");
   int start = 0;
-  char c;
+  char c = '0';
 
   do {
-    if ((!c || c == 'b') && start == 0) mainScreen();
-    else if (c == 'h') {
+    if ((c == '0' || c == 'b') && start == 0) {
+      mainScreen();
+    } else if (c == 'h') {
       helpScreen();
       c = 'b';
       continue;
@@ -39,11 +40,11 @@ int main() {
     else {
       start = 1;
       c = loginScreen(list);
-      if (c == 'b') c = '0';
+      if (c == 'b') c = '1';
       continue;
     }
     clearFooter();
-    if (!c || c == 'b') c = command();
+    if (c == '0' || c == 'b') c = command();
   } while (c != 'x');
 
   return 0;

@@ -43,9 +43,13 @@ typedef struct
 } AccountList;
 
 void pushAccount(AccountList *list, Account data);
+void insertAccountIn(int position, AccountList *list, Account data);
+void unshiftAccount(AccountList *list, Account data);
+void shiftAccount(AccountList *list);
+void popAccount(AccountList *list);
 void alterAccountInPostion(AccountList *list, Account account, int position);
 int findAccountPosition(AccountList *list, char number[]);
-Account getAccountByNumber(AccountList *list, char number[]);
+AccountListItemPointer getAccountByNumber(AccountList *list, char number[]);
 AccountList *initializeAccountList();
 Account createAccount(AccountList *list, int update, int input);
 void printAccount(Account account);

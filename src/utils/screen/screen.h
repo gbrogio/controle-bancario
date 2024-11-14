@@ -4,6 +4,6 @@
 
 void buildScreen();
 char command();
-char controlSubScreen(AccountList *list, char screen());
+char controlSubScreen(char screen);
 
 #endif 

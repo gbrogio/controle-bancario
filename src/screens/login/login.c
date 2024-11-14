@@ -24,16 +24,16 @@ char loginScreen(AccountList *list) {
       status = loginManagerScreen();
     } while (status == 0);
     if (status != 1) return 'b';
-    return controlSubScreen(list, managerScreen);
+    return controlSubScreen(managerScreen(list));
   } 
 
   if (option == '2') {
-    int status;
+    AccountListItemPointer account;
     do {
-      status = loginClientScreen(list);
-    } while (status == 0);
-    if (status != 1) return 'b';
-    return controlSubScreen(list, clientScreen);
+      account = loginClientScreen(list);
+    } while (account == NULL);
+    if (account->data.code == -1) return 'b';
+    return controlSubScreen(clientScreen(list, account));
   }
   
   return option;
