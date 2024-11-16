@@ -61,6 +61,8 @@
     ".prettierrc": "json",
     "*.css": "css",
     "css": "css",
-    "global.h": "c"
+    "global.h": "c",
+    "functions.h": "c",
+    "account.h": "c"
   }
 }
