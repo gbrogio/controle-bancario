@@ -28,7 +28,7 @@ Account createAccount(AccountList *list, int update, int input)
   {
     int *code = &account.code;
 
-    getInput("%d", code, "Digite um numero valido e unico! Pressione 'Enter' para reescrever...", 17, 6, validationCode, list);
+    getInput("%d", code, "Digite um numero valido e unico! Pressione 'Enter' para reescrever...", 17, 6, /* validationCode */ noValid, list);
 
     if (account.code == 0)
     {
@@ -39,12 +39,12 @@ Account createAccount(AccountList *list, int update, int input)
   if (input == 1 || input == -1)
     getInput("%s", account.bank, "", 17, 8, noValid, NULL);
   if (input == 2 || input == -1)
-    getInput("%s", account.agency, "Digite um formato valido (ex. 1234-5)! Pressione 'Enter' para reescrever...", 17, 10, validationAgency, NULL);
+    getInput("%s", account.agency, "Digite um formato valido (ex. 1234-5)! Pressione 'Enter' para reescrever...", 17, 10, /* validationAgency */ noValid, NULL);
   if (input == 3 || input == -1)
-    getInput("%s", account.number, "Ja usado ou invalido (ex. 123456-7)! Pressione 'Enter' para reescrever..", 17, 12, validationNumber, list);
+    getInput("%s", account.number, "Ja usado ou invalido (ex. 123456-7)! Pressione 'Enter' para reescrever..", 17, 12, /* validationNumber */ noValid, list);
   if (input == 4 || input == -1)
   {
-    getInput("%c", &account.type, "C = Conta Corrente / P = Conta Poupanca! Pressione 'Enter' para reescrever..", 17, 14, validationType, NULL);
+    getInput("%c", &account.type, "C = Conta Corrente / P = Conta Poupanca! Pressione 'Enter' para reescrever..", 17, 14, /* validationType */ noValid, NULL);
     account.type = tolower(account.type);
   }
   if (input == 5 || input == -1)
@@ -60,7 +60,7 @@ Account createAccount(AccountList *list, int update, int input)
   }
   if (input == 7 || input == -1)
   {
-    getInput("%s", account.status, "Digite apenas \"ativo\" e \"inativo\"! Pressione 'Enter' para reescrever...", 17, 20, validationStatus, NULL);
+    getInput("%s", account.status, "Digite apenas \"ativo\" e \"inativo\"! Pressione 'Enter' para reescrever...", 17, 20, /* validationStatus */ noValid, NULL);
     for (int i = 0; i < (int)strlen(account.status); i++)
     {
       account.status[i] = tolower(account.status[i]);
@@ -68,7 +68,7 @@ Account createAccount(AccountList *list, int update, int input)
   }
   if (((input == 8 || input == -1) && account.type == 'p') || (input == 8 && update == 1))
   {
-    getInput("%d", &account.interestDay, "Digite um dia entre 01 e 28! Pressione 'Enter' para reescrever...", SCREEN_WIDTH / 2 + 22, SCREEN_HEIGHT / 2 - 1, validationDay, NULL);
+    getInput("%d", &account.interestDay, "Digite um dia entre 01 e 28! Pressione 'Enter' para reescrever...", SCREEN_WIDTH / 2 + 22, SCREEN_HEIGHT / 2 - 1, /* validationDay */ noValid, NULL);
   }
   else if (account.type == 'c')
   {
@@ -76,7 +76,7 @@ Account createAccount(AccountList *list, int update, int input)
     writeText("N/A", SCREEN_WIDTH / 2 + 22, SCREEN_HEIGHT / 2 - 1, 1);
   }
   if (input == 9 || input == -1)
-    getInput("%s", account.password, "Senha deve ter 8 números! Pressione 'Enter' para reescrever...", SCREEN_WIDTH / 2 + 22, SCREEN_HEIGHT / 2 + 1, validationPassword, NULL);
+    getInput("%s", account.password, "Senha deve ter 8 números! Pressione 'Enter' para reescrever...", SCREEN_WIDTH / 2 + 22, SCREEN_HEIGHT / 2 + 1, /* validationPassword */ noValid, NULL);
 
   return account;
 }

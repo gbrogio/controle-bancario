@@ -13,7 +13,8 @@
 #include "screens/screens.h"
 
 int main() {
-  AccountList *list = initializeAccountList();
+  AccountList *accountList = initializeAccountList();
+  TransactionList *transactionList = initializeTransactionList();
 
   setlocale(LC_ALL, "Portuguese");
   int start = 0;
@@ -30,7 +31,7 @@ int main() {
     else if (c == 'x') break;
     else {
       start = 1;
-      c = loginScreen(list);
+      c = loginScreen(accountList, transactionList);
       if (c == 'b') c = '1';
       continue;
     }

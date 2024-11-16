@@ -16,7 +16,8 @@ char confirm(char msg[])
     scanf("%c", &c);
     if (c != 's' && c != 'n')
     {
-      printMessage("Entrada invalida! Digite 's' para Sim ou 'n' para Nao.");
+      writeText("Entrada invalida! Digite 's' para sim ou 'n' para nao.", 0, SCREEN_HEIGHT - 1, 0);
+      awaitPressAnyKey(0);
     }
   } while (c != 's' && c != 'n');
   return c;

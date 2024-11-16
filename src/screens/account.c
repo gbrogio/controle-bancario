@@ -26,7 +26,7 @@ char accountScreen(TransactionList *list, AccountListItem *client)
 
   if (option == '1')
   {
-    createTransaction(list, client, 'c');
+    // createTransaction(list, client, 'c');
     option = '0';
     return option;
   }

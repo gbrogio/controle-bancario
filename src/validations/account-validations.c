@@ -2,6 +2,7 @@
 #include <string.h>
 #include "validations.h"
 #include "../models/account.h"
+#include "../functions/functions.h"
 #include "../global.h"
 
 int validationCode(GenericType i, GenericType a)

@@ -165,6 +165,20 @@ void registerAccountAtEnd(AccountList *list);
  */
 void removeAccountByNumber(AccountList *list);
 
+/**
+ * @brief Removes an account from the list by its position.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void removeAccountAtStart(AccountList *list);
+
+/**
+ * @brief Removes an account from the list by its position.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void removeAccountAtEnd(AccountList *list);
+
 void buildScreen();
 char command();
 char controlSubScreen(char screen);

@@ -3,7 +3,7 @@
 #include "../functions/functions.h"
 #include "screens.h"
 
-char loginScreen(AccountList *list) {
+char loginScreen(AccountList *accountList, TransactionList *transactionList) {
   char option;
   cls();
   writeText("ENTRAR", SCREEN_WIDTH / 2, 4, 0);
@@ -20,16 +20,16 @@ char loginScreen(AccountList *list) {
       status = loginManagerScreen();
     } while (status == 0);
     if (status != 1) return 'b';
-    return controlSubScreen(managerScreen(list));
+    return controlSubScreen(managerScreen(accountList));
   } 
 
   if (option == '2') {
     AccountListItemPointer account;
     do {
-      account = loginAccountScreen(list);
+      account = loginAccountScreen(accountList);
     } while (!account);
     if (account->data.code == -1) return 'b';
-    return controlSubScreen(accountScreen(list, account));
+    return controlSubScreen(accountScreen(transactionList, account));
   }
   
   return option;
