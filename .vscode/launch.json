@@ -8,10 +8,10 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/gbrogio/university/data-structure/controle-bancario",
-      "program": "/home/gbrogio/university/data-structure/controle-bancario/build/Debug/outDebug",
+      "cwd": "/home/gbrogio/my/unicv/controle-bancario",
+      "program": "/home/gbrogio/my/unicv/controle-bancario/bin/main",
       "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",

@@ -10,6 +10,6 @@ void homeScreen();
 int loginManagerScreen();
 AccountListItemPointer loginAccountScreen(AccountList *list);
 char managerScreen(AccountList *list);
-char accountScreen(TransactionList *list, AccountListItem *client);
+char accountScreen(AccountList *accountList, TransactionList *transactionList, AccountListItemPointer client);
 
 #endif

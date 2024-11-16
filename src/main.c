@@ -5,9 +5,8 @@
 */
 
 // main libs
-#include <stdio.h>
 #include <locale.h>
-#include <string.h>
+
 #include "functions/functions.h"
 #include "global.h"
 #include "screens/screens.h"

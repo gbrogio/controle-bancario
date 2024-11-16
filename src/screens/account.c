@@ -1,6 +1,6 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+
+
+
 
 #include "../global.h"
 #include "../models/account.h"
@@ -8,7 +8,7 @@
 #include "../functions/functions.h"
 #include "screens.h"
 
-char accountScreen(TransactionList *list, AccountListItem *client)
+char accountScreen(AccountList *accountList, TransactionList *transactionList, AccountListItemPointer client)
 {
   char option;
   cls();

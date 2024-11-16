@@ -1,6 +1,6 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+
+
+
 #include "../../global.h"
 #include "../functions.h"
 #include "../../models/account.h"
@@ -8,16 +8,16 @@
 
 void registerAccountAtEnd(AccountList *list)
 {
-  char doAgain = 's';
+  char doAgain;
   do
   {
     cls();
     buildScreen();
     writeText("CADASTRO DE CONTA (FINAL)", SCREEN_WIDTH / 2, 4, 0);
     Account account = createAccount(list, 0, -1);
-    clearFooter();
     if (account.code != 0)
     {
+      clearFooter();
       char confirmation = confirm("Deseja cadastrar essa conta?");
       if (confirmation == 's')
         pushAccount(list, account);

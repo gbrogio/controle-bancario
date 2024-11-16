@@ -1,7 +1,8 @@
+#include <stddef.h>
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
+
 #include "./functions.h"
 #include "../models/account.h"
 #include "../global.h"

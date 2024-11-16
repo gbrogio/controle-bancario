@@ -181,6 +181,8 @@ void removeAccountAtEnd(AccountList *list);
 
 void buildScreen();
 char command();
-char controlSubScreen(char screen);
+char controlSubScreen(char screen(
+                          AccountList *list, TransactionList *transactionList, AccountListItemPointer account),
+                      AccountList *list, TransactionList *transactionList, AccountListItemPointer account);
 
 #endif

@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include "../global.h"
 #include "../models/account.h"
 #include "../functions/functions.h"
@@ -20,7 +21,7 @@ char loginScreen(AccountList *accountList, TransactionList *transactionList) {
       status = loginManagerScreen();
     } while (status == 0);
     if (status != 1) return 'b';
-    return controlSubScreen(managerScreen(accountList));
+    return controlSubScreen(managerScreen, accountList, transactionList, NULL);
   } 
 
   if (option == '2') {
@@ -29,7 +30,7 @@ char loginScreen(AccountList *accountList, TransactionList *transactionList) {
       account = loginAccountScreen(accountList);
     } while (!account);
     if (account->data.code == -1) return 'b';
-    return controlSubScreen(accountScreen(transactionList, account));
+    return controlSubScreen(accountScreen, accountList, transactionList, account);
   }
   
   return option;

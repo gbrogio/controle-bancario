@@ -1,8 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <stddef.h>
 #include <ctype.h>
-#include <time.h>
+#include <string.h>
+
 #include "functions.h"
 #include "../models/transaction.h"
 #include "../models/account.h"
