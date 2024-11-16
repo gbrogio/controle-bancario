@@ -9,17 +9,17 @@
     Remove an account at the start of the list
     @param list The list of accounts
 */
-void removeAccountAtStart(AccountList *list)
+void disableAccountAtStart(AccountList *list)
 {
   char doAgain = 's';
   do
   {
     cls();
     buildScreen();
-    writeText("REMOVER CONTA (INICIO)", SCREEN_WIDTH / 2, 4, 0);
+    writeText("INATIVAR CONTA (INICIO)", SCREEN_WIDTH / 2, 4, 0);
     printAccountInPosition(list, 0);
     clearFooter();
-    char confirmation = confirm("Deseja remover essa conta?");
+    char confirmation = confirm("Deseja inativar essa conta?");
     if (confirmation == 's')
     {
       if (list->head == NULL)
@@ -30,6 +30,6 @@ void removeAccountAtStart(AccountList *list)
       list->length--;
     }
     clearFooter();
-    doAgain = confirm("Deseja remover outra conta?");
+    doAgain = confirm("Deseja inativar outra conta?");
   } while (doAgain == 's');
 }

@@ -6,7 +6,7 @@
 #include "../../models/account.h"
 #include "../../validations/validations.h"
 
-void removeAccountAtEnd(AccountList *list)
+void disableAccountAtEnd(AccountList *list)
 {
   if (list->length == 0)
   {
@@ -20,10 +20,10 @@ void removeAccountAtEnd(AccountList *list)
   {
     cls();
     buildScreen();
-    writeText("REMOVER CONTA (FINAL)", SCREEN_WIDTH / 2, 4, 0);
+    writeText("INATIVAR CONTA (FINAL)", SCREEN_WIDTH / 2, 4, 0);
     printAccountInPosition(list, list->length - 1);
     clearFooter();
-    char confirmation = confirm("Deseja remover essa conta?");
+    char confirmation = confirm("Deseja inativar essa conta?");
     if (confirmation == 's')
     {
       if (list->head == NULL)
@@ -42,6 +42,6 @@ void removeAccountAtEnd(AccountList *list)
       list->length--;
     }
     clearFooter();
-    doAgain = confirm("Deseja remover outra conta?");
+    doAgain = confirm("Deseja inativar outra conta?");
   } while (doAgain == 's');
 }

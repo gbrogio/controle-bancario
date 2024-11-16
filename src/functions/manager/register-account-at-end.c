@@ -1,6 +1,3 @@
-
-
-
 #include "../../global.h"
 #include "../functions.h"
 #include "../../models/account.h"

@@ -121,7 +121,7 @@ Account createAccount(AccountList *list, int update, int input);
  * 
  * @param list Pointer to the AccountList structure.
  */
-void removeAccountAtEnd(AccountList *list);
+void disableAccountAtEnd(AccountList *list);
 
 /**
  * @brief Alters the details of an existing account in the list.
@@ -163,21 +163,64 @@ void registerAccountAtEnd(AccountList *list);
  * 
  * @param list Pointer to the AccountList structure.
  */
-void removeAccountByNumber(AccountList *list);
+void disableAccountByNumber(AccountList *list);
 
 /**
  * @brief Removes an account from the list by its position.
  * 
  * @param list Pointer to the AccountList structure.
  */
-void removeAccountAtStart(AccountList *list);
+void disableAccountAtStart(AccountList *list);
 
 /**
  * @brief Removes an account from the list by its position.
  * 
  * @param list Pointer to the AccountList structure.
  */
-void removeAccountAtEnd(AccountList *list);
+void disableAccountAtEnd(AccountList *list);
+
+/**
+ * @brief Creates a new transaction.
+ * 
+ * @param list Pointer to the transaction list.
+ * @param account Pointer to the account.
+ * @param type Type of transaction.
+ * 
+ * @return Transaction New transaction.
+ */
+Transaction createTransaction(TransactionList *list, AccountListItem *account, char type);
+
+/**
+ * @brief Saves the account list to a file.
+ * 
+ * @param list Pointer to the account list.
+ * @param filename Name of the file to save the account list to.
+ */
+void saveAccounts(AccountList *list, char *filename);
+
+/**
+ * @brief Loads the account list from a file.
+ * 
+ * @param list Pointer to the account list.
+ * @param filename Name of the file to load the account list from.
+ */
+void loadAccounts(AccountList *list, char *filename);
+
+/**
+ * @brief Saves the transaction list to a file.
+ * 
+ * @param list Pointer to the transaction list.
+ * @param filename Name of the file to save the transaction list to.
+ */
+void saveTransactions(TransactionList *list, char *filename);
+
+/**
+ * @brief Loads the transaction list from a file.
+ * 
+ * @param list Pointer to the transaction list.
+ * @param filename Name of the file to load the transaction list from.
+ */
+void loadTransactions(TransactionList *list, char *filename);
 
 void buildScreen();
 char command();

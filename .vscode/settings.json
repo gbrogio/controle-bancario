@@ -63,6 +63,7 @@
     "css": "css",
     "global.h": "c",
     "functions.h": "c",
-    "account.h": "c"
+    "account.h": "c",
+    "stdlib.h": "c"
   }
 }

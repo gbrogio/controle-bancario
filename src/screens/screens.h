@@ -9,7 +9,7 @@ char loginScreen(AccountList *list, TransactionList *transactionList);
 void homeScreen();
 int loginManagerScreen();
 AccountListItemPointer loginAccountScreen(AccountList *list);
-char managerScreen(AccountList *list);
+char managerScreen(AccountList *accountList, TransactionList *_, AccountListItemPointer __);
 char accountScreen(AccountList *accountList, TransactionList *transactionList, AccountListItemPointer client);
 
 #endif

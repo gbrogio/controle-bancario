@@ -6,6 +6,7 @@
 
 // main libs
 #include <locale.h>
+#include <stdio.h>
 
 #include "functions/functions.h"
 #include "global.h"
@@ -14,6 +15,8 @@
 int main() {
   AccountList *accountList = initializeAccountList();
   TransactionList *transactionList = initializeTransactionList();
+  loadAccounts(accountList, "/db/accounts.dat");
+  loadTransactions(transactionList, "/db/transactions.dat");
 
   setlocale(LC_ALL, "Portuguese");
   int start = 0;
@@ -37,6 +40,9 @@ int main() {
     clearFooter();
     if (c == '0' || c == 'b') c = command();
   } while (c != 'x');
+
+  saveAccounts(accountList, "/db/accounts.dat");
+  saveTransactions(transactionList, "/db/transactions.dat");
 
   return 0;
 }

@@ -7,7 +7,7 @@
 #include "../functions/functions.h"
 #include "screens.h"
 
-char managerScreen(AccountList *list)
+char managerScreen(AccountList *accountList, TransactionList *_, AccountListItemPointer __)
 {
   char option;
   cls();
@@ -30,56 +30,56 @@ char managerScreen(AccountList *list)
 
   if (option == '1')
   {
-    registerAccountAtEnd(list);
+    registerAccountAtEnd(accountList);
     option = '0';
     return option;
   }
 
   if (option == '2')
   {
-    registerAccountAtStart(list);
+    registerAccountAtStart(accountList);
     option = '0';
     return option;
   }
 
   if (option == '3')
   {
-    registerAccountAtPosition(list);
+    registerAccountAtPosition(accountList);
     option = '0';
     return option;
   }
 
   if (option == '4')
     {
-    removeAccountAtEnd(list);
+    disableAccountAtEnd(accountList);
     option = '0';
     return option;
   }
 
   if (option == '5')
   {
-    removeAccountAtStart(list);
+    disableAccountAtStart(accountList);
     option = '0';
     return option;
   }
 
   if (option == '6')
   {
-    removeAccountByNumber(list);
+    disableAccountByNumber(accountList);
     option = '0';
     return option;
   }
 
   if (option == '7')
   {
-    alterAccount(list);
+    alterAccount(accountList);
     option = '0';
     return option;
   }
 
   if (option == '8')
   {
-    listAccounts(list);
+    listAccounts(accountList);
     option = '0';
     return option;
   }

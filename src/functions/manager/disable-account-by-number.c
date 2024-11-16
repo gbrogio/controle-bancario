@@ -6,14 +6,14 @@
 #include "../../models/account.h"
 #include "../../validations/validations.h"
 
-void removeAccountByNumber(AccountList *list)
+void disableAccountByNumber(AccountList *list)
 {
   char doAgain = 's';
   do
   {
     cls();
     buildScreen();
-    writeText("REMOVER CONTA (POSICAO)", SCREEN_WIDTH / 2, 4, 0);
+    writeText("INATIVAR CONTA (POSICAO)", SCREEN_WIDTH / 2, 4, 0);
 
     writeText("Numero da conta..:", SCREEN_WIDTH / 2 - 14,
               SCREEN_HEIGHT / 2, 0);
@@ -27,7 +27,7 @@ void removeAccountByNumber(AccountList *list)
 
     if (number[0] == '0') {
       clearFooter();
-      doAgain = confirm("Deseja remover outra conta?");
+      doAgain = confirm("Deseja inativar outra conta?");
       continue;
     }
 
@@ -41,10 +41,10 @@ void removeAccountByNumber(AccountList *list)
 
     cls();
     buildScreen();
-    writeText("REMOVER CONTA", SCREEN_WIDTH / 2, 4, 0);
+    writeText("inativar CONTA", SCREEN_WIDTH / 2, 4, 0);
     printAccountInPosition(list, position);
     clearFooter();
-    char confirmation = confirm("Deseja remover essa conta?");
+    char confirmation = confirm("Deseja inativar essa conta?");
     if (confirmation == 's')
     {
       if (list->head == NULL)
@@ -71,6 +71,6 @@ void removeAccountByNumber(AccountList *list)
     }
 
     clearFooter();
-    doAgain = confirm("Deseja remover outra conta?");
+    doAgain = confirm("Deseja inativar outra conta?");
   } while (doAgain == 's');
 }

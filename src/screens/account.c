@@ -26,7 +26,7 @@ char accountScreen(AccountList *accountList, TransactionList *transactionList, A
 
   if (option == '1')
   {
-    // createTransaction(list, client, 'c');
+    createTransaction(transactionList, client, 'c');
     option = '0';
     return option;
   }
