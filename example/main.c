@@ -8,7 +8,18 @@
 #include <stdio.h>
 #include <locale.h>
 #include <string.h>
-#include "helpers/helpers.h"
+
+// utils
+#include "utils/screen/screen.h"
+
+// global
+#include "global/global.h"
+
+// screens
+#include "screens/help/help.h"
+#include "screens/main/main.h"
+#include "screens/login/login.h"
+#include "utils/account/account.h"
 
 int main() {
   AccountList *list = initializeAccountList();

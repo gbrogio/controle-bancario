@@ -1,4 +1,4 @@
-#include "menu.h"
+#include "login.h"
 #include "../../global/global.h"
 #include "../../utils/screen/screen.h"
 #include "../app/manager/login.h"
@@ -31,7 +31,7 @@ char loginScreen(AccountList *list) {
     AccountListItemPointer account;
     do {
       account = loginClientScreen(list);
-    } while (account == NULL);
+    } while (!account);
     if (account->data.code == -1) return 'b';
     return controlSubScreen(clientScreen(list, account));
   }
