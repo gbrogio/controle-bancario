@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "./helpers.h"
+#include "./functions.h"
 #include "../models/account.h"
 
 void pushAccount(AccountList *list, Account data)

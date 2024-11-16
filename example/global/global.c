@@ -149,15 +149,11 @@ void getInput(char mask[], GenericType input, char err[], int x,
   @return The input of the user
 */
 char confirm(char msg[]) {
-    char c[2];
+    char c;
     writeText(msg, 0, SCREEN_HEIGHT - 1, 0);
     writeText("(S/N)", strlen(msg) + 3, SCREEN_HEIGHT - 1, 1);
-    do {
-        goTo(strlen(msg) + 9, SCREEN_HEIGHT - 1);
-        scanf("%1s", c);
-        clearInputBuffer();
-    } while (c[0] == '\n');
-    return tolower(c[0]);
+    c = awaitPressAnyKey(0);
+    return tolower(c);
 }
 
 /*

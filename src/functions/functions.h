@@ -2,6 +2,7 @@
 #define HELPERS_H
 
 #include "../models/account.h"
+#include "../models/transaction.h"
 
 /**
  * @brief Adds a new account to the end of the account list.
@@ -70,10 +71,29 @@ int findAccountPosition(AccountList *list, char number[]);
 AccountListItemPointer getAccountByNumber(AccountList *list, char number[]);
 
 /**
- * @brief initializes a new account list.
+ * @brief Initializes a new account list.
  * 
  * @return AccountList* Pointer to the new account list.
  */
 AccountList *initializeAccountList();
+
+/**
+ * @brief Adds a new transaction to the end of the transaction list.
+ * 
+ * @param list Pointer to the transaction list.
+ * @param data Transaction data to be added.
+ */
+void pushTransaction(TransactionList *list, Transaction data);
+
+/**
+ * @brief Initializes a new transaction list.
+ * 
+ * @return TransactionList* Pointer to the new transaction list.
+ */
+TransactionList *initializeTransactionList();
+
+void buildScreen();
+char command();
+char controlSubScreen(char screen);
 
 #endif

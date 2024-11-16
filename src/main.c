@@ -8,7 +8,8 @@
 #include <stdio.h>
 #include <locale.h>
 #include <string.h>
-#include "helpers/helpers.h"
+#include "functions/functions.h"
+#include "screens/screens.h"
 
 int main() {
   AccountList *list = initializeAccountList();
