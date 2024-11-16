@@ -5,7 +5,7 @@
 typedef struct
 {
   int id;
-  char movimentDate[23];
+  char movimentDate[75];
   char type;
   double value;
 

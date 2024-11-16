@@ -63,6 +63,7 @@
     "css": "css",
     "screen.h": "c",
     "global.h": "c",
-    "account.h": "c"
+    "account.h": "c",
+    "string.h": "c"
   }
 }

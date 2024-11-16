@@ -1,6 +1,8 @@
 #ifndef VALIDATIONS_H
 #define VALIDATIONS_H
 
+#include "../global.h"
+
 /**
  * @brief Validates code data.
  * 
@@ -72,6 +74,15 @@ int validationStatus(GenericType i, GenericType a);
  * @return int 1 if the data is invalid, 0 if it is valid.
  */
 int validationDay(GenericType i, GenericType a);
+
+/**
+ * @brief Validates if the position is valid.
+ * 
+ * @param i Input data.
+ * @param a Additional data.
+ * @return int 1 if the data is invalid, 0 if it is valid.
+ */
+int invalidPosition(GenericType i, GenericType a);
 
 /**
  * @brief Always accept the data.

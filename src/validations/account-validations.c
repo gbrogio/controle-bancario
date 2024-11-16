@@ -134,3 +134,10 @@ int validationDay(GenericType i, GenericType a)
 
   return 0;
 }
+
+int invalidPosition(GenericType i, GenericType a)
+{
+  int position = *(int *)i;
+  AccountList *list = (AccountList *)a;
+  return position < 0 || position > list->length;
+}

@@ -92,6 +92,79 @@ void pushTransaction(TransactionList *list, Transaction data);
  */
 TransactionList *initializeTransactionList();
 
+/**
+ * @brief Prints a transaction.
+ * 
+ * @param transaction Transaction to be printed.
+ */
+Account printAccountInPosition(AccountList *list, int position);
+
+/**
+ * @brief Prints an account.
+ * 
+ * @param account Account to be printed.
+ */
+void printAccount(Account account);
+
+/**
+ * @brief Creates a new account.
+ * 
+ * @param list Pointer to the account list.
+ * @param update Flag to indicate if the account is being updated.
+ * @param input Flag to indicate if the account is being input.
+ * @return Account New account.
+ */
+Account createAccount(AccountList *list, int update, int input);
+
+/**
+ * @brief Removes the account at the end of the list.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void removeAccountAtEnd(AccountList *list);
+
+/**
+ * @brief Alters the details of an existing account in the list.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void alterAccount(AccountList *list);
+
+/**
+ * @brief Registers a new account at the start of the list.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void registerAccountAtStart(AccountList *list);
+
+/**
+ * @brief Registers a new account at a specific position in the list.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void registerAccountAtPosition(AccountList *list);
+
+/**
+ * @brief Lists all the accounts in the list.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void listAccounts(AccountList *list);
+
+/**
+ * @brief Registers a new account at the end of the list.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void registerAccountAtEnd(AccountList *list);
+
+/**
+ * @brief Removes an account from the list by its account number.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void removeAccountByNumber(AccountList *list);
+
 void buildScreen();
 char command();
 char controlSubScreen(char screen);

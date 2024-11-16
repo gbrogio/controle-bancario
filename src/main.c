@@ -9,6 +9,7 @@
 #include <locale.h>
 #include <string.h>
 #include "functions/functions.h"
+#include "global.h"
 #include "screens/screens.h"
 
 int main() {
@@ -20,7 +21,7 @@ int main() {
 
   do {
     if ((c == '0' || c == 'b') && start == 0) {
-      mainScreen();
+      homeScreen();
     } else if (c == 'h') {
       helpScreen();
       c = 'b';

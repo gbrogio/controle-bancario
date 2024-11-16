@@ -1,4 +1,3 @@
-#include "login.h"
 #include "../global.h"
 #include "../models/account.h"
 #include "../functions/functions.h"
@@ -27,10 +26,10 @@ char loginScreen(AccountList *list) {
   if (option == '2') {
     AccountListItemPointer account;
     do {
-      account = loginClientScreen(list);
+      account = loginAccountScreen(list);
     } while (!account);
     if (account->data.code == -1) return 'b';
-    return controlSubScreen(clientScreen(list, account));
+    return controlSubScreen(accountScreen(list, account));
   }
   
   return option;

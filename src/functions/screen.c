@@ -3,6 +3,7 @@
 
 #include "functions.h"
 #include "../screens/screens.h"
+#include "../global.h"
 
 void buildScreenBorder() {
   // header
