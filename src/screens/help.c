@@ -11,6 +11,9 @@ void helpScreen() {
   writeText("x - Para o programa", 0, 8, 0);
   writeText("0 - Em campos de codigo, cancela e volta para a tela anterior", 0,
             11, 0);
+  writeText("Numero de conta responsavel por rendimentos: \"000000-0\"", 0, 13,
+            0);
+
   buildScreen();
   printMessage("Pressione qualquer tecla para continuar...");
 }

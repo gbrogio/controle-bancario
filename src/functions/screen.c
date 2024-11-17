@@ -2,6 +2,7 @@
 #include "../screens/screens.h"
 #include "functions.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void buildScreenBorder() {
   // header

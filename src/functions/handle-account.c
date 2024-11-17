@@ -60,6 +60,17 @@ Account createAccount(AccountList *list, int update, int input) {
     account.type = tolower(account.type);
   }
 
+  // UPDATE ACCOUNT STATUS
+  if (input == 5 || input == -1) {
+    getInput("%s", account.status,
+             "Digite apenas \"ativo\" e \"inativo\"! Pressione 'Enter' para "
+             "reescrever...",
+             17, 16, validationStatus, NULL);
+    for (int i = 0; i < (int)strlen(account.status); i++) {
+      account.status[i] = tolower(account.status[i]);
+    }
+  }
+
   // UPDATE ACCOUNT BALANCE
   if (input == 6 || input == -1) {
     if (account.status[0] == 'i') {
@@ -68,7 +79,7 @@ Account createAccount(AccountList *list, int update, int input) {
     } else
       getInput("%lf", &account.balance,
                "Digite um saldo valido! Pressione 'Enter' para reescrever...",
-               17, 16, noValid, NULL);
+               17, 18, noValid, NULL);
   }
 
   // UPDATE ACCOUNT LIMIT
@@ -76,25 +87,14 @@ Account createAccount(AccountList *list, int update, int input) {
       (input == 7 && update == 1)) {
     if (account.status[0] == 'i') {
       account.limit = 0;
-      writeText("N/A", 17, 18, 1);
+      writeText("N/A", 17, 20, 1);
     } else
       getInput("%lf", &account.limit,
                "Digite um limite valido! Pressione 'Enter' para reescrever...",
-               17, 18, noValid, NULL);
+               17, 20, noValid, NULL);
   } else if (account.type == 'p') {
     account.limit = 0;
-    writeText("N/A", 17, 18, 1);
-  }
-
-  // UPDATE ACCOUNT STATUS
-  if (input == 5 || input == -1) {
-    getInput("%s", account.status,
-             "Digite apenas \"ativo\" e \"inativo\"! Pressione 'Enter' para "
-             "reescrever...",
-             17, 20, validationStatus, NULL);
-    for (int i = 0; i < (int)strlen(account.status); i++) {
-      account.status[i] = tolower(account.status[i]);
-    }
+    writeText("N/A", 17, 20, 1);
   }
 
   // UPDATE ACCOUNT INTEREST DAY

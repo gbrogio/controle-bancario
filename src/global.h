@@ -90,4 +90,8 @@ void cls();
  */
 char awaitPressAnyKey(int clearBuffer);
 
+void changeBackgroundColor(int r, int g, int b);
+void changeForegroundColor(int r, int g, int b);
+void setDefaultColor() ;
+
 #endif

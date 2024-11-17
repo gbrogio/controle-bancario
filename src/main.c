@@ -10,6 +10,7 @@
 #include "screens/screens.h"
 #include <locale.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
   AccountList *accountList = initializeAccountList();
@@ -17,7 +18,9 @@ int main() {
   loadAccounts(accountList, "db/accounts.dat");
   loadTransactions(transactionList, "db/transactions.dat");
 
+  system("echo -e \"\033[48;2;9;9;11m\033[38;2;250;250;250m\"");
   setlocale(LC_ALL, "Portuguese");
+
   int start = 0;
   char c = '0';
 

@@ -36,7 +36,8 @@ AccountListItemPointer loginAccountScreen(AccountList *list) {
 
   GetAccountByNumber accountFounded = getAccountByNumber(list, number, 1);
 
-  if (accountFounded.account->data.code != -1 &&
+  if (accountFounded.account != NULL &&
+      accountFounded.account->data.code != -1 &&
       strcmp(accountFounded.account->data.password, password) == 0) {
     return accountFounded.account;
   }

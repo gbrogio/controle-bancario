@@ -40,8 +40,11 @@ void transfer(AccountList *accountList, TransactionList *transactionList,
         getAccountByNumber(accountList, number, 1);
 
     if (accountFounded.account == NULL ||
-        accountFounded.account->data.number == account->data.number) {
-      printMessage("Conta nao encontrada! Pressione 'Enter' para continuar...");
+        accountFounded.account->data.number == account->data.number ||
+        accountFounded.account->data.type == 'p' ||
+        accountFounded.account->data.status[0] == 'i') {
+      printMessage(
+          "Conta credito nao encontrada! Pressione 'Enter' para continuar...");
       continue;
     }
 
