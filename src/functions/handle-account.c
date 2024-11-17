@@ -33,18 +33,25 @@ Account createAccount(AccountList *list, int update, int input) {
     }
   }
 
+  // UPDATE ACCOUNT BANK
   if (input == 1 || input == -1)
     getInput("%s", account.bank, "", 17, 8, noValid, NULL);
+
+  // UPDATE ACCOUNT AGENCY
   if (input == 2 || input == -1)
     getInput("%s", account.agency,
              "Digite um formato valido (ex. 1234-5)! Pressione 'Enter' para "
              "reescrever...",
              17, 10, validationAgency, NULL);
+
+  // UPDATE ACCOUNT NUMBER
   if (input == 3 || input == -1)
     getInput("%s", account.number,
              "Ja usado ou invalido (ex. 123456-7)! Pressione 'Enter' para "
              "reescrever..",
              17, 12, validationNumber, list);
+
+  // UPDATE ACCOUNT TYPE
   if (input == 4 || input == -1) {
     getInput("%c", &account.type,
              "C = Conta Corrente / P = Conta Poupanca! Pressione 'Enter' para "
@@ -52,19 +59,34 @@ Account createAccount(AccountList *list, int update, int input) {
              17, 14, validationType, NULL);
     account.type = tolower(account.type);
   }
-  if (input == 6 || input == -1)
-    getInput("%lf", &account.balance,
-             "Digite um saldo valido! Pressione 'Enter' para reescrever...", 17,
-             16, noValid, NULL);
+
+  // UPDATE ACCOUNT BALANCE
+  if (input == 6 || input == -1) {
+    if (account.status[0] == 'i') {
+      account.balance = 0;
+      writeText("N/A", 17, 18, 1);
+    } else
+      getInput("%lf", &account.balance,
+               "Digite um saldo valido! Pressione 'Enter' para reescrever...",
+               17, 16, noValid, NULL);
+  }
+
+  // UPDATE ACCOUNT LIMIT
   if (((input == 7 || input == -1) && account.type == 'c') ||
-      (input == 6 && update == 1)) {
-    getInput("%lf", &account.limit,
-             "Digite um limite valido! Pressione 'Enter' para reescrever...",
-             17, 18, noValid, NULL);
+      (input == 7 && update == 1)) {
+    if (account.status[0] == 'i') {
+      account.limit = 0;
+      writeText("N/A", 17, 18, 1);
+    } else
+      getInput("%lf", &account.limit,
+               "Digite um limite valido! Pressione 'Enter' para reescrever...",
+               17, 18, noValid, NULL);
   } else if (account.type == 'p') {
     account.limit = 0;
     writeText("N/A", 17, 18, 1);
   }
+
+  // UPDATE ACCOUNT STATUS
   if (input == 5 || input == -1) {
     getInput("%s", account.status,
              "Digite apenas \"ativo\" e \"inativo\"! Pressione 'Enter' para "
@@ -74,6 +96,8 @@ Account createAccount(AccountList *list, int update, int input) {
       account.status[i] = tolower(account.status[i]);
     }
   }
+
+  // UPDATE ACCOUNT INTEREST DAY
   if (((input == 8 || input == -1) && account.type == 'p') ||
       (input == 8 && update == 1)) {
     getInput(
@@ -84,6 +108,8 @@ Account createAccount(AccountList *list, int update, int input) {
     account.interestDay = 0;
     writeText("N/A", SCREEN_WIDTH / 2 + 22, SCREEN_HEIGHT / 2 - 1, 1);
   }
+
+  // UPDATE ACCOUNT PASSWORD
   if (input == 9 || input == -1)
     getInput("%s", account.password,
              "Senha deve ter 8 números! Pressione 'Enter' para reescrever...",
