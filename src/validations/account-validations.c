@@ -24,8 +24,10 @@ int validationCode(GenericType i, GenericType a)
   return code == previousAccount->data.code;
 }
 
-int validationAgency(GenericType i, GenericType a)
+int validationAgency(GenericType i, GenericType _)
 {
+  UNUSED(_);
+
   char *agency = (char *)i;
   if (strlen(agency) != 6)
     return 1;
@@ -45,8 +47,10 @@ int validationAgency(GenericType i, GenericType a)
   return 0;
 }
 
-int validationNumberType(GenericType i, GenericType a)
+int validationNumberType(GenericType i, GenericType _)
 {
+  UNUSED(_);
+
   char *number = (char *)i;
 
   if (number[0] == '0')
@@ -81,15 +85,17 @@ int validationNumber(GenericType i, GenericType a)
   if (valid == 1)
     return 1;
 
-  int position = findAccountPosition((AccountList *)a, number);
-  if (position != -1)
+  GetAccountByNumber accountFounded = getAccountByNumber((AccountList *)a, number);
+  if (accountFounded.position != -1)
     return 1;
 
   return 0;
 }
 
-int validationPassword(GenericType i, GenericType a)
+int validationPassword(GenericType i, GenericType _)
 {
+  UNUSED(_);
+
   char *password = (char *)i;
   if (strlen(password) != 8)
     return 1;
@@ -103,8 +109,10 @@ int validationPassword(GenericType i, GenericType a)
   return 0;
 }
 
-int validationType(GenericType i, GenericType a)
+int validationType(GenericType i, GenericType _)
 {
+  UNUSED(_);
+
   char *type = (char *)i;
   char lowerType = tolower(*type);
 
@@ -113,8 +121,10 @@ int validationType(GenericType i, GenericType a)
   return 0;
 }
 
-int validationStatus(GenericType i, GenericType a)
+int validationStatus(GenericType i, GenericType _)
 {
+  UNUSED(_);
+
   char *status = (char *)i;
 
   for (int i = 0; i < (int)strlen(status); i++)
@@ -127,8 +137,10 @@ int validationStatus(GenericType i, GenericType a)
   return 0;
 }
 
-int validationDay(GenericType i, GenericType a)
+int validationDay(GenericType i, GenericType _)
 {
+  UNUSED(_);
+
   int *day = (int *)i;
   if (*day < 1 || *day > 28)
     return 1;

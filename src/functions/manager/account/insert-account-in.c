@@ -1,10 +1,10 @@
-#include <stddef.h>
+
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "../functions.h"
-#include "../../models/account.h"
-#include "../../global.h"
+#include "../../functions.h"
+#include "../../../models/account.h"
+#include "../../../global.h"
 
 void insertAccountIn(int position, AccountList *list, Account data)
 {
@@ -22,4 +22,17 @@ void insertAccountIn(int position, AccountList *list, Account data)
     previousData = currentData;
     currentData = currentData->next;
   }
+
+  if (previousData == NULL)
+  {
+    newData->next = list->head;
+    list->head = newData;
+  }
+  else
+  {
+    previousData->next = newData;
+    newData->next = currentData;
+  }
+
+  list->length++;
 }

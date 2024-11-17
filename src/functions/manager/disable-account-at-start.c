@@ -1,4 +1,4 @@
-#include <stddef.h>
+#include <string.h>
 #include <stdlib.h>
 
 #include "../../global.h"
@@ -11,13 +11,20 @@
 */
 void disableAccountAtStart(AccountList *list)
 {
+  if (list->length == 0)
+  {
+    printMessage("Nao ha contas cadastradas.");
+    awaitPressAnyKey(0);
+    return;
+  }
+
   char doAgain = 's';
   do
   {
     cls();
     buildScreen();
     writeText("INATIVAR CONTA (INICIO)", SCREEN_WIDTH / 2, 4, 0);
-    printAccountInPosition(list, 0);
+    printAccount(list->head->data);
     clearFooter();
     char confirmation = confirm("Deseja inativar essa conta?");
     if (confirmation == 's')

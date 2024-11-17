@@ -1,4 +1,4 @@
-#include <stddef.h>
+#include <string.h>
 #include <stdlib.h>
 
 #include "../../global.h"
@@ -21,7 +21,7 @@ void disableAccountAtEnd(AccountList *list)
     cls();
     buildScreen();
     writeText("INATIVAR CONTA (FINAL)", SCREEN_WIDTH / 2, 4, 0);
-    printAccountInPosition(list, list->length - 1);
+    printAccount(list->tail->data);
     clearFooter();
     char confirmation = confirm("Deseja inativar essa conta?");
     if (confirmation == 's')

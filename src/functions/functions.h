@@ -46,20 +46,15 @@ void popAccount(AccountList *list);
 /**
  * @brief Alters the account data at a specific position in the account list.
  * 
- * @param list Pointer to the account list.
- * @param account New account data.
- * @param position Position of the account to be altered.
+ * @param account Pointer to the account list item.
+ * @param data Account data to be altered.
  */
-void alterAccountInPostion(AccountList *list, Account account, int position);
+void alterAccount(AccountListItemPointer account, Account data);
 
-/**
- * @brief Finds the position of an account in the account list by its number.
- * 
- * @param list Pointer to the account list.
- * @param number Account number to search for.
- * @return int Position of the account in the list, or -1 if not found.
- */
-int findAccountPosition(AccountList *list, char number[]);
+typedef struct {
+  AccountListItemPointer account;
+  int position;
+} GetAccountByNumber;
 
 /**
  * @brief Retrieves an account from the account list by its number.
@@ -68,7 +63,7 @@ int findAccountPosition(AccountList *list, char number[]);
  * @param number Account number to search for.
  * @return AccountListItemPointer Pointer to the account list item, or NULL if not found.
  */
-AccountListItemPointer getAccountByNumber(AccountList *list, char number[]);
+GetAccountByNumber getAccountByNumber(AccountList *list, char number[]);
 
 /**
  * @brief Initializes a new account list.
@@ -91,13 +86,6 @@ void pushTransaction(TransactionList *list, Transaction data);
  * @return TransactionList* Pointer to the new transaction list.
  */
 TransactionList *initializeTransactionList();
-
-/**
- * @brief Prints a transaction.
- * 
- * @param transaction Transaction to be printed.
- */
-Account printAccountInPosition(AccountList *list, int position);
 
 /**
  * @brief Prints an account.
@@ -128,7 +116,7 @@ void disableAccountAtEnd(AccountList *list);
  * 
  * @param list Pointer to the AccountList structure.
  */
-void alterAccount(AccountList *list);
+void alterAccountScreen(AccountList *list);
 
 /**
  * @brief Registers a new account at the start of the list.
@@ -183,12 +171,13 @@ void disableAccountAtEnd(AccountList *list);
  * @brief Creates a new transaction.
  * 
  * @param list Pointer to the transaction list.
- * @param account Pointer to the account.
+ * @param from Pointer to the account to transfer from.
+ * @param to Pointer to the account to transfer to.
  * @param type Type of transaction.
  * 
  * @return Transaction New transaction.
  */
-Transaction createTransaction(TransactionList *list, AccountListItem *account, char type);
+Transaction createTransaction(TransactionList *list, AccountListItem *from, AccountListItem *to, char type);
 
 /**
  * @brief Saves the account list to a file.
@@ -221,6 +210,32 @@ void saveTransactions(TransactionList *list, char *filename);
  * @param filename Name of the file to load the transaction list from.
  */
 void loadTransactions(TransactionList *list, char *filename);
+
+/**
+ * @brief Registers a transaction.
+ * 
+ * @param list Pointer to the transaction list.
+ * @param account Pointer to the account.
+ * @param type Type of transaction.
+ */
+void registerTransaction(TransactionList *list, AccountListItem *account, char type);
+
+/**
+ * @brief Adds a new transaction to the end of the transaction list.
+ * 
+ * @param list Pointer to the transaction list.
+ * @param data Transaction data to be added.
+ */
+void pushTransaction(TransactionList *list, Transaction data);
+
+/**
+ * @brief Transfers money between accounts.
+ * 
+ * @param accountList Pointer to the account list.
+ * @param transactionList Pointer to the transaction list.
+ * @param account Pointer to the account.
+ */
+void transfer(AccountList *accountList, TransactionList *transactionList, AccountListItem *account);
 
 void buildScreen();
 char command();

@@ -4,9 +4,9 @@
 
 void clearFooter()
 {
-  for (int i = 0; i < SCREEN_WIDTH - 4; i++)
+  for (int i = 0; i < SCREEN_WIDTH - 2; i++)
   {
-    goTo(2 + i, SCREEN_HEIGHT - 1);
+    goTo(1 + i, SCREEN_HEIGHT - 1);
     printf(" ");
   }
 }

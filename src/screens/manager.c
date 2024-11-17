@@ -9,6 +9,9 @@
 
 char managerScreen(AccountList *accountList, TransactionList *_, AccountListItemPointer __)
 {
+  UNUSED(_);
+  UNUSED(__);
+
   char option;
   cls();
   writeText("BEM VINDO DE VOLTA!", SCREEN_WIDTH, 4, 0);
@@ -72,7 +75,7 @@ char managerScreen(AccountList *accountList, TransactionList *_, AccountListItem
 
   if (option == '7')
   {
-    alterAccount(accountList);
+    alterAccountScreen(accountList);
     option = '0';
     return option;
   }

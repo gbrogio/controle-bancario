@@ -1,38 +1,6 @@
 #include <stdlib.h>
-#include <stddef.h>
-
 #include "./functions.h"
 #include "../models/transaction.h"
-
-void pushTransaction(TransactionList *list, Transaction data)
-{
-  TransactionListItemPointer newData = (TransactionListItemPointer)malloc(sizeof(TransactionListItem));
-
-  newData->data = data;
-  newData->next = NULL;
-  newData->prev = list->tail;
-
-  if (list->head == NULL)
-    list->head = newData;
-  else
-    list->tail->next = newData;
-
-  list->tail = newData;
-  list->length++;
-}
-
-/* 
-void shiftTransaction(TransactionList *list)
-{
-  if (list->head == NULL)
-    return;
-
-  TransactionListItemPointer lastData = list->tail;
-  list->tail = list->tail->prev;
-  list->tail->next = NULL;
-  free(lastData);
-  list->length--;  
-} */
 
 TransactionList *initializeTransactionList()
 {

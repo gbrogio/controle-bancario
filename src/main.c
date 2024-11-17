@@ -15,8 +15,8 @@
 int main() {
   AccountList *accountList = initializeAccountList();
   TransactionList *transactionList = initializeTransactionList();
-  loadAccounts(accountList, "/db/accounts.dat");
-  loadTransactions(transactionList, "/db/transactions.dat");
+  loadAccounts(accountList, "db/accounts.dat");
+  loadTransactions(transactionList, "db/transactions.dat");
 
   setlocale(LC_ALL, "Portuguese");
   int start = 0;
@@ -41,8 +41,12 @@ int main() {
     if (c == '0' || c == 'b') c = command();
   } while (c != 'x');
 
-  saveAccounts(accountList, "/db/accounts.dat");
-  saveTransactions(transactionList, "/db/transactions.dat");
+  saveAccounts(accountList, "db/accounts.dat");
+  saveTransactions(transactionList, "db/transactions.dat");
+
+  clearFooter();
+  goTo(2, SCREEN_HEIGHT - 1);
+  printf("Dados salvos com sucesso em /db/**.dat\n");
 
   return 0;
 }

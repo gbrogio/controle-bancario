@@ -5,6 +5,7 @@
 #define APP_NAME "G.B.M.S. Bank"
 #define ADM_CODE "123"
 #define ADM_PASSWORD "123"
+#define UNUSED(x) (void)(x)
 
 typedef void *GenericType;
 

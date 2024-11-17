@@ -8,7 +8,7 @@ mkdir bin
 SRC_FILES=$(find src -name '*.c')
 
 # Compila o código-fonte
-gcc -g $SRC_FILES -o bin/main
+gcc -Wall -Wextra -Wpedantic $SRC_FILES -o bin/main
 
 # Verifica o sistema operacional e executa o programa
 if [ "$(uname)" = "Linux" ]; then

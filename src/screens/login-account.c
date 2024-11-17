@@ -1,4 +1,4 @@
-#include <stddef.h>
+
 #include <string.h>
 #include <stdlib.h>
 
@@ -30,10 +30,10 @@ AccountListItemPointer loginAccountScreen(AccountList *list) {
   char confirmation = confirm("Deseja entrar com essas credenciais?");
   if (confirmation != 's') return NULL;
 
-  AccountListItemPointer account = getAccountByNumber(list, number);
+  GetAccountByNumber accountFounded = getAccountByNumber(list, number);
 
-  if (account->data.code != -1 && strcmp(account->data.password, password) == 0) {
-    return account;
+  if (accountFounded.account->data.code != -1 && strcmp(accountFounded.account->data.password, password) == 0) {
+    return accountFounded.account;
   }
 
   clearFooter();

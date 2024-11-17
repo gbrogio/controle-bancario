@@ -1,10 +1,10 @@
-#include <stddef.h>
+
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "../functions.h"
-#include "../../models/account.h"
-#include "../../global.h"
+#include "../../functions.h"
+#include "../../../models/account.h"
+#include "../../../global.h"
 
 void popAccount(AccountList *list)
 {
@@ -19,5 +19,15 @@ void popAccount(AccountList *list)
     free(lastData);
     list->head = NULL;
     list->tail = NULL;
+  }else
+  {
+    while (currentData->next != lastData)
+    {
+      currentData = currentData->next;
+    }
+    currentData->next = NULL;
+    list->tail = currentData;
+    free(lastData);
   }
+  list->length--;
 }

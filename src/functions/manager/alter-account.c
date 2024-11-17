@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stddef.h>
+
 #include "../../global.h"
 #include "../functions.h"
 #include "../../models/account.h"
 #include "../../validations/validations.h"
 
-void alterAccount(AccountList *list)
+void alterAccountScreen(AccountList *list)
 {
   char doAgain = 's';
   do
@@ -20,7 +20,6 @@ void alterAccount(AccountList *list)
               SCREEN_HEIGHT / 2, 0);
 
     char number[8];
-    int position = 0;
 
     getInput("%s", number,
              "Digite um numero valido! Pressione 'Enter' para continuar...",
@@ -32,9 +31,9 @@ void alterAccount(AccountList *list)
       continue;
     }
 
-    position = findAccountPosition(list, number);
+    GetAccountByNumber accountFounded = getAccountByNumber(list, number);
 
-    if (position == -1)
+    if (accountFounded.position == -1)
     {
       printMessage("Conta nao encontrada! Pressione 'Enter' para continuar...");
       continue;
@@ -44,8 +43,8 @@ void alterAccount(AccountList *list)
     buildScreen();
     writeText("ALTERAR CADASTRO DE CONTA", SCREEN_WIDTH / 2, 4, 0);
 
-
-    Account account = printAccountInPosition(list, position);
+    printAccount(accountFounded.account->data);
+    Account account = accountFounded.account->data;
     char confirmation = confirm("Deseja alterar essa conta?");
     if (confirmation == 's')
     {
@@ -60,8 +59,8 @@ void alterAccount(AccountList *list)
                     SCREEN_HEIGHT - 1, 0);
           goTo(35, SCREEN_HEIGHT - 1);
           scanf("%d", &field);
-          if (field < 1 || field > 8)
-            printMessage("Por favor digite um numero valido e entre 1 e 8!");
+          if (field < 1 || field > 9)
+            printMessage("Por favor digite um numero valido e entre 1 e 9!");
         } while (field < 1 || field > 9 || (account.type == 'c' && field == 8) || (account.type == 'p' && field == 6));
 
         if (field == 4) clearInputBuffer();          
@@ -109,7 +108,7 @@ void alterAccount(AccountList *list)
       char confirmationModify = confirm("Deseja confirmar a alteracao?");
       if (confirmationModify == 's')
       {
-        alterAccountInPostion(list, account, position);
+        alterAccount(accountFounded.account, account);
       }
     }
     clearFooter();

@@ -1,8 +1,4 @@
 #include <stdio.h>
-
-
-
-
 #include "../global.h"
 
 void clearInputBuffer()

@@ -1,4 +1,4 @@
-#include <stddef.h>
+
 #include <string.h>
 #include <time.h>
 #include <stdio.h>
@@ -8,8 +8,11 @@
 #include "../validations/validations.h"
 #include "../global.h"
 
-Transaction createTransaction(TransactionList *list, AccountListItem *account, char type)
+Transaction createTransaction(TransactionList *list, AccountListItem *from, AccountListItem *to, char type)
 {
+  if (to == NULL)
+    to = from;
+
   Transaction transaction;
   transaction.id = list->length + 1;
 
@@ -17,19 +20,24 @@ Transaction createTransaction(TransactionList *list, AccountListItem *account, c
   getInput("%lf", &transaction.value, "Digite um valor valido! Pressione 'Enter' para reescrever...", 22, SCREEN_HEIGHT / 2, noValid, NULL);
 
   transaction.type = type;
-  strcpy(transaction.accountNumber, account->data.number);
+  strcpy(transaction.toAccountNumber, to->data.number);
+  strcpy(transaction.fromAccountNumber, from->data.number);
 
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
   int ano = tm.tm_year + 1900;
   sprintf(transaction.movimentDate, "%02d/%02d/%04d as %02d:%02d:%02d", tm.tm_mday, tm.tm_mon + 1, ano, tm.tm_hour, tm.tm_min, tm.tm_sec);
 
-  if (type == 'd')
-    account->data.balance -= transaction.value;
-  else
-    account->data.balance += transaction.value;
+  if (type == 'd') {
+    from->data.balance -= transaction.value;
+    if (to->data.code != from->data.code) to->data.balance += transaction.value;
+  }
+  else {
+    if (to->data.code != from->data.code) to->data.balance -= transaction.value;
+    from->data.balance += transaction.value;
+  }
 
-  transaction.balance = account->data.balance;
+  transaction.balance = from->data.balance;
 
   return transaction;
 }

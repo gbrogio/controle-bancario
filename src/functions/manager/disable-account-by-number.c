@@ -1,4 +1,4 @@
-#include <stddef.h>
+#include <string.h>
 #include <stdlib.h>
 
 #include "../../global.h"
@@ -8,6 +8,13 @@
 
 void disableAccountByNumber(AccountList *list)
 {
+  if (list->length == 0)
+  {
+    printMessage("Nao ha contas cadastradas.");
+    awaitPressAnyKey(0);
+    return;
+  }
+
   char doAgain = 's';
   do
   {
@@ -19,7 +26,6 @@ void disableAccountByNumber(AccountList *list)
               SCREEN_HEIGHT / 2, 0);
 
     char number[8];
-    int position = 0;
 
     getInput("%s", number,
              "Digite um numero valido! Pressione 'Enter' para continuar...",
@@ -31,9 +37,9 @@ void disableAccountByNumber(AccountList *list)
       continue;
     }
 
-    position = findAccountPosition(list, number);
+    GetAccountByNumber accountFounded = getAccountByNumber(list, number);
 
-    if (position == -1)
+    if (accountFounded.position == -1)
     {
       printMessage("Conta nao encontrada! Pressione 'Enter' para continuar...");
       continue;
@@ -41,15 +47,15 @@ void disableAccountByNumber(AccountList *list)
 
     cls();
     buildScreen();
-    writeText("inativar CONTA", SCREEN_WIDTH / 2, 4, 0);
-    printAccountInPosition(list, position);
+    writeText("INATIVAR CONTA (POSICAO)", SCREEN_WIDTH / 2, 4, 0);
+    printAccount(accountFounded.account->data);
     clearFooter();
     char confirmation = confirm("Deseja inativar essa conta?");
     if (confirmation == 's')
     {
       if (list->head == NULL)
         return;
-      if (position == 0)
+      if (accountFounded.position == 0)
       {
         AccountListItemPointer firstAccount = list->head;
         strcpy(firstAccount->data.status, "inativo");
@@ -57,7 +63,7 @@ void disableAccountByNumber(AccountList *list)
       else
       {
         AccountListItemPointer previousAccount = list->head;
-        for (int i = 0; i < position - 1; i++)
+        for (int i = 0; i < accountFounded.position - 1; i++)
         {
           previousAccount = previousAccount->next;
         }

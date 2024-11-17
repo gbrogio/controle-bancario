@@ -10,7 +10,8 @@ typedef struct
   double value;
 
   double balance;
-  char accountNumber[9];
+  char toAccountNumber[9];
+  char fromAccountNumber[9];
 } Transaction;
 
 typedef struct TransactionListItem *TransactionListItemPointer;
