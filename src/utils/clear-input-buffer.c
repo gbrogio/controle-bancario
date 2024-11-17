@@ -1,8 +1,7 @@
-#include <stdio.h>
 #include "../global.h"
+#include <stdio.h>
 
-void clearInputBuffer()
-{
+void clearInputBuffer() {
   int c;
   while ((c = getchar()) != '\n' && c != EOF)
     ;

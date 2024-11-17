@@ -1,5 +1,3 @@
 #include "validations.h"
 
-int noValid() {
-  return 0;
-}
+int noValid() { return 0; }

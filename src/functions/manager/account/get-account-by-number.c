@@ -1,13 +1,12 @@
-
-#include <string.h>
+#include "../../../global.h"
+#include "../../../models/account.h"
+#include "../../functions.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../functions.h"
-#include "../../../models/account.h"
-#include "../../../global.h"
+#include <string.h>
 
-GetAccountByNumber getAccountByNumber(AccountList *list, char number[])
-{
+GetAccountByNumber getAccountByNumber(AccountList *list, char number[],
+                                      int ignoreInactives) {
   GetAccountByNumber res = {NULL, -1};
   if (list->head == NULL)
     return res;
@@ -15,8 +14,13 @@ GetAccountByNumber getAccountByNumber(AccountList *list, char number[])
   AccountListItemPointer currentData = list->head;
 
   int position = 0;
-  while (currentData != NULL)
-  {
+  while (currentData != NULL) {
+    if (ignoreInactives && strcmp(currentData->data.status, "inativo") == 0) {
+      currentData = currentData->next;
+      position++;
+      continue;
+    }
+
     if (strcmp(currentData->data.number, number) == 0) {
       res.account = currentData;
       res.position = position;

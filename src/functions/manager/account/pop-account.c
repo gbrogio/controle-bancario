@@ -1,28 +1,23 @@
-
-#include <string.h>
+#include "../../../global.h"
+#include "../../../models/account.h"
+#include "../../functions.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../functions.h"
-#include "../../../models/account.h"
-#include "../../../global.h"
+#include <string.h>
 
-void popAccount(AccountList *list)
-{
+void popAccount(AccountList *list) {
   if (list->head == NULL)
     return;
 
   AccountListItemPointer lastData = list->tail;
   AccountListItemPointer currentData = list->head;
 
-  if (currentData == lastData)
-  {
+  if (currentData == lastData) {
     free(lastData);
     list->head = NULL;
     list->tail = NULL;
-  }else
-  {
-    while (currentData->next != lastData)
-    {
+  } else {
+    while (currentData->next != lastData) {
       currentData = currentData->next;
     }
     currentData->next = NULL;

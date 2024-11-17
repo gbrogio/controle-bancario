@@ -1,35 +1,34 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "../../global.h"
-#include "../functions.h"
 #include "../../models/account.h"
 #include "../../validations/validations.h"
+#include "../functions.h"
 
-void transfer(AccountList *accountList, TransactionList *transactionList, AccountListItem *account)
-{
-  if (accountList->length <= 1)
-  {
+void transfer(AccountList *accountList, TransactionList *transactionList,
+              AccountListItem *account) {
+  if (accountList->length <= 1) {
     printMessage("Nao ha outras contas cadastradas.");
     return;
   }
 
   char doAgain = 's';
-  do
-  {
+  do {
     cls();
     buildScreen();
     writeText("TRANSFERIR PARA", SCREEN_WIDTH / 2, 4, 0);
 
-    writeText("Numero da conta..:", SCREEN_WIDTH / 2 - 14,
-              SCREEN_HEIGHT / 2, 0);
+    writeText("Numero da conta..:", SCREEN_WIDTH / 2 - 14, SCREEN_HEIGHT / 2,
+              0);
 
     char number[8];
 
     getInput("%s", number,
              "Digite um numero valido! Pressione 'Enter' para continuar...",
-             SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, validationNumberType, accountList);
+             SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, validationNumberType,
+             accountList);
 
     if (number[0] == '0') {
       clearFooter();
@@ -37,10 +36,11 @@ void transfer(AccountList *accountList, TransactionList *transactionList, Accoun
       continue;
     }
 
-    GetAccountByNumber accountFounded = getAccountByNumber(accountList, number);
+    GetAccountByNumber accountFounded =
+        getAccountByNumber(accountList, number, 1);
 
-    if (accountFounded.account == NULL || accountFounded.account->data.number == account->data.number)
-    {
+    if (accountFounded.account == NULL ||
+        accountFounded.account->data.number == account->data.number) {
       printMessage("Conta nao encontrada! Pressione 'Enter' para continuar...");
       continue;
     }
@@ -48,15 +48,15 @@ void transfer(AccountList *accountList, TransactionList *transactionList, Accoun
     cls();
     buildScreen();
     writeText("TRANSFERIR PARA", SCREEN_WIDTH / 2, 4, 0);
-    printAccount(accountFounded.account->data);
+    printAccount(accountFounded.account->data, 1, 1);
     clearFooter();
     char confirmation = confirm("Deseja transferir para essa conta?");
-    if (confirmation == 's')
-    {
+    if (confirmation == 's') {
       if (accountList->head == NULL)
         return;
 
-      Transaction transaction = createTransaction(transactionList, account, accountFounded.account, 'd');
+      Transaction transaction = createTransaction(transactionList, account,
+                                                  accountFounded.account, 'd');
       pushTransaction(transactionList, transaction);
     }
 
@@ -64,5 +64,3 @@ void transfer(AccountList *accountList, TransactionList *transactionList, Accoun
     doAgain = confirm("Deseja transferir para outra conta?");
   } while (doAgain == 's');
 }
-    
-

@@ -1,10 +1,10 @@
-#include <stdlib.h>
-#include "../functions.h"
 #include "../../models/transaction.h"
+#include "../functions.h"
+#include <stdlib.h>
 
-void pushTransaction(TransactionList *list, Transaction data)
-{
-  TransactionListItemPointer newData = (TransactionListItemPointer)malloc(sizeof(TransactionListItem));
+void pushTransaction(TransactionList *list, Transaction data) {
+  TransactionListItemPointer newData =
+      (TransactionListItemPointer)malloc(sizeof(TransactionListItem));
 
   newData->data = data;
   newData->next = NULL;

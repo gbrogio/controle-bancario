@@ -1,9 +1,8 @@
+#include "../global.h"
+#include "../models/account.h"
+#include "functions.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "functions.h"
-#include "../models/account.h"
-#include "../global.h"
 
 void loadTransactions(TransactionList *list, char *filename) {
   FILE *file = fopen(filename, "rb");

@@ -1,20 +1,12 @@
-#include <stdio.h>
-#include <stdio.h>
-
-
-
 #include "../global.h"
+#include <stdio.h>
 
-
-void getInput(char mask[], GenericType input, char err[], int x,
-              int y, int validation(GenericType i, GenericType a), GenericType args)
-{
+void getInput(char mask[], GenericType input, char err[], int x, int y,
+              int validation(GenericType i, GenericType a), GenericType args) {
   int hasError;
   int validationResult;
-  do
-  {
-    for (int i = 0; i < SCREEN_WIDTH - x - 2; i++)
-    {
+  do {
+    for (int i = 0; i < SCREEN_WIDTH - x - 2; i++) {
       goTo(x + i, y);
       printf(" ");
     }
@@ -24,8 +16,7 @@ void getInput(char mask[], GenericType input, char err[], int x,
 
     hasError = scanf(mask, input);
     validationResult = validation(input, args);
-    if (hasError != 1 || validationResult == 1)
-    {
+    if (hasError != 1 || validationResult == 1) {
       printMessage(err);
       continue;
     }

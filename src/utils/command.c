@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <ctype.h>
 #include "../global.h"
+#include <ctype.h>
+#include <stdio.h>
 
 char command() {
   char c;
@@ -9,7 +9,7 @@ char command() {
   writeText("x - SAIR", SCREEN_WIDTH, SCREEN_HEIGHT - 1, 0);
   goTo(11, SCREEN_HEIGHT - 1);
   do {
-      scanf("%c", &c);
+    scanf("%c", &c);
   } while (c == '\n');
   return tolower(c);
 }

@@ -1,16 +1,15 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "../../global.h"
-#include "../functions.h"
 #include "../../models/account.h"
+#include "../functions.h"
 
-void registerTransaction(TransactionList *list, AccountListItem *account, char type)
-{
+void registerTransaction(TransactionList *list, AccountListItem *account,
+                         char type) {
   char doAgain = 's';
-  do
-  {
+  do {
     cls();
     buildScreen();
     writeText("REGISTRAR ", SCREEN_WIDTH / 2, 4, 0);
@@ -19,8 +18,7 @@ void registerTransaction(TransactionList *list, AccountListItem *account, char t
     AccountListItem from = *account;
     Transaction transaction = createTransaction(list, &from, &from, type);
 
-    if (transaction.value != 0)
-    {
+    if (transaction.value != 0) {
       clearFooter();
       char confirmation = confirm("Deseja confirmar essa transacao?");
       if (confirmation == 's') {
@@ -32,5 +30,3 @@ void registerTransaction(TransactionList *list, AccountListItem *account, char t
     doAgain = confirm("Deseja realizar outra transacao?");
   } while (doAgain == 's');
 }
-    
-

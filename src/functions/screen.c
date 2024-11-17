@@ -1,30 +1,25 @@
+#include "../global.h"
+#include "../screens/screens.h"
+#include "functions.h"
 #include <stdio.h>
 
-#include "functions.h"
-#include "../screens/screens.h"
-#include "../global.h"
-
-void buildScreenBorder()
-{
+void buildScreenBorder() {
   // header
-  for (int i = 0; i < SCREEN_WIDTH; i++)
-  {
+  for (int i = 0; i < SCREEN_WIDTH; i++) {
     goTo(i, 3);
     // printf("═");
     printf("-");
   }
 
   // footer
-  for (int i = 0; i < SCREEN_WIDTH; i++)
-  {
+  for (int i = 0; i < SCREEN_WIDTH; i++) {
     goTo(i, SCREEN_HEIGHT - 2);
     // printf("═");
     printf("-");
   }
 
   // horizontal lines
-  for (int i = 0; i < SCREEN_WIDTH; i++)
-  {
+  for (int i = 0; i < SCREEN_WIDTH; i++) {
     goTo(i, 0);
     // printf("═");
     printf("-");
@@ -34,8 +29,7 @@ void buildScreenBorder()
   }
 
   // vertical lines
-  for (int i = 0; i < SCREEN_HEIGHT; i++)
-  {
+  for (int i = 0; i < SCREEN_HEIGHT; i++) {
     goTo(0, i);
     // printf("║");
     printf("|");
@@ -75,8 +69,7 @@ void buildScreenBorder()
   printf("+");
 }
 
-void buildScreenInfo()
-{
+void buildScreenInfo() {
   // header
   writeText("UNICV", 0, 1, 0);
   writeText(APP_NAME, 0, 2, 0);
@@ -84,22 +77,20 @@ void buildScreenInfo()
   writeText("GUILHERME BROGIO", SCREEN_WIDTH, 2, 0);
 }
 
-void buildScreen()
-{
+void buildScreen() {
   buildScreenInfo(APP_NAME);
   buildScreenBorder(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-char controlSubScreen(char screen(
-                          AccountList *list, TransactionList *transactionList, AccountListItemPointer account),
-                      AccountList *list, TransactionList *transactionList, AccountListItemPointer account)
-{
+char controlSubScreen(char screen(AccountList *list,
+                                  TransactionList *transactionList,
+                                  AccountListItemPointer account),
+                      AccountList *list, TransactionList *transactionList,
+                      AccountListItemPointer account) {
   char option;
-  do
-  {
+  do {
     option = screen(list, transactionList, account);
-    if (option == 'h')
-    {
+    if (option == 'h') {
       helpScreen();
       continue;
     }

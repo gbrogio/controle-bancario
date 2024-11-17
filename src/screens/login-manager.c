@@ -1,11 +1,9 @@
-
-#include <string.h>
-#include <stdlib.h>
-
-#include "../global.h"
 #include "../functions/functions.h"
+#include "../global.h"
 #include "../validations/validations.h"
 #include "./screens.h"
+#include <stdlib.h>
+#include <string.h>
 
 int loginManagerScreen() {
   cls();
@@ -17,13 +15,19 @@ int loginManagerScreen() {
   char code[50];
   char password[50];
 
-  getInput("%s", code, "Digite um codigo valido! Pressione 'Enter' para continuar...", SCREEN_WIDTH / 2, 12, noValid, NULL);
-  if (strcmp(code, "0") == 0) return 2;
-  getInput("%s", password, "Digite uma senha valida! Pressione 'Enter' para continuar...", SCREEN_WIDTH / 2, 14, noValid, NULL);
-  
+  getInput("%s", code,
+           "Digite um codigo valido! Pressione 'Enter' para continuar...",
+           SCREEN_WIDTH / 2, 12, noValid, NULL);
+  if (strcmp(code, "0") == 0)
+    return 2;
+  getInput("%s", password,
+           "Digite uma senha valida! Pressione 'Enter' para continuar...",
+           SCREEN_WIDTH / 2, 14, noValid, NULL);
+
   clearFooter();
   char confirmation = confirm("Deseja entrar com essas credenciais?");
-  if (confirmation != 's') return 0;
+  if (confirmation != 's')
+    return 0;
 
   if (strcmp(code, ADM_CODE) == 0 && strcmp(password, ADM_PASSWORD) == 0) {
     return 1;

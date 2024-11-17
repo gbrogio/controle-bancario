@@ -1,12 +1,10 @@
-
-#include <string.h>
-#include <stdlib.h>
-
-#include "../global.h"
 #include "../functions/functions.h"
-#include "../validations/validations.h"
+#include "../global.h"
 #include "../models/account.h"
+#include "../validations/validations.h"
 #include "screens.h"
+#include <stdlib.h>
+#include <string.h>
 
 AccountListItemPointer loginAccountScreen(AccountList *list) {
   cls();
@@ -18,21 +16,28 @@ AccountListItemPointer loginAccountScreen(AccountList *list) {
   char number[9];
   char password[9];
 
-  getInput("%s", number, "Digite um numero valido! Pressione 'Enter' para continuar...", SCREEN_WIDTH / 2, 12, validationNumberType, NULL);
+  getInput("%s", number,
+           "Digite um numero valido! Pressione 'Enter' para continuar...",
+           SCREEN_WIDTH / 2, 12, validationNumberType, NULL);
   if (strcmp(number, "0") == 0) {
-    AccountListItemPointer account = (AccountListItemPointer) malloc(sizeof(AccountListItem));
+    AccountListItemPointer account =
+        (AccountListItemPointer)malloc(sizeof(AccountListItem));
     account->data.code = -1;
     return account;
   }
-  getInput("%s", password, "Digite uma senha valida! Pressione 'Enter' para continuar...", SCREEN_WIDTH / 2, 14, validationPassword, NULL);
-  
+  getInput("%s", password,
+           "Digite uma senha valida! Pressione 'Enter' para continuar...",
+           SCREEN_WIDTH / 2, 14, validationPassword, NULL);
+
   clearFooter();
   char confirmation = confirm("Deseja entrar com essas credenciais?");
-  if (confirmation != 's') return NULL;
+  if (confirmation != 's')
+    return NULL;
 
-  GetAccountByNumber accountFounded = getAccountByNumber(list, number);
+  GetAccountByNumber accountFounded = getAccountByNumber(list, number, 1);
 
-  if (accountFounded.account->data.code != -1 && strcmp(accountFounded.account->data.password, password) == 0) {
+  if (accountFounded.account->data.code != -1 &&
+      strcmp(accountFounded.account->data.password, password) == 0) {
     return accountFounded.account;
   }
 

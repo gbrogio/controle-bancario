@@ -64,6 +64,7 @@
     "global.h": "c",
     "functions.h": "c",
     "account.h": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "stdio.h": "c"
   }
 }

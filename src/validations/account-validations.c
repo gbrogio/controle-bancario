@@ -1,12 +1,11 @@
-#include <ctype.h>
-#include <string.h>
-#include "validations.h"
-#include "../models/account.h"
 #include "../functions/functions.h"
 #include "../global.h"
+#include "../models/account.h"
+#include "validations.h"
+#include <ctype.h>
+#include <string.h>
 
-int validationCode(GenericType i, GenericType a)
-{
+int validationCode(GenericType i, GenericType a) {
   int code = *(int *)i;
   AccountList *list = (AccountList *)a;
 
@@ -15,8 +14,7 @@ int validationCode(GenericType i, GenericType a)
   if (list->head == NULL)
     return code == 0;
   AccountListItemPointer previousAccount = list->head;
-  while (previousAccount->next != NULL)
-  {
+  while (previousAccount->next != NULL) {
     if (code == previousAccount->data.code)
       return 1;
     previousAccount = previousAccount->next;
@@ -24,16 +22,14 @@ int validationCode(GenericType i, GenericType a)
   return code == previousAccount->data.code;
 }
 
-int validationAgency(GenericType i, GenericType _)
-{
+int validationAgency(GenericType i, GenericType _) {
   UNUSED(_);
 
   char *agency = (char *)i;
   if (strlen(agency) != 6)
     return 1;
 
-  for (int i = 0; i < 4; i++)
-  {
+  for (int i = 0; i < 4; i++) {
     if (!isdigit(agency[i]))
       return 1;
   }
@@ -47,8 +43,7 @@ int validationAgency(GenericType i, GenericType _)
   return 0;
 }
 
-int validationNumberType(GenericType i, GenericType _)
-{
+int validationNumberType(GenericType i, GenericType _) {
   UNUSED(_);
 
   char *number = (char *)i;
@@ -59,8 +54,7 @@ int validationNumberType(GenericType i, GenericType _)
   if (strlen(number) != 8)
     return 1;
 
-  for (int i = 0; i < 6; i++)
-  {
+  for (int i = 0; i < 6; i++) {
     if (!isdigit(number[i]))
       return 1;
   }
@@ -74,8 +68,7 @@ int validationNumberType(GenericType i, GenericType _)
   return 0;
 }
 
-int validationNumber(GenericType i, GenericType a)
-{
+int validationNumber(GenericType i, GenericType a) {
   char *number = (char *)i;
 
   if (number[0] == '0')
@@ -85,23 +78,22 @@ int validationNumber(GenericType i, GenericType a)
   if (valid == 1)
     return 1;
 
-  GetAccountByNumber accountFounded = getAccountByNumber((AccountList *)a, number);
+  GetAccountByNumber accountFounded =
+      getAccountByNumber((AccountList *)a, number, 0);
   if (accountFounded.position != -1)
     return 1;
 
   return 0;
 }
 
-int validationPassword(GenericType i, GenericType _)
-{
+int validationPassword(GenericType i, GenericType _) {
   UNUSED(_);
 
   char *password = (char *)i;
   if (strlen(password) != 8)
     return 1;
 
-  for (int i = 0; i < 8; i++)
-  {
+  for (int i = 0; i < 8; i++) {
     if (!isdigit(password[i]))
       return 1;
   }
@@ -109,8 +101,7 @@ int validationPassword(GenericType i, GenericType _)
   return 0;
 }
 
-int validationType(GenericType i, GenericType _)
-{
+int validationType(GenericType i, GenericType _) {
   UNUSED(_);
 
   char *type = (char *)i;
@@ -121,14 +112,12 @@ int validationType(GenericType i, GenericType _)
   return 0;
 }
 
-int validationStatus(GenericType i, GenericType _)
-{
+int validationStatus(GenericType i, GenericType _) {
   UNUSED(_);
 
   char *status = (char *)i;
 
-  for (int i = 0; i < (int)strlen(status); i++)
-  {
+  for (int i = 0; i < (int)strlen(status); i++) {
     status[i] = tolower(status[i]);
   }
 
@@ -137,8 +126,7 @@ int validationStatus(GenericType i, GenericType _)
   return 0;
 }
 
-int validationDay(GenericType i, GenericType _)
-{
+int validationDay(GenericType i, GenericType _) {
   UNUSED(_);
 
   int *day = (int *)i;
@@ -148,8 +136,7 @@ int validationDay(GenericType i, GenericType _)
   return 0;
 }
 
-int invalidPosition(GenericType i, GenericType a)
-{
+int invalidPosition(GenericType i, GenericType a) {
   int position = *(int *)i;
   AccountList *list = (AccountList *)a;
   return position < 0 || position > list->length;

@@ -1,8 +1,8 @@
+#include "../global.h"
+#include "../models/account.h"
+#include "functions.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "functions.h"
-#include "../models/account.h"
-#include "../global.h"
 
 void loadAccounts(AccountList *list, char *filename) {
   FILE *file = fopen(filename, "rb");

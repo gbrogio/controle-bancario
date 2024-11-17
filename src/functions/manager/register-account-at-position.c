@@ -1,13 +1,11 @@
 #include "../../global.h"
-#include "../functions.h"
 #include "../../models/account.h"
 #include "../../validations/validations.h"
+#include "../functions.h"
 
-void registerAccountAtPosition(AccountList *list)
-{
+void registerAccountAtPosition(AccountList *list) {
   char doAgain = 's';
-  do
-  {
+  do {
     cls();
     buildScreen();
     writeText("CADASTRO DE CONTA (POSICAO)", SCREEN_WIDTH / 2, 4, 0);
@@ -25,8 +23,7 @@ void registerAccountAtPosition(AccountList *list)
     writeText("CADASTRO DE CONTA (POSICAO)", SCREEN_WIDTH / 2, 4, 0);
     Account account = createAccount(list, 0, -1);
     clearFooter();
-    if (account.code != 0)
-    {
+    if (account.code != 0) {
       char confirmation = confirm("Deseja cadastrar essa conta?");
       if (confirmation == 's')
         insertAccountIn(position, list, account);

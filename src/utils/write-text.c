@@ -1,20 +1,14 @@
-
+#include "../global.h"
 #include <stdio.h>
 #include <string.h>
 
-
-#include "../global.h"
-
-void writeText(char *text, int x, int y, int disableProporcion)
-{
-  if (text == NULL)
-  {
+void writeText(char *text, int x, int y, int disableProporcion) {
+  if (text == NULL) {
     fprintf(stderr, "Error: null text passed to writeText\n");
     return;
   }
 
-  if (SCREEN_WIDTH == 0)
-  {
+  if (SCREEN_WIDTH == 0) {
     fprintf(stderr, "Erro: SCREEN_WIDTH is zero\n");
     return;
   }
@@ -37,11 +31,9 @@ void writeText(char *text, int x, int y, int disableProporcion)
     so the correct length to substract is 5).
   */
   int poss_correct;
-  if (length + x_correct > SCREEN_WIDTH - 1)
-  {
+  if (length + x_correct > SCREEN_WIDTH - 1) {
     poss_correct = (x_correct - ((length + x_correct) - (SCREEN_WIDTH - 1)));
-  }
-  else
+  } else
     poss_correct = x_correct - length;
 
   if (disableProporcion == 1)

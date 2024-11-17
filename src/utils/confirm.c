@@ -1,15 +1,11 @@
-#include <string.h>
-#include <stdio.h>
-#include <ctype.h>
-
-
 #include "../global.h"
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
 
-char confirm(char msg[])
-{
+char confirm(char msg[]) {
   char c;
-  do
-  {
+  do {
     clearFooter();
     writeText(msg, 0, SCREEN_HEIGHT - 1, 0);
     writeText("(S/N) ", strlen(msg) + 3, SCREEN_HEIGHT - 1, 1);
@@ -19,9 +15,9 @@ char confirm(char msg[])
       printf("FOIIIIII");
     }
     c = tolower(c);
-    if (c != 's' && c != 'n')
-    {
-      writeText("Entrada invalida! Digite 's' para sim ou 'n' para nao.", 0, SCREEN_HEIGHT - 1, 0);
+    if (c != 's' && c != 'n') {
+      writeText("Entrada invalida! Digite 's' para sim ou 'n' para nao.", 0,
+                SCREEN_HEIGHT - 1, 0);
       awaitPressAnyKey(0);
     }
   } while (c != 's' && c != 'n');

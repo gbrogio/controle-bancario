@@ -1,8 +1,8 @@
-#include <stddef.h>
+#include "../functions/functions.h"
 #include "../global.h"
 #include "../models/account.h"
-#include "../functions/functions.h"
 #include "screens.h"
+#include <stddef.h>
 
 char loginScreen(AccountList *accountList, TransactionList *transactionList) {
   char option;
@@ -14,24 +14,27 @@ char loginScreen(AccountList *accountList, TransactionList *transactionList) {
   buildScreen();
 
   option = command();
-  
+
   if (option == '1') {
     int status;
     do {
       status = loginManagerScreen();
     } while (status == 0);
-    if (status != 1) return 'b';
+    if (status != 1)
+      return 'b';
     return controlSubScreen(managerScreen, accountList, transactionList, NULL);
-  } 
+  }
 
   if (option == '2') {
     AccountListItemPointer account;
     do {
       account = loginAccountScreen(accountList);
     } while (!account);
-    if (account->data.code == -1) return 'b';
-    return controlSubScreen(accountScreen, accountList, transactionList, account);
+    if (account->data.code == -1)
+      return 'b';
+    return controlSubScreen(accountScreen, accountList, transactionList,
+                            account);
   }
-  
+
   return option;
 }

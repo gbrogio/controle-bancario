@@ -5,12 +5,11 @@
 */
 
 // main libs
-#include <locale.h>
-#include <stdio.h>
-
 #include "functions/functions.h"
 #include "global.h"
 #include "screens/screens.h"
+#include <locale.h>
+#include <stdio.h>
 
 int main() {
   AccountList *accountList = initializeAccountList();
@@ -29,16 +28,18 @@ int main() {
       helpScreen();
       c = 'b';
       continue;
-    }
-    else if (c == 'x') break;
+    } else if (c == 'x')
+      break;
     else {
       start = 1;
       c = loginScreen(accountList, transactionList);
-      if (c == 'b') c = '1';
+      if (c == 'b')
+        c = '1';
       continue;
     }
     clearFooter();
-    if (c == '0' || c == 'b') c = command();
+    if (c == '0' || c == 'b')
+      c = command();
   } while (c != 'x');
 
   saveAccounts(accountList, "db/accounts.dat");

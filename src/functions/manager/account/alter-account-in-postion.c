@@ -1,13 +1,11 @@
-
-#include <string.h>
+#include "../../../global.h"
+#include "../../../models/account.h"
+#include "../../functions.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../functions.h"
-#include "../../../models/account.h"
-#include "../../../global.h"
+#include <string.h>
 
-void alterAccount(AccountListItemPointer account, Account data)
-{
+void alterAccount(AccountListItemPointer account, Account data) {
   if (account == NULL)
     return;
 

@@ -1,6 +1,5 @@
 #ifndef SCREENS_H
 #define SCREENS_H
-
 #include "../models/account.h"
 #include "../models/transaction.h"
 

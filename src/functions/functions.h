@@ -61,9 +61,11 @@ typedef struct {
  * 
  * @param list Pointer to the account list.
  * @param number Account number to search for.
+ * @param ignoreInactives Flag to indicate if inactive accounts should be ignored.
+ * 
  * @return AccountListItemPointer Pointer to the account list item, or NULL if not found.
  */
-GetAccountByNumber getAccountByNumber(AccountList *list, char number[]);
+GetAccountByNumber getAccountByNumber(AccountList *list, char number[], int ignoreInactives);
 
 /**
  * @brief Initializes a new account list.
@@ -91,8 +93,10 @@ TransactionList *initializeTransactionList();
  * @brief Prints an account.
  * 
  * @param account Account to be printed.
+ * @param hiddenMoney Flag to indicate if money fields (e.g. balance, limit) should be hidden.
+ * @param hiddenSensitiveData Flag to indicate if sensitive data should be hidden.
  */
-void printAccount(Account account);
+void printAccount(Account account, int hiddenMoney, int hiddenSensitiveData);
 
 /**
  * @brief Creates a new account.
