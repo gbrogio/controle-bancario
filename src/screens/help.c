@@ -1,6 +1,7 @@
 #include "../functions/functions.h"
 #include "../global.h"
 #include "screens.h"
+#include <stdio.h>
 
 void helpScreen() {
   cls();
@@ -11,8 +12,9 @@ void helpScreen() {
   writeText("x - Para o programa", 0, 8, 0);
   writeText("0 - Em campos de codigo, cancela e volta para a tela anterior", 0,
             11, 0);
-  writeText("Numero de conta responsavel por rendimentos: \"000000-0\"", 0, 13,
+  writeText("Numero de conta responsavel por rendimentos: ", 0, 13,
             0);
+  printf(YIELD_ACCOUNT_NUMBER);
 
   buildScreen();
   printMessage("Pressione qualquer tecla para continuar...");

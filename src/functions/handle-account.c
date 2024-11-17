@@ -9,6 +9,10 @@
 Account createAccount(AccountList *list, int update, int input) {
   Account account;
 
+  if (update == 0) {
+    account.yielded = 0;
+  }
+
   writeText("    CODIGO..:", 0, 6, 0);
   writeText("1 - BANCO...:", 0, 8, 0);
   writeText("2 - AGENCIA.:", 0, 10, 0);

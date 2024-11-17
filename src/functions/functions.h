@@ -241,6 +241,14 @@ void pushTransaction(TransactionList *list, Transaction data);
  */
 void transfer(AccountList *accountList, TransactionList *transactionList, AccountListItem *account);
 
+/**
+ * @brief Gives the yield of an account.
+ * 
+ * @param account Pointer to the account.
+ * @return double Yield of the account.
+ */
+double giveYieldTo(AccountListItemPointer account, TransactionList *transactionList);
+
 void buildScreen();
 char command();
 char controlSubScreen(char screen(

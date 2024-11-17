@@ -14,6 +14,7 @@ typedef struct
   char status[10];
   char password[9];
   int interestDay;
+  int yielded;
 } Account;
 
 typedef struct AccountListItem *AccountListItemPointer;

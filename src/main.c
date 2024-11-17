@@ -24,6 +24,14 @@ int main() {
   int start = 0;
   char c = '0';
 
+  AccountListItemPointer account = accountList->head;
+  while (account != NULL) {
+    if (account->data.type == 'p' && account->data.balance > 0) {
+      giveYieldTo(account, transactionList);
+    }
+    account = account->next;
+  }
+
   do {
     if ((c == '0' || c == 'b') && start == 0) {
       homeScreen();
