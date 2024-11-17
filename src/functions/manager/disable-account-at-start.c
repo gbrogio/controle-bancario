@@ -25,9 +25,7 @@ void disableAccountAtStart(AccountList *list)
       if (list->head == NULL)
         return;
       AccountListItemPointer firstAccount = list->head;
-      list->head = list->head->next;
-      free(firstAccount);
-      list->length--;
+      strcpy(firstAccount->data.status, "inativo");
     }
     clearFooter();
     doAgain = confirm("Deseja inativar outra conta?");

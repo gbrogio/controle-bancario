@@ -21,4 +21,6 @@ int findAccountPosition(AccountList *list, char number[])
     currentData = currentData->next;
     position++;
   }
+
+  return -1;
 }

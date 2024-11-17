@@ -52,8 +52,7 @@ void disableAccountByNumber(AccountList *list)
       if (position == 0)
       {
         AccountListItemPointer firstAccount = list->head;
-        list->head = list->head->next;
-        free(firstAccount);
+        strcpy(firstAccount->data.status, "inativo");
       }
       else
       {
