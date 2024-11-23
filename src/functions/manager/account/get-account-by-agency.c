@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-GetAccountBy getAccountByNumber(AccountList *list, char number[],
+GetAccountBy getAccountByAgency(AccountList *list, char agency[],
                                 int ignoreInactives) {
   GetAccountBy res = {NULL, -1};
   if (list->head == NULL)
@@ -21,7 +21,7 @@ GetAccountBy getAccountByNumber(AccountList *list, char number[],
       continue;
     }
 
-    if (strcmp(currentData->data.number, number) == 0) {
+    if (strcmp(currentData->data.agency, agency) == 0) {
       res.account = currentData;
       res.position = position;
       return res;

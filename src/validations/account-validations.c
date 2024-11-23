@@ -26,18 +26,33 @@ int validationAgency(GenericType i, GenericType _) {
   UNUSED(_);
 
   char *agency = (char *)i;
-  if (strlen(agency) != 6)
+  if (strlen(agency) != 6 && strlen(agency) != 5)
     return 1;
 
-  for (int i = 0; i < 4; i++) {
+  if (strlen(agency) == 6) {
+    for (int i = 0; i < 4; i++) {
+      if (!isdigit(agency[i]))
+        return 1;
+    }
+
+    if (agency[4] != '-')
+      return 1;
+
+    if (!isdigit(agency[5]))
+      return 1;
+
+    return 0;
+  }
+
+  for (int i = 0; i < 3; i++) {
     if (!isdigit(agency[i]))
       return 1;
   }
 
-  if (agency[4] != '-')
+  if (agency[3] != '-')
     return 1;
 
-  if (!isdigit(agency[5]))
+  if (!isdigit(agency[4]))
     return 1;
 
   return 0;
@@ -78,8 +93,7 @@ int validationNumber(GenericType i, GenericType a) {
   if (valid == 1)
     return 1;
 
-  GetAccountByNumber accountFounded =
-      getAccountByNumber((AccountList *)a, number, 0);
+  GetAccountBy accountFounded = getAccountByNumber((AccountList *)a, number, 0);
   if (accountFounded.position != -1)
     return 1;
 

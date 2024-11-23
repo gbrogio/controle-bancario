@@ -28,10 +28,11 @@ void alterAccountScreen(AccountList *list) {
       continue;
     }
 
-    GetAccountByNumber accountFounded = getAccountByNumber(list, number, 0);
+    GetAccountBy accountFounded = getAccountByNumber(list, number, 0);
 
     if (accountFounded.position == -1) {
-      printMessage("Conta nao encontrada! Pressione 'Enter' para continuar...");
+      printMessage("Conta nao encontrada! Pressione 'Enter' para continuar...",
+                   0);
       continue;
     }
 
@@ -52,7 +53,7 @@ void alterAccountScreen(AccountList *list) {
           goTo(35, SCREEN_HEIGHT - 1);
           scanf("%d", &field);
           if (field < 1 || field > 9)
-            printMessage("Por favor digite um numero valido e entre 1 e 9!");
+            printMessage("Por favor digite um numero valido e entre 1 e 9!", 1);
         } while (field < 1 || field > 9 ||
                  (account.type == 'c' && field == 8) ||
                  (account.type == 'p' && field == 6));
@@ -75,7 +76,8 @@ void alterAccountScreen(AccountList *list) {
         else if (field == 5) {
           if (account.balance != 0 && strcmp(newField.status, "inativo") != 0) {
             printMessage("Conta com saldo diferente de zero! Pressione 'Enter' "
-                         "para continuar...");
+                         "para continuar...",
+                         1);
             clearFooter();
             alterAgain = confirm("Deseja alterar outro campo?");
             continue;

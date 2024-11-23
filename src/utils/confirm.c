@@ -11,9 +11,6 @@ char confirm(char msg[]) {
     writeText("(S/N) ", strlen(msg) + 3, SCREEN_HEIGHT - 1, 1);
     scanf(" %c", &c);
     goTo(0, 0);
-    if (c == 'n') {
-      printf("FOIIIIII");
-    }
     c = tolower(c);
     if (c != 's' && c != 'n') {
       writeText("Entrada invalida! Digite 's' para sim ou 'n' para nao.", 0,

@@ -8,6 +8,15 @@ If you are using Linux execute the command before build the project:
 chmod +x start-linux
 ```
 
+## Rules for getting Accounts
+
+- [x] General consult
+- [x] Account number consult
+- [x] Alphabetic consult
+- [x] Inative accounts consult
+- [x] Only credit accounts
+- [ ] Data Transactions
+
 ## Extra Rules for Savings Accounts
 
 - [x] Implement monthly yield rule for savings accounts.

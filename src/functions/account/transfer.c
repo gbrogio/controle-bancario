@@ -10,7 +10,7 @@
 void transfer(AccountList *accountList, TransactionList *transactionList,
               AccountListItem *account) {
   if (accountList->length <= 1) {
-    printMessage("Nao ha outras contas cadastradas.");
+    printMessage("Nao ha outras contas cadastradas.", 1);
     return;
   }
 
@@ -36,15 +36,16 @@ void transfer(AccountList *accountList, TransactionList *transactionList,
       continue;
     }
 
-    GetAccountByNumber accountFounded =
-        getAccountByNumber(accountList, number, 1);
+    GetAccountBy accountFounded = getAccountByNumber(accountList, number, 1);
 
     if (accountFounded.account == NULL ||
         accountFounded.account->data.number == account->data.number ||
         accountFounded.account->data.type == 'p' ||
         accountFounded.account->data.status[0] == 'i') {
       printMessage(
-          "Conta credito nao encontrada! Pressione 'Enter' para continuar...");
+          "Conta credito nao encontrada! Pressione 'Enter' para continuar...",
+          0);
+      doAgain = confirm("Deseja transferir para outra conta?");
       continue;
     }
 

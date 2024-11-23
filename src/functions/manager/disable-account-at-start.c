@@ -10,7 +10,7 @@
 */
 void disableAccountAtStart(AccountList *list) {
   if (list->length == 0) {
-    printMessage("Nao ha contas cadastradas.");
+    printMessage("Nao ha contas cadastradas.", 1);
     awaitPressAnyKey(0);
     return;
   }
@@ -26,7 +26,8 @@ void disableAccountAtStart(AccountList *list) {
     if (confirmation == 's') {
       if (list->head->data.balance != 0) {
         printMessage("Conta com saldo diferente de zero! Pressione 'Enter' "
-                     "para continuar...");
+                     "para continuar...",
+                     1);
         clearFooter();
         doAgain = confirm("Deseja inativar outra conta?");
         continue;

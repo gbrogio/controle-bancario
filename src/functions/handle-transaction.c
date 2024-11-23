@@ -15,10 +15,19 @@ Transaction createTransaction(TransactionList *list, AccountListItem *from,
   Transaction transaction;
   transaction.id = list->length + 1;
 
-  writeText("VALOR TRANSACAO..:", 0, SCREEN_HEIGHT / 2, 4);
-  getInput("%lf", &transaction.value,
-           "Digite um valor valido! Pressione 'Enter' para reescrever...", 22,
-           SCREEN_HEIGHT / 2, noValid, NULL);
+  do {
+    writeText("VALOR TRANSACAO..:", 0, SCREEN_HEIGHT / 2, 4);
+    getInput("%lf", &transaction.value,
+             "Digite um valor valido! Pressione 'Enter' para reescrever...", 22,
+             SCREEN_HEIGHT / 2, noValid, NULL);
+
+    if (from->data.balance + from->data.limit < transaction.value &&
+        type == 'd') {
+      printMessage("Saldo insuficiente! Pressione 'Enter' para continuar...",
+                   1);
+    }
+  } while (from->data.balance + from->data.limit < transaction.value &&
+           type == 'd');
 
   transaction.type = type;
   strcpy(transaction.toAccountNumber, to->data.number);

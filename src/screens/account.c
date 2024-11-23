@@ -54,7 +54,13 @@ char accountScreen(AccountList *accountList, TransactionList *transactionList,
     return option;
   } else if (option == '3' && account->data.type == 'p') {
     clearFooter();
-    printMessage("Operacao nao permitida para contas poupanca!");
+    printMessage("Operacao nao permitida para contas poupanca!", 1);
+    option = '0';
+    return option;
+  }
+
+  if (option == '4') {
+    listTransactions(transactionList, account->data.number);
     option = '0';
     return option;
   }

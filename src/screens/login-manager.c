@@ -34,6 +34,6 @@ int loginManagerScreen() {
   }
 
   clearFooter();
-  printMessage("Codigo ou senha invalidos!");
+  printMessage("Codigo ou senha invalidos!", 1);
   return 0;
 }

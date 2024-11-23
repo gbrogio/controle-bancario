@@ -54,7 +54,7 @@ void alterAccount(AccountListItemPointer account, Account data);
 typedef struct {
   AccountListItemPointer account;
   int position;
-} GetAccountByNumber;
+} GetAccountBy;
 
 /**
  * @brief Retrieves an account from the account list by its number.
@@ -65,7 +65,18 @@ typedef struct {
  * 
  * @return AccountListItemPointer Pointer to the account list item, or NULL if not found.
  */
-GetAccountByNumber getAccountByNumber(AccountList *list, char number[], int ignoreInactives);
+GetAccountBy getAccountByNumber(AccountList *list, char number[], int ignoreInactives);
+
+/**
+ * @brief Retrieves an account from the account list by its number.
+ * 
+ * @param list Pointer to the account list.
+ * @param number Account number to search for.
+ * @param ignoreInactives Flag to indicate if inactive accounts should be ignored.
+ * 
+ * @return AccountListItemPointer Pointer to the account list item, or NULL if not found.
+ */
+GetAccountBy getAccountByAgency(AccountList *list, char agency[], int ignoreInactives);
 
 /**
  * @brief Initializes a new account list.
@@ -140,8 +151,10 @@ void registerAccountAtPosition(AccountList *list);
  * @brief Lists all the accounts in the list.
  * 
  * @param list Pointer to the AccountList structure.
+ * 
+ * @return char Flag to indicate if the user wants to return to the previous screen.
  */
-void listAccounts(AccountList *list);
+char listAccounts(AccountList *list);
 
 /**
  * @brief Registers a new account at the end of the list.
@@ -248,6 +261,79 @@ void transfer(AccountList *accountList, TransactionList *transactionList, Accoun
  * @return double Yield of the account.
  */
 double giveYieldTo(AccountListItemPointer account, TransactionList *transactionList);
+
+/**
+ * @brief Print a account.
+ * 
+ * @param account Account to be printed.
+ * @param y Y position on the terminal.
+ */
+void printAccountTable(Account account, int y);
+
+/**
+ * @brief Lists all the transactions in the list.
+ * 
+ * @param list Pointer to the TransactionList structure.
+ * @param number Account number to search for.
+ */
+void listTransactions(TransactionList *list, char number[]);
+
+/**
+ * @brief Print a transaction.
+ * 
+ * @param transaction Transaction to be printed.
+ * @param y Y position on the terminal.
+ */
+void printTransaction(Transaction transaction, int y);
+
+/**
+ * @brief Lists all the accounts in the list.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void listAccountsGeneral(AccountList *list);
+
+/**
+ * @brief Lists all the disabled accounts in the list.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void listAccountsDisabled(AccountList *list);
+
+/**
+ * @brief Lists all the disabled accounts in the list.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void listAccountsChecking(AccountList *list);
+
+/**
+ * @brief Lists all the accounts in the list in alphabetical order.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void listAccountsAlphabetic(AccountList *list);
+
+/**
+ * @brief Lists a unique account in the list by number.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void listAccountsByNumber(AccountList *list);
+
+/**
+ * @brief Lists all accounts in the list by they agency.
+ * 
+ * @param list Pointer to the AccountList structure.
+ */
+void listAccountsByAgency(AccountList *list);
+
+/**
+ * @brief Build the account head table.
+ * 
+ * @param y Y position on the terminal.
+ */
+void buildTableAccount(int y);
 
 void buildScreen();
 char command();

@@ -34,7 +34,7 @@ AccountListItemPointer loginAccountScreen(AccountList *list) {
   if (confirmation != 's')
     return NULL;
 
-  GetAccountByNumber accountFounded = getAccountByNumber(list, number, 1);
+  GetAccountBy accountFounded = getAccountByNumber(list, number, 1);
 
   if (accountFounded.account != NULL &&
       accountFounded.account->data.code != -1 &&
@@ -43,6 +43,6 @@ AccountListItemPointer loginAccountScreen(AccountList *list) {
   }
 
   clearFooter();
-  printMessage("Numero ou senha invalidos!");
+  printMessage("Numero ou senha invalidos!", 1);
   return NULL;
 }

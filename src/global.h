@@ -56,7 +56,7 @@ void getInput(char mask[], GenericType input, char err[], int x,
  * 
  * @param msg The message to be displayed.
  */
-void printMessage(char msg[]);
+void printMessage(char msg[], int clearBuffer);
 
 /**
  * @brief Clears the footer of the terminal.

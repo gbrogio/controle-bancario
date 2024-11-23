@@ -71,7 +71,9 @@ char managerScreen(AccountList *accountList, TransactionList *_,
   }
 
   if (option == '8') {
-    listAccounts(accountList);
+    char opt = listAccounts(accountList);
+    if (opt == 'x')
+      return opt;
     option = '0';
     return option;
   }

@@ -7,7 +7,7 @@
 
 void disableAccountByNumber(AccountList *list) {
   if (list->length == 0) {
-    printMessage("Nao ha contas cadastradas.");
+    printMessage("Nao ha contas cadastradas.", 1);
     awaitPressAnyKey(0);
     return;
   }
@@ -33,16 +33,18 @@ void disableAccountByNumber(AccountList *list) {
       continue;
     }
 
-    GetAccountByNumber accountFounded = getAccountByNumber(list, number, 0);
+    GetAccountBy accountFounded = getAccountByNumber(list, number, 0);
 
     if (accountFounded.position == -1) {
-      printMessage("Conta nao encontrada! Pressione 'Enter' para continuar...");
+      printMessage("Conta nao encontrada! Pressione 'Enter' para continuar...",
+                   0);
       continue;
     }
 
     if (accountFounded.account->data.balance != 0) {
       printMessage("Conta com saldo diferente de zero! Pressione 'Enter' para "
-                   "continuar...");
+                   "continuar...",
+                   0);
       clearFooter();
       doAgain = confirm("Deseja inativar outra conta?");
       continue;

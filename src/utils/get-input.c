@@ -17,7 +17,7 @@ void getInput(char mask[], GenericType input, char err[], int x, int y,
     hasError = scanf(mask, input);
     validationResult = validation(input, args);
     if (hasError != 1 || validationResult == 1) {
-      printMessage(err);
+      printMessage(err, 1);
       continue;
     }
     clearInputBuffer();
