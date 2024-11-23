@@ -60,5 +60,6 @@ int main() {
   goTo(2, SCREEN_HEIGHT - 1);
   printf("Dados salvos com sucesso em /db/**.dat\n");
 
+  goTo(SCREEN_WIDTH * 2, SCREEN_HEIGHT + 1);
   return 0;
 }

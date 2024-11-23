@@ -16,44 +16,51 @@ void listTransactions(TransactionList *list, char number[]) {
     cls();
     buildScreen();
     writeText("LISTAR TRANSACOES", SCREEN_WIDTH / 2, 4, 0);
-    writeText("DATA                   | TIPO      | VALOR (R$)  | CONTA      | "
-              "SALDO F. (R$)",
-              2, 5, 1);
+
     for (int i = 0; i < SCREEN_WIDTH; i++) {
-      goTo(i, 6);
+      goTo(i, 5);
       // printf("═");
       printf("-");
     }
-    goTo(25, 6);
-    printf("|");
-    goTo(37, 6);
-    printf("|");
-    goTo(51, 6);
-    printf("|");
-    goTo(64, 6);
-    printf("|");
 
     // corners
-    goTo(0, 6);
+    goTo(0, 5);
     // printf("╠");
     printf("+");
-    goTo(SCREEN_WIDTH, 6);
+    goTo(SCREEN_WIDTH, 5);
+    // printf("╣");
+    printf("+");
+
+    writeText("DATA                   | TIPO      | VALOR (R$)  | CONTA      | "
+              "SALDO F. (R$)",
+              2, 6, 1);
+    for (int i = 0; i < SCREEN_WIDTH; i++) {
+      goTo(i, 7);
+      // printf("═");
+      printf("-");
+    }
+
+    // corners
+    goTo(0, 7);
+    // printf("╠");
+    printf("+");
+    goTo(SCREEN_WIDTH, 7);
     // printf("╣");
     printf("+");
 
     int printed = 0;
-    for (int i = page * 0; i < 17; i++) {
+    for (int i = page * 0; i < 14; i++) {
       if (transaction == NULL) {
         noTransactions = 1;
         break;
       }
-      if (strcmp(transaction->data.fromAccountNumber, number) != 0 ||
+      if (strcmp(transaction->data.fromAccountNumber, number) != 0 &&
           strcmp(transaction->data.toAccountNumber, number) != 0) {
         transaction = transaction->next;
         continue;
       }
 
-      printTransaction(transaction->data, 7 + printed);
+      printTransaction(transaction->data, 8 + printed);
       printed++;
 
       transaction = transaction->next;

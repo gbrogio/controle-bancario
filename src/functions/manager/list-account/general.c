@@ -17,7 +17,7 @@ void listAccountsGeneral(AccountList *list) {
     buildTableAccount(7);
 
     int printed = 0;
-    for (int i = page * 0; i < 16; i++) {
+    for (int i = page * 0; i < 14; i++) {
       if (account == NULL) {
         noAccounts = 1;
         break;

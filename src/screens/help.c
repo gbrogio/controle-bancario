@@ -14,6 +14,7 @@ void helpScreen() {
             11, 0);
   writeText("Numero de conta responsavel por rendimentos: ", 0, 13, 0);
   printf(YIELD_ACCOUNT_NUMBER);
+  writeText("ATI. = Ativo | INA. = Inativo | P = Poupanca | C = Corrente", 0, 14, 0);
 
   buildScreen();
   printMessage("Pressione qualquer tecla para continuar...", 1);

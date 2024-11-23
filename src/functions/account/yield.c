@@ -10,7 +10,7 @@ void createYieldTransaction(TransactionList *transactionList, Account *account,
                             double yield) {
   Transaction transaction;
   transaction.id = transactionList->length + 1;
-  transaction.type = 'y'; // Tipo de transação para rendimento
+  transaction.type = 'c'; // Tipo de transação para rendimento
   transaction.value = yield;
   strcpy(transaction.toAccountNumber, account->number);
   strcpy(transaction.fromAccountNumber, YIELD_ACCOUNT_NUMBER);
@@ -26,20 +26,20 @@ void createYieldTransaction(TransactionList *transactionList, Account *account,
 
 double giveYieldTo(AccountListItemPointer account,
                    TransactionList *transactionList) {
-  time_t t = time(NULL);
-  struct tm tm = *localtime(&t);
-  int currentDay = tm.tm_mday;
+  // time_t t = time(NULL);
+  // struct tm tm = *localtime(&t);
+  // int currentDay = tm.tm_mday;
 
-  if (currentDay == account->data.interestDay && account->data.yielded == 0) {
+  // if (currentDay == account->data.interestDay && account->data.yielded == 0) {
     double yield = account->data.balance * YIELD;
     account->data.balance += yield;
     account->data.yielded = 1;
     createYieldTransaction(transactionList, &account->data, yield);
     return yield;
-  }
+  // }
 
-  if (account->data.yielded == 1 && currentDay != account->data.interestDay) {
-    account->data.yielded = 0;
-  }
-  return 0.0;
+  // if (account->data.yielded == 1 && currentDay != account->data.interestDay) {
+  //   account->data.yielded = 0;
+  // }
+  // return 0.0;
 }

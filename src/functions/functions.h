@@ -68,17 +68,6 @@ typedef struct {
 GetAccountBy getAccountByNumber(AccountList *list, char number[], int ignoreInactives);
 
 /**
- * @brief Retrieves an account from the account list by its number.
- * 
- * @param list Pointer to the account list.
- * @param number Account number to search for.
- * @param ignoreInactives Flag to indicate if inactive accounts should be ignored.
- * 
- * @return AccountListItemPointer Pointer to the account list item, or NULL if not found.
- */
-GetAccountBy getAccountByAgency(AccountList *list, char agency[], int ignoreInactives);
-
-/**
  * @brief Initializes a new account list.
  * 
  * @return AccountList* Pointer to the new account list.
@@ -320,13 +309,6 @@ void listAccountsAlphabetic(AccountList *list);
  * @param list Pointer to the AccountList structure.
  */
 void listAccountsByNumber(AccountList *list);
-
-/**
- * @brief Lists all accounts in the list by they agency.
- * 
- * @param list Pointer to the AccountList structure.
- */
-void listAccountsByAgency(AccountList *list);
 
 /**
  * @brief Build the account head table.
