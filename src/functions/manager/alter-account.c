@@ -50,13 +50,22 @@ void alterAccountScreen(AccountList *list) {
         do {
           clearFooter();
           writeText("Qual campo voce deseja alterar?", 0, SCREEN_HEIGHT - 1, 0);
-          goTo(35, SCREEN_HEIGHT - 1);
-          scanf("%d", &field);
+          getInput("%d", &field, 0,
+             "Por favor digite um campo valido! Pressione 'Enter' para "
+             "continuar...",
+             35, SCREEN_HEIGHT - 1, noValid, list);
+
           if (field < 1 || field > 9)
             printMessage("Por favor digite um numero valido e entre 1 e 9!", 1);
+
+          if (account.type == 'c' && field == 8)
+            printMessage("Conta corrente nao possui dia de rendimentos!", 1);
+
+          if (account.type == 'p' && field == 7)
+            printMessage("Conta poupanca nao possui limite!", 1);
         } while (field < 1 || field > 9 ||
                  (account.type == 'c' && field == 8) ||
-                 (account.type == 'p' && field == 6));
+                 (account.type == 'p' && field == 7));
 
         clearInputBuffer();
         Account newField = createAccount(list, 1, field);

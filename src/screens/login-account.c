@@ -31,8 +31,10 @@ AccountListItemPointer loginAccountScreen(AccountList *list) {
 
   clearFooter();
   char confirmation = confirm("Deseja entrar com essas credenciais?");
-  if (confirmation != 's')
+  if (confirmation != 's') {
+    getchar();
     return NULL;
+  }
 
   GetAccountBy accountFounded = getAccountByNumber(list, number, 1);
 

@@ -4,6 +4,7 @@
 #include "./screens.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 int loginManagerScreen() {
   cls();
@@ -26,8 +27,10 @@ int loginManagerScreen() {
 
   clearFooter();
   char confirmation = confirm("Deseja entrar com essas credenciais?");
-  if (confirmation != 's')
+  if (confirmation != 's') {
+    getchar();
     return 0;
+  }
 
   if (strcmp(code, ADM_CODE) == 0 && strcmp(password, ADM_PASSWORD) == 0) {
     return 1;

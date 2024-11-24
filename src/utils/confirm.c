@@ -13,9 +13,7 @@ char confirm(char msg[]) {
     goTo(0, 0);
     c = tolower(c);
     if (c != 's' && c != 'n') {
-      writeText("Entrada invalida! Digite 's' para sim ou 'n' para nao.", 0,
-                SCREEN_HEIGHT - 1, 0);
-      awaitPressAnyKey(0);
+      printMessage("Entrada invalida! Digite 's' para sim ou 'n' para nao.", 1);
     }
   } while (c != 's' && c != 'n');
   return c;

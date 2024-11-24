@@ -117,7 +117,7 @@ Account createAccount(AccountList *list, int update, int input) {
   // UPDATE ACCOUNT PASSWORD
   if (input == 9 || input == -1)
     getInput("%s", account.password, 10,
-             "Senha deve ter 8 números! Pressione 'Enter' para reescrever...",
+             "Senha deve ter 8 numeros! Pressione 'Enter' para reescrever...",
              SCREEN_WIDTH / 2 + 22, SCREEN_HEIGHT / 2 + 1, validationPassword,
              NULL);
 
