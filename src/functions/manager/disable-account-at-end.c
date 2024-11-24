@@ -6,34 +6,46 @@
 #include "../../validations/validations.h"
 #include "../functions.h"
 
-void disableAccountAtEnd(AccountList *list) {
-  if (list->length == 0) {
+void disableAccountAtEnd(AccountList *list)
+{
+  if (list->length == 0)
+  {
     printMessage("Nao ha contas cadastradas.", 1);
     return;
   }
 
-  char doAgain = 's';
-  do {
-    cls();
-    buildScreen();
-    writeText("INATIVAR CONTA (FINAL)", SCREEN_WIDTH / 2, 4, 0);
-    printAccount(list->tail->data, 0, 1);
-    clearFooter();
-    char confirmation = confirm("Deseja inativar essa conta?");
-    if (confirmation == 's') {
-      if (list->head->data.balance != 0) {
-        printMessage("Conta com saldo diferente de zero! Pressione 'Enter' "
-                     "para continuar...",
-                     1);
-        clearFooter();
-        doAgain = confirm("Deseja inativar outra conta?");
-        continue;
-      }
-
-      AccountListItemPointer lastAccount = list->tail;
-      strcpy(lastAccount->data.status, "inativo");
+  cls();
+  buildScreen();
+  writeText("INATIVAR CONTA (FINAL)", SCREEN_WIDTH / 2, 4, 0);
+  AccountListItemPointer lastAccount = NULL;
+  AccountListItemPointer currentData = list->head;
+  for (int i = 0; i < list->length; i++)
+  {
+    if (strcmp(currentData->data.status, "inativo") != 0)
+    {
+      lastAccount = currentData;
     }
-    clearFooter();
-    doAgain = confirm("Deseja inativar outra conta?");
-  } while (doAgain == 's');
+    currentData = currentData->next;
+  }
+
+  if (lastAccount == NULL)
+  {
+    printMessage("Nao ha contas ativas.", 1);
+    return;
+  }
+
+  clearFooter();
+  char confirmation = confirm("Deseja inativar essa conta?");
+  if (confirmation == 's')
+  {
+    if (lastAccount->data.balance != 0)
+    {
+      printMessage("Conta com saldo diferente de zero! Pressione 'Enter' "
+                   "para continuar...",
+                   1);
+      return;
+    }
+
+    strcpy(lastAccount->data.status, "inativo");
+  }
 }

@@ -4,6 +4,7 @@
 #include "../functions.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 void disableAccountByNumber(AccountList *list) {
   if (list->length == 0) {
@@ -21,7 +22,7 @@ void disableAccountByNumber(AccountList *list) {
               0);
 
     char number[16];
-
+    getchar();
     getInput("%s", number, 16,
              "Digite um numero valido! Pressione 'Enter' para continuar...",
              SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, validationNumberType, list);

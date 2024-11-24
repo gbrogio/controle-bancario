@@ -5,6 +5,7 @@
 #include "screens.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 AccountListItemPointer loginAccountScreen(AccountList *list) {
   cls();

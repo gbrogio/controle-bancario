@@ -49,7 +49,7 @@ void alterAccountScreen(AccountList *list) {
         int field;
         do {
           clearFooter();
-          writeText("Qual campo voce deseja alterar?", 0, SCREEN_HEIGHT - 1, 0);
+          writeText("Qual campo voce deseja alterar?", 2, SCREEN_HEIGHT - 1, 1);
           getInput("%d", &field, 0,
              "Por favor digite um campo valido! Pressione 'Enter' para "
              "continuar...",
@@ -67,7 +67,6 @@ void alterAccountScreen(AccountList *list) {
                  (account.type == 'c' && field == 8) ||
                  (account.type == 'p' && field == 7));
 
-        clearInputBuffer();
         Account newField = createAccount(list, 1, field);
         if (field == 1)
           strcpy(account.bank, newField.bank);
@@ -77,8 +76,18 @@ void alterAccountScreen(AccountList *list) {
           strcpy(account.number, newField.number);
         else if (field == 4)
           account.type = newField.type;
-        else if (field == 6)
+        else if (field == 6) {
+          if (newField.balance != 0 && strcmp(account.status, "inativo") == 0) {
+            writeText("R$ 0.00        ", 17, 18, 1);
+            printMessage("Conta com saldo diferente de zero! Pressione 'Enter' "
+                         "para continuar...",
+                         0);
+            clearFooter();
+            alterAgain = confirm("Deseja alterar outro campo?");
+            continue;
+          }
           account.balance = newField.balance;
+        }
         else if (field == 7)
           account.limit = newField.limit;
         else if (field == 5) {

@@ -14,28 +14,32 @@ void disableAccountAtStart(AccountList *list) {
     return;
   }
 
-  char doAgain = 's';
-  do {
-    cls();
-    buildScreen();
-    writeText("INATIVAR CONTA (INICIO)", SCREEN_WIDTH / 2, 4, 0);
-    printAccount(list->head->data, 0, 1);
-    clearFooter();
-    char confirmation = confirm("Deseja inativar essa conta?");
-    if (confirmation == 's') {
-      if (list->head->data.balance != 0) {
-        printMessage("Conta com saldo diferente de zero! Pressione 'Enter' "
-                     "para continuar...",
-                     1);
-        clearFooter();
-        doAgain = confirm("Deseja inativar outra conta?");
-        continue;
-      }
+  cls();
+  buildScreen();
+  writeText("INATIVAR CONTA (INICIO)", SCREEN_WIDTH / 2, 4, 0);
+  AccountListItemPointer firstAccount = list->head;
+  AccountListItemPointer currentData = list->head;
 
-      AccountListItemPointer firstAccount = list->head;
-      strcpy(firstAccount->data.status, "inativo");
+  for (int i = 0; i < list->length; i++) {
+    if (strcmp(currentData->data.status, "inativo") != 0) {
+      firstAccount = currentData;
+      break;
     }
-    clearFooter();
-    doAgain = confirm("Deseja inativar outra conta?");
-  } while (doAgain == 's');
+    currentData = currentData->next;
+  }
+
+  printAccount(firstAccount->data, 0, 1);
+  clearFooter();
+  char confirmation = confirm("Deseja inativar essa conta?");
+  if (confirmation == 's') {
+    if (firstAccount->data.balance != 0) {
+      printMessage("Conta com saldo diferente de zero! Pressione 'Enter' "
+                    "para continuar...",
+                    1);
+      return;
+    }
+
+    strcpy(firstAccount->data.status, "inativo");
+  }
+  clearFooter();
 }

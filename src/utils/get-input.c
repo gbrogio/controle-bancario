@@ -18,7 +18,9 @@ void getInput(char mask[], GenericType input, int size, char err[], int x, int y
       goTo(x + i, y);
       printf(" ");
     }
-    clearFooter();
+    if (y != SCREEN_HEIGHT - 1) {
+      clearFooter();
+    }
 
     goTo(x, y);
     if (strcmp(mask, "%s") == 0) {
