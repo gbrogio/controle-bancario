@@ -89,4 +89,13 @@ int invalidPosition(GenericType i, GenericType a);
  */
 int noValid();
 
+/**
+ * @brief Validates date data.
+ * 
+ * @param i Input data.
+ * @param a Additional data.
+ * @return int 1 if the data is invalid, 0 if it is valid.
+ */
+int validationDate(GenericType i, GenericType a);
+
 #endif

@@ -49,8 +49,10 @@ int main() {
       continue;
     }
     clearFooter();
-    if (c == '0' || c == 'b')
+    if (c == '0' || c == 'b') {
       c = command();
+      getchar();
+    }
   } while (c != 'x');
 
   saveAccounts(accountList, "db/accounts.dat");

@@ -15,12 +15,12 @@ int loginManagerScreen() {
   char code[50];
   char password[50];
 
-  getInput("%s", code,
+  getInput("%s", code, 50,
            "Digite um codigo valido! Pressione 'Enter' para continuar...",
            SCREEN_WIDTH / 2, 12, noValid, NULL);
   if (strcmp(code, "0") == 0)
     return 2;
-  getInput("%s", password,
+  getInput("%s", password, 50,
            "Digite uma senha valida! Pressione 'Enter' para continuar...",
            SCREEN_WIDTH / 2, 14, noValid, NULL);
 

@@ -15,7 +15,7 @@ void buildTableAccount(int y) {
   // printf("╣");
   printf("+");
 
-  writeText("ST.  | BANCO        | AGENCIA  | CONTA      | TIPO | SALDO"
+  writeText("ST.  | BANCO        | AGENCIA | CONTA      | TIPO | SALDO"
             "(R$) | LIMITE (R$)",
             2, y - 1, 1);
 

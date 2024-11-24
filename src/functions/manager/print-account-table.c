@@ -24,18 +24,18 @@ void printAccountTable(Account account, int y) {
 
   goTo(22, y);
   if (strlen(account.agency) == 5)
-    printf("| %s    |", account.agency);
-  else
     printf("| %s   |", account.agency);
+  else
+    printf("| %s", account.agency);
 
-  goTo(35, y);
-  printf("%s   |", account.number);
+  goTo(32, y);
+  printf("| %s", account.number);
 
-  goTo(48, y);
-  printf(" %c   |", toupper(account.type));
+  goTo(44, y);
+  printf(" | %c    |", toupper(account.type));
 
-  goTo(55, y);
-  printf("%.2lf", account.balance);
+  goTo(53, y);
+  printf(" %.2lf", account.balance);
 
   goTo(65, y);
   printf("| %.2lf", account.limit);

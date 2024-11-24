@@ -26,34 +26,20 @@ int validationAgency(GenericType i, GenericType _) {
   UNUSED(_);
 
   char *agency = (char *)i;
-  if (strlen(agency) != 6 && strlen(agency) != 5)
+  int agencyLenght = strlen(agency);
+
+  if (agencyLenght < 3 || agencyLenght > 6)
     return 1;
 
-  if (strlen(agency) == 6) {
-    for (int i = 0; i < 4; i++) {
-      if (!isdigit(agency[i]))
-        return 1;
-    }
-
-    if (agency[4] != '-')
-      return 1;
-
-    if (!isdigit(agency[5]))
-      return 1;
-
-    return 0;
+  int validationDigitLength = 0;
+  if (agency[agencyLenght - 2] == '-' && isdigit(agency[agencyLenght - 1])) {
+    validationDigitLength = 2;
   }
 
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < agencyLenght - validationDigitLength; i++) {
     if (!isdigit(agency[i]))
       return 1;
   }
-
-  if (agency[3] != '-')
-    return 1;
-
-  if (!isdigit(agency[4]))
-    return 1;
 
   return 0;
 }
@@ -62,22 +48,25 @@ int validationNumberType(GenericType i, GenericType _) {
   UNUSED(_);
 
   char *number = (char *)i;
+  int numberLenght = strlen(number);
 
-  if (number[0] == '0')
+  if (number[0] == '0' && numberLenght == 1)
     return 0;
 
-  if (strlen(number) != 8)
+  // if number length minus verification digit is less than or bigger than the
+  // minimum account number length so it is invalid
+  if (numberLenght - 2 < 4 || numberLenght - 2 > 10)
     return 1;
 
-  for (int i = 0; i < 6; i++) {
+  for (int i = 0; i < numberLenght - 2; i++) {
     if (!isdigit(number[i]))
       return 1;
   }
 
-  if (number[6] != '-')
+  if (number[numberLenght - 2] != '-')
     return 1;
 
-  if (!isdigit(number[7]))
+  if (!isdigit(number[numberLenght - 1]))
     return 1;
 
   return 0;

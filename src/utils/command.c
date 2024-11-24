@@ -11,7 +11,8 @@ char command() {
   setDefaultColor();
   goTo(11, SCREEN_HEIGHT - 1);
   do {
-    scanf("%c", &c);
+    scanf(" %c", &c);
   } while (c == '\n');
+
   return tolower(c);
 }

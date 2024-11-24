@@ -13,7 +13,7 @@ void registerAccountAtPosition(AccountList *list) {
     writeText("Posicao..:", SCREEN_WIDTH / 2 - 6, SCREEN_HEIGHT / 2, 0);
     int position;
 
-    getInput("%d", &position,
+    getInput("%d", &position, 0,
              "Por favor digite uma posicao valida! Pressione 'Enter' para "
              "continuar...",
              SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, invalidPosition, list);

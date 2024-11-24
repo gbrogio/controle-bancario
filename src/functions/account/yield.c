@@ -30,15 +30,17 @@ double giveYieldTo(AccountListItemPointer account,
   // struct tm tm = *localtime(&t);
   // int currentDay = tm.tm_mday;
 
-  // if (currentDay == account->data.interestDay && account->data.yielded == 0) {
-    double yield = account->data.balance * YIELD;
-    account->data.balance += yield;
-    account->data.yielded = 1;
-    createYieldTransaction(transactionList, &account->data, yield);
-    return yield;
+  // if (currentDay == account->data.interestDay && account->data.yielded == 0)
+  // {
+  double yield = account->data.balance * YIELD;
+  account->data.balance += yield;
+  account->data.yielded = 1;
+  createYieldTransaction(transactionList, &account->data, yield);
+  return yield;
   // }
 
-  // if (account->data.yielded == 1 && currentDay != account->data.interestDay) {
+  // if (account->data.yielded == 1 && currentDay != account->data.interestDay)
+  // {
   //   account->data.yielded = 0;
   // }
   // return 0.0;

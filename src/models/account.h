@@ -5,14 +5,14 @@
 typedef struct
 {
   int code;
-  char bank[50];
-  char agency[7];
-  char number[9];
+  char bank[52];
+  char agency[12];
+  char number[16];
   char type;
   double balance;
   double limit;
   char status[10];
-  char password[9];
+  char password[10];
   int interestDay;
   int yielded;
 } Account;

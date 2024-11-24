@@ -3,6 +3,7 @@
 #include "../models/account.h"
 #include "screens.h"
 #include <stddef.h>
+#include <stdio.h>
 
 char loginScreen(AccountList *accountList, TransactionList *transactionList) {
   char option;
@@ -14,6 +15,7 @@ char loginScreen(AccountList *accountList, TransactionList *transactionList) {
   buildScreen();
 
   option = command();
+  getchar();
 
   if (option == '1') {
     int status;

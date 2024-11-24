@@ -38,6 +38,7 @@ void clearInputBuffer();
  * 
  * @param mask The mask to be used on `scanf`.
  * @param input The input to be stored.
+ * @param size The size of the input.
  * @param err The error message to be displayed if the input is invalid.
  * @param x The x position on the terminal.
  * @param y The y position on the terminal.
@@ -48,7 +49,7 @@ void clearInputBuffer();
  * int input;
  * getInput("%d", &input, "Por favor digite um numero valido", 0, 0, noValid, NULL);
  */
-void getInput(char mask[], GenericType input, char err[], int x,
+void getInput(char mask[], GenericType input, int size, char err[], int x,
               int y, int validation(GenericType i, GenericType a), GenericType args);
 
 /**

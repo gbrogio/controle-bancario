@@ -6,8 +6,13 @@
 #include <string.h>
 
 void insertAccountIn(int position, AccountList *list, Account data) {
-  if (list->head == NULL || position < 0 || position > list->length)
+  if (position < 0 || position > list->length)
     return;
+
+  if (list->head == NULL) {
+    pushAccount(list, data);
+    return;
+  }
 
   AccountListItemPointer newData =
       (AccountListItemPointer)malloc(sizeof(AccountListItem));

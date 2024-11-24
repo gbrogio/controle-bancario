@@ -13,10 +13,10 @@ AccountListItemPointer loginAccountScreen(AccountList *list) {
   writeText("Digite numero da conta.:", SCREEN_WIDTH / 2 - 26, 12, 1);
   writeText("Digite sua senha.......:", SCREEN_WIDTH / 2 - 26, 14, 1);
 
-  char number[9];
-  char password[9];
+  char number[16];
+  char password[10];
 
-  getInput("%s", number,
+  getInput("%s", number, 16,
            "Digite um numero valido! Pressione 'Enter' para continuar...",
            SCREEN_WIDTH / 2, 12, validationNumberType, NULL);
   if (strcmp(number, "0") == 0) {
@@ -25,7 +25,7 @@ AccountListItemPointer loginAccountScreen(AccountList *list) {
     account->data.code = -1;
     return account;
   }
-  getInput("%s", password,
+  getInput("%s", password, 10,
            "Digite uma senha valida! Pressione 'Enter' para continuar...",
            SCREEN_WIDTH / 2, 14, validationPassword, NULL);
 

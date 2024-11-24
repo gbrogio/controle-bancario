@@ -92,6 +92,7 @@ char controlSubScreen(char screen(AccountList *list,
   do {
     option = screen(list, transactionList, account);
     if (option == 'h') {
+      getchar();
       helpScreen();
       continue;
     }

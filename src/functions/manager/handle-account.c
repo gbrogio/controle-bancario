@@ -1,10 +1,11 @@
-#include "../global.h"
-#include "../models/account.h"
-#include "../models/transaction.h"
-#include "../validations/validations.h"
-#include "functions.h"
+#include "../../global.h"
+#include "../../models/account.h"
+#include "../../models/transaction.h"
+#include "../../validations/validations.h"
+#include "../functions.h"
 #include <ctype.h>
 #include <string.h>
+#include <stdio.h>
 
 Account createAccount(AccountList *list, int update, int input) {
   Account account;
@@ -28,7 +29,7 @@ Account createAccount(AccountList *list, int update, int input) {
     int *code = &account.code;
 
     getInput(
-        "%d", code,
+        "%d", code, 0,
         "Digite um numero valido e unico! Pressione 'Enter' para reescrever...",
         17, 6, validationCode, list);
 
@@ -39,25 +40,25 @@ Account createAccount(AccountList *list, int update, int input) {
 
   // UPDATE ACCOUNT BANK
   if (input == 1 || input == -1)
-    getInput("%s", account.bank, "", 17, 8, noValid, NULL);
+    getInput("%s", account.bank, 52, "", 17, 8, noValid, NULL);
 
   // UPDATE ACCOUNT AGENCY
   if (input == 2 || input == -1)
-    getInput("%s", account.agency,
+    getInput("%s", account.agency, 12,
              "Digite um formato valido (ex. 1234-5)! Pressione 'Enter' para "
              "reescrever...",
              17, 10, validationAgency, NULL);
 
   // UPDATE ACCOUNT NUMBER
   if (input == 3 || input == -1)
-    getInput("%s", account.number,
+    getInput("%s", account.number, 16,
              "Ja usado ou invalido (ex. 123456-7)! Pressione 'Enter' para "
              "reescrever..",
              17, 12, validationNumber, list);
 
   // UPDATE ACCOUNT TYPE
   if (input == 4 || input == -1) {
-    getInput("%c", &account.type,
+    getInput("%c", &account.type, 0,
              "C = Conta Corrente / P = Conta Poupanca! Pressione 'Enter' para "
              "reescrever..",
              17, 14, validationType, NULL);
@@ -66,7 +67,7 @@ Account createAccount(AccountList *list, int update, int input) {
 
   // UPDATE ACCOUNT STATUS
   if (input == 5 || input == -1) {
-    getInput("%s", account.status,
+    getInput("%s", account.status, 10,
              "Digite apenas \"ativo\" e \"inativo\"! Pressione 'Enter' para "
              "reescrever...",
              17, 16, validationStatus, NULL);
@@ -81,7 +82,7 @@ Account createAccount(AccountList *list, int update, int input) {
       account.balance = 0;
       writeText("N/A", 17, 18, 1);
     } else
-      getInput("%lf", &account.balance,
+      getInput("%lf", &account.balance, 0,
                "Digite um saldo valido! Pressione 'Enter' para reescrever...",
                17, 18, noValid, NULL);
   }
@@ -93,7 +94,7 @@ Account createAccount(AccountList *list, int update, int input) {
       account.limit = 0;
       writeText("N/A", 17, 20, 1);
     } else
-      getInput("%lf", &account.limit,
+      getInput("%lf", &account.limit, 0,
                "Digite um limite valido! Pressione 'Enter' para reescrever...",
                17, 20, noValid, NULL);
   } else if (account.type == 'p') {
@@ -105,7 +106,7 @@ Account createAccount(AccountList *list, int update, int input) {
   if (((input == 8 || input == -1) && account.type == 'p') ||
       (input == 8 && update == 1)) {
     getInput(
-        "%d", &account.interestDay,
+        "%d", &account.interestDay, 0,
         "Digite um dia entre 01 e 28! Pressione 'Enter' para reescrever...",
         SCREEN_WIDTH / 2 + 22, SCREEN_HEIGHT / 2 - 1, validationDay, NULL);
   } else if (account.type == 'c') {
@@ -115,7 +116,7 @@ Account createAccount(AccountList *list, int update, int input) {
 
   // UPDATE ACCOUNT PASSWORD
   if (input == 9 || input == -1)
-    getInput("%s", account.password,
+    getInput("%s", account.password, 10,
              "Senha deve ter 8 números! Pressione 'Enter' para reescrever...",
              SCREEN_WIDTH / 2 + 22, SCREEN_HEIGHT / 2 + 1, validationPassword,
              NULL);

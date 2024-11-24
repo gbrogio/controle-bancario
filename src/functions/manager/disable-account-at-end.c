@@ -9,7 +9,6 @@
 void disableAccountAtEnd(AccountList *list) {
   if (list->length == 0) {
     printMessage("Nao ha contas cadastradas.", 1);
-    awaitPressAnyKey(0);
     return;
   }
 

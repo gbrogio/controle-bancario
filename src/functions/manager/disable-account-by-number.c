@@ -8,7 +8,6 @@
 void disableAccountByNumber(AccountList *list) {
   if (list->length == 0) {
     printMessage("Nao ha contas cadastradas.", 1);
-    awaitPressAnyKey(0);
     return;
   }
 
@@ -21,9 +20,9 @@ void disableAccountByNumber(AccountList *list) {
     writeText("Numero da conta..:", SCREEN_WIDTH / 2 - 14, SCREEN_HEIGHT / 2,
               0);
 
-    char number[8];
+    char number[16];
 
-    getInput("%s", number,
+    getInput("%s", number, 16,
              "Digite um numero valido! Pressione 'Enter' para continuar...",
              SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, validationNumberType, list);
 

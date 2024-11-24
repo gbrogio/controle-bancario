@@ -15,7 +15,7 @@ void listAccountsByNumber(AccountList *list) {
     writeText("LISTAR CONTAS (NUMERO)", SCREEN_WIDTH / 2, 4, 0);
 
     char number[10];
-    getInput("%s", number,
+    getInput("%s", number, 10,
              "Digite um numero valido! Pressione 'Enter' para continuar...", 11,
              5, validationNumberType, list);
     GetAccountBy accountFounded = getAccountByNumber(list, number, 0);

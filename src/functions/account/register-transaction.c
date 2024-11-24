@@ -7,7 +7,7 @@
 #include "../functions.h"
 
 void registerTransaction(TransactionList *list, AccountListItem *account,
-                         char type) {
+                         char type, int insertDate) {
   char doAgain = 's';
   do {
     cls();
@@ -16,7 +16,8 @@ void registerTransaction(TransactionList *list, AccountListItem *account,
     printf(type == 'c' ? "ENTRADA" : "SAIDA");
 
     AccountListItem from = *account;
-    Transaction transaction = createTransaction(list, &from, &from, type);
+    Transaction transaction =
+        createTransaction(list, &from, &from, type, insertDate);
 
     if (transaction.value != 0) {
       clearFooter();

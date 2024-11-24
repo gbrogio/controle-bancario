@@ -56,7 +56,30 @@ AccountListItemPointer sortList(AccountListItemPointer head) {
 }
 
 void listAccountsAlphabetic(AccountList *list) {
-  AccountListItemPointer account = sortList(list->head);
+  AccountListItemPointer account;
+
+  // Copy list
+  AccountListItemPointer current = list->head;
+  AccountListItemPointer newHead = NULL;
+  AccountListItemPointer newTail = NULL;
+
+  while (current != NULL) {
+    AccountListItemPointer newNode = (AccountListItemPointer)malloc(sizeof(AccountListItem));
+    newNode->data = current->data;
+    newNode->next = NULL;
+
+    if (newHead == NULL) {
+      newHead = newNode;
+      newTail = newNode;
+    } else {
+      newTail->next = newNode;
+      newTail = newNode;
+    }
+
+    current = current->next;
+  }
+
+  account = sortList(newHead);
 
   int page = 1;
   int noAccounts = 0;

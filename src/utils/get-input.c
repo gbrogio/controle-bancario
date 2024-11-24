@@ -1,7 +1,15 @@
 #include "../global.h"
 #include <stdio.h>
+#include <string.h>
 
-void getInput(char mask[], GenericType input, char err[], int x, int y,
+void trimString(char* str) {
+    size_t len = strlen(str);
+    if (len > 0 && str[len - 1] == '\n') {
+        str[len - 1] = '\0'; // Remove o '\n' se presente
+    }
+}
+
+void getInput(char mask[], GenericType input, int size, char err[], int x, int y,
               int validation(GenericType i, GenericType a), GenericType args) {
   int hasError;
   int validationResult;
@@ -13,13 +21,18 @@ void getInput(char mask[], GenericType input, char err[], int x, int y,
     clearFooter();
 
     goTo(x, y);
-
-    hasError = scanf(mask, input);
+    if (strcmp(mask, "%s") == 0) {
+      fgets((char *)input, size, stdin);
+      trimString((char *)input);
+      hasError = 1;
+    } else {
+      hasError = scanf(mask, input);
+      clearInputBuffer();
+    }
     validationResult = validation(input, args);
     if (hasError != 1 || validationResult == 1) {
-      printMessage(err, 1);
+      printMessage(err, 0);
       continue;
     }
-    clearInputBuffer();
   } while (hasError != 1 || validationResult == 1);
 }

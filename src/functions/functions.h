@@ -180,10 +180,11 @@ void disableAccountAtEnd(AccountList *list);
  * @param from Pointer to the account to transfer from.
  * @param to Pointer to the account to transfer to.
  * @param type Type of transaction.
+ * @param insertDate Date of the transaction.
  * 
  * @return Transaction New transaction.
  */
-Transaction createTransaction(TransactionList *list, AccountListItem *from, AccountListItem *to, char type);
+Transaction createTransaction(TransactionList *list, AccountListItem *from, AccountListItem *to, char type, int insertDate);
 
 /**
  * @brief Saves the account list to a file.
@@ -223,8 +224,9 @@ void loadTransactions(TransactionList *list, char *filename);
  * @param list Pointer to the transaction list.
  * @param account Pointer to the account.
  * @param type Type of transaction.
+ * @param insertDate Date of the transaction.
  */
-void registerTransaction(TransactionList *list, AccountListItem *account, char type);
+void registerTransaction(TransactionList *list, AccountListItem *account, char type, int insertDate);
 
 /**
  * @brief Adds a new transaction to the end of the transaction list.
@@ -240,8 +242,9 @@ void pushTransaction(TransactionList *list, Transaction data);
  * @param accountList Pointer to the account list.
  * @param transactionList Pointer to the transaction list.
  * @param account Pointer to the account.
+ * @param insertDate Date of the transaction.
  */
-void transfer(AccountList *accountList, TransactionList *transactionList, AccountListItem *account);
+void transfer(AccountList *accountList, TransactionList *transactionList, AccountListItem *account, int insertDate);
 
 /**
  * @brief Gives the yield of an account.

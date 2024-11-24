@@ -16,15 +16,15 @@ void alterAccountScreen(AccountList *list) {
     writeText("Numero da conta..:", SCREEN_WIDTH / 2 - 14, SCREEN_HEIGHT / 2,
               0);
 
-    char number[8];
-
-    getInput("%s", number,
+    char number[16];
+    getchar();
+    getInput("%s", number, 16,
              "Digite um numero valido! Pressione 'Enter' para continuar...",
              SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, validationNumberType, list);
 
     if (number[0] == '0') {
       clearFooter();
-      doAgain = confirm("Deseja remover outra conta?");
+      doAgain = confirm("Deseja alterar outra conta?");
       continue;
     }
 
@@ -40,7 +40,7 @@ void alterAccountScreen(AccountList *list) {
     buildScreen();
     writeText("ALTERAR CADASTRO DE CONTA", SCREEN_WIDTH / 2, 4, 0);
 
-    printAccount(accountFounded.account->data, 1, 1);
+    printAccount(accountFounded.account->data, 0, 0);
     Account account = accountFounded.account->data;
     char confirmation = confirm("Deseja alterar essa conta?");
     if (confirmation == 's') {
@@ -58,8 +58,7 @@ void alterAccountScreen(AccountList *list) {
                  (account.type == 'c' && field == 8) ||
                  (account.type == 'p' && field == 6));
 
-        if (field == 4)
-          clearInputBuffer();
+        clearInputBuffer();
         Account newField = createAccount(list, 1, field);
         if (field == 1)
           strcpy(account.bank, newField.bank);
@@ -74,10 +73,11 @@ void alterAccountScreen(AccountList *list) {
         else if (field == 7)
           account.limit = newField.limit;
         else if (field == 5) {
-          if (account.balance != 0 && strcmp(newField.status, "inativo") != 0) {
+          if (account.balance != 0 && strcmp(newField.status, "inativo") == 0) {
+            writeText("ativo  ", 17, 16, 1);
             printMessage("Conta com saldo diferente de zero! Pressione 'Enter' "
                          "para continuar...",
-                         1);
+                         0);
             clearFooter();
             alterAgain = confirm("Deseja alterar outro campo?");
             continue;
@@ -115,6 +115,7 @@ void alterAccountScreen(AccountList *list) {
       }
     }
     clearFooter();
+    clearInputBuffer();
     doAgain = confirm("Deseja alterar outra conta?");
   } while (doAgain == 's');
 }

@@ -8,7 +8,7 @@
 #include "../functions.h"
 
 void transfer(AccountList *accountList, TransactionList *transactionList,
-              AccountListItem *account) {
+              AccountListItem *account, int insertDate) {
   if (accountList->length <= 1) {
     printMessage("Nao ha outras contas cadastradas.", 1);
     return;
@@ -23,9 +23,9 @@ void transfer(AccountList *accountList, TransactionList *transactionList,
     writeText("Numero da conta..:", SCREEN_WIDTH / 2 - 14, SCREEN_HEIGHT / 2,
               0);
 
-    char number[8];
+    char number[16];
 
-    getInput("%s", number,
+    getInput("%s", number, 16,
              "Digite um numero valido! Pressione 'Enter' para continuar...",
              SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, validationNumberType,
              accountList);
@@ -59,8 +59,8 @@ void transfer(AccountList *accountList, TransactionList *transactionList,
       if (accountList->head == NULL)
         return;
 
-      Transaction transaction = createTransaction(transactionList, account,
-                                                  accountFounded.account, 'd');
+      Transaction transaction = createTransaction(
+          transactionList, account, accountFounded.account, 'd', insertDate);
       pushTransaction(transactionList, transaction);
     }
 

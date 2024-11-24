@@ -2,6 +2,7 @@
 #include "../global.h"
 #include "../models/account.h"
 #include "screens.h"
+#include <stdio.h>
 
 char managerScreen(AccountList *accountList, TransactionList *_,
                    AccountListItemPointer __) {
