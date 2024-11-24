@@ -15,9 +15,10 @@ Transaction createTransaction(TransactionList *list, AccountListItem *from,
 
   Transaction transaction;
   transaction.id = list->length + 1;
-  writeText("VALOR TRANSACAO..:", 0, SCREEN_HEIGHT / 2, 4);
+  writeText("VALOR TRANSACAO..:", SCREEN_WIDTH / 2 - 14, SCREEN_HEIGHT / 2, 4);
   if (insertDate)
-    writeText("DATA.............:", 0, SCREEN_HEIGHT / 2 + 1, 4);
+    writeText("DATA.............:", SCREEN_WIDTH / 2 - 14,
+              SCREEN_HEIGHT / 2 + 1, 4);
 
   do {
     getInput("%lf", &transaction.value, 0,
@@ -27,15 +28,15 @@ Transaction createTransaction(TransactionList *list, AccountListItem *from,
     if (from->data.balance + from->data.limit < transaction.value &&
         type == 'd') {
       printMessage("Saldo insuficiente! Pressione 'Enter' para continuar...",
-                   1);
+                   0);
     }
   } while (from->data.balance + from->data.limit < transaction.value &&
            type == 'd');
 
-  char dateFormated[10];
+  char dateFormated[12];
   if (insertDate) {
     do {
-      getInput("%s", dateFormated, 10,
+      getInput("%s", dateFormated, 12,
                "Digite uma data valida (ex. dd/mm/aaaa)! Pressione 'Enter' "
                "para reescrever...",
                22, SCREEN_HEIGHT / 2 + 1, validationDate, NULL);
@@ -60,7 +61,7 @@ Transaction createTransaction(TransactionList *list, AccountListItem *from,
       int lastDate = atoi(dateList);
 
       if (currentDate < lastDate) {
-        printMessage("Data invalida! Pressione 'Enter' para continuar...", 1);
+        printMessage("Data invalida! Pressione 'Enter' para continuar...", 0);
         continue;
       }
 

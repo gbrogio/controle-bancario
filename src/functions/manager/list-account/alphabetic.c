@@ -64,7 +64,8 @@ void listAccountsAlphabetic(AccountList *list) {
   AccountListItemPointer newTail = NULL;
 
   while (current != NULL) {
-    AccountListItemPointer newNode = (AccountListItemPointer)malloc(sizeof(AccountListItem));
+    AccountListItemPointer newNode =
+        (AccountListItemPointer)malloc(sizeof(AccountListItem));
     newNode->data = current->data;
     newNode->next = NULL;
 

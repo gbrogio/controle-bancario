@@ -2,9 +2,9 @@
 #include "../../models/account.h"
 #include "../../validations/validations.h"
 #include "../functions.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 void disableAccountByNumber(AccountList *list) {
   if (list->length == 0) {
@@ -38,6 +38,8 @@ void disableAccountByNumber(AccountList *list) {
     if (accountFounded.position == -1) {
       printMessage("Conta nao encontrada! Pressione 'Enter' para continuar...",
                    0);
+      doAgain = confirm("Deseja alterar outra conta?");
+
       continue;
     }
 

@@ -4,8 +4,8 @@
 #include "../../validations/validations.h"
 #include "../functions.h"
 #include <ctype.h>
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 
 Account createAccount(AccountList *list, int update, int input) {
   Account account;

@@ -3,9 +3,9 @@
 #include "../models/account.h"
 #include "../validations/validations.h"
 #include "screens.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 AccountListItemPointer loginAccountScreen(AccountList *list) {
   cls();

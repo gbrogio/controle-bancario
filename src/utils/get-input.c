@@ -2,15 +2,16 @@
 #include <stdio.h>
 #include <string.h>
 
-void trimString(char* str) {
-    size_t len = strlen(str);
-    if (len > 0 && str[len - 1] == '\n') {
-        str[len - 1] = '\0'; // Remove o '\n' se presente
-    }
+void trimString(char *str) {
+  size_t len = strlen(str);
+  if (len > 0 && str[len - 1] == '\n') {
+    str[len - 1] = '\0'; // Remove o '\n' se presente
+  }
 }
 
-void getInput(char mask[], GenericType input, int size, char err[], int x, int y,
-              int validation(GenericType i, GenericType a), GenericType args) {
+void getInput(char mask[], GenericType input, int size, char err[], int x,
+              int y, int validation(GenericType i, GenericType a),
+              GenericType args) {
   int hasError;
   int validationResult;
   do {
@@ -30,6 +31,10 @@ void getInput(char mask[], GenericType input, int size, char err[], int x, int y
     } else {
       hasError = scanf(mask, input);
       clearInputBuffer();
+
+      if (strcmp(mask, "%lf") == 0 && *((double *)input) < 0) {
+        hasError = 0;
+      }
     }
     validationResult = validation(input, args);
     if (hasError != 1 || validationResult == 1) {

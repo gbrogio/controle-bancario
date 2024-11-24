@@ -33,6 +33,7 @@ void alterAccountScreen(AccountList *list) {
     if (accountFounded.position == -1) {
       printMessage("Conta nao encontrada! Pressione 'Enter' para continuar...",
                    0);
+      doAgain = confirm("Deseja alterar outra conta?");
       continue;
     }
 
@@ -51,9 +52,9 @@ void alterAccountScreen(AccountList *list) {
           clearFooter();
           writeText("Qual campo voce deseja alterar?", 2, SCREEN_HEIGHT - 1, 1);
           getInput("%d", &field, 0,
-             "Por favor digite um campo valido! Pressione 'Enter' para "
-             "continuar...",
-             35, SCREEN_HEIGHT - 1, noValid, list);
+                   "Por favor digite um campo valido! Pressione 'Enter' para "
+                   "continuar...",
+                   35, SCREEN_HEIGHT - 1, noValid, list);
 
           if (field < 1 || field > 9)
             printMessage("Por favor digite um numero valido e entre 1 e 9!", 1);
@@ -87,8 +88,7 @@ void alterAccountScreen(AccountList *list) {
             continue;
           }
           account.balance = newField.balance;
-        }
-        else if (field == 7)
+        } else if (field == 7)
           account.limit = newField.limit;
         else if (field == 5) {
           if (account.balance != 0 && strcmp(newField.status, "inativo") == 0) {
@@ -115,9 +115,9 @@ void alterAccountScreen(AccountList *list) {
           account.limit = 0;
           if (account.balance < 0) {
             account.balance = 0;
-            writeText("0.00", 17, 16, 1);
+            writeText("R$ 0.00           ", 17, 18, 1);
           }
-          writeText("N/A                 ", 17, 18, 1);
+          writeText("N/A                 ", 17, 20, 1);
           account.interestDay = 1;
           writeText("1  ", SCREEN_WIDTH / 2 + 22, SCREEN_HEIGHT / 2 - 1, 1);
         }

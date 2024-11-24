@@ -6,7 +6,7 @@
 #include <string.h>
 
 void listTransactions(TransactionList *list, char number[]) {
-  TransactionListItemPointer transaction = list->head;
+  TransactionListItemPointer transaction = list->tail;
   int page = 1;
   int noTransactions = 0;
   char option;
@@ -56,19 +56,44 @@ void listTransactions(TransactionList *list, char number[]) {
       }
       if (strcmp(transaction->data.fromAccountNumber, number) != 0 &&
           strcmp(transaction->data.toAccountNumber, number) != 0) {
-        transaction = transaction->next;
+        transaction = transaction->prev;
         continue;
       }
 
       printTransaction(transaction->data, 8 + printed);
       printed++;
 
-      transaction = transaction->next;
+      transaction = transaction->prev;
     }
 
     writeText("b - VOLTAR", SCREEN_WIDTH, SCREEN_HEIGHT - 1, 0);
     writeText("Pressione 'Enter' para continuar: ", 0, SCREEN_HEIGHT - 1, 0);
     option = awaitPressAnyKey(0);
+
+    if (printed < 14) {
+      option = 'b';
+      continue;
+    }
+
+    int hasMore = 0;
+    for (int i = 0; i < 14; i++) {
+      if (transaction == NULL) {
+        break;
+      }
+      if (strcmp(transaction->data.fromAccountNumber, number) != 0 &&
+          strcmp(transaction->data.toAccountNumber, number) != 0) {
+        transaction = transaction->prev;
+        continue;
+      }
+
+      hasMore = 1;
+      break;
+    }
+    if (printed == 14 && !hasMore) {
+      option = 'b';
+      continue;
+    }
+
     if (noTransactions)
       option = 'b';
     else

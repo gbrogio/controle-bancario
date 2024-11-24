@@ -12,8 +12,9 @@ void registerTransaction(TransactionList *list, AccountListItem *account,
   do {
     cls();
     buildScreen();
-    writeText("REGISTRAR ", SCREEN_WIDTH / 2, 4, 0);
-    printf(type == 'c' ? "ENTRADA" : "SAIDA");
+    char title[21];
+    sprintf(title, "REGISTRAR %s", type == 'c' ? "ENTRADA" : "SAIDA");
+    writeText(title, SCREEN_WIDTH / 2, 4, 0);
 
     AccountListItem from = *account;
     Transaction transaction =

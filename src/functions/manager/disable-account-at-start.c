@@ -34,8 +34,8 @@ void disableAccountAtStart(AccountList *list) {
   if (confirmation == 's') {
     if (firstAccount->data.balance != 0) {
       printMessage("Conta com saldo diferente de zero! Pressione 'Enter' "
-                    "para continuar...",
-                    1);
+                   "para continuar...",
+                   1);
       return;
     }
 

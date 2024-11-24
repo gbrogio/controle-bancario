@@ -26,22 +26,20 @@ void createYieldTransaction(TransactionList *transactionList, Account *account,
 
 double giveYieldTo(AccountListItemPointer account,
                    TransactionList *transactionList) {
-  // time_t t = time(NULL);
-  // struct tm tm = *localtime(&t);
-  // int currentDay = tm.tm_mday;
+  time_t t = time(NULL);
+  struct tm tm = *localtime(&t);
+  int currentDay = tm.tm_mday;
 
-  // if (currentDay == account->data.interestDay && account->data.yielded == 0)
-  // {
-  double yield = account->data.balance * YIELD;
-  account->data.balance += yield;
-  account->data.yielded = 1;
-  createYieldTransaction(transactionList, &account->data, yield);
-  return yield;
-  // }
+  if (currentDay == account->data.interestDay && account->data.yielded == 0) {
+    double yield = account->data.balance * YIELD;
+    account->data.balance += yield;
+    account->data.yielded = 1;
+    createYieldTransaction(transactionList, &account->data, yield);
+    return yield;
+  }
 
-  // if (account->data.yielded == 1 && currentDay != account->data.interestDay)
-  // {
-  //   account->data.yielded = 0;
-  // }
-  // return 0.0;
+  if (account->data.yielded == 1 && currentDay != account->data.interestDay) {
+    account->data.yielded = 0;
+  }
+  return 0.0;
 }

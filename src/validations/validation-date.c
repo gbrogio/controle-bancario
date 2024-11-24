@@ -1,5 +1,6 @@
 #include "validations.h"
 #include <ctype.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -7,8 +8,9 @@
 int validationDate(GenericType i, GenericType _) {
   UNUSED(_);
   char *date = (char *)i;
+  int length = strlen(date);
 
-  if (strlen(date) != 10)
+  if (length != 10)
     return 1;
 
   // FORMAT VALIDATIONS dd

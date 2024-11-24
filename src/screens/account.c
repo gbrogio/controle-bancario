@@ -22,16 +22,16 @@ char accountScreen(AccountList *accountList, TransactionList *transactionList,
             0);
 
   writeText("1 - Registrar Entrada", 0, 6, 0);
-  writeText("2 - Registrar Saida", 0, 8, 0);
+  writeText("2 - Registrar Saida", 0, 7, 0);
 
   if (account->data.type == 'p')
     changeForegroundColor(161, 161, 170);
-  writeText("3 - Transferir", 0, 10, 0);
-  writeText("4 - Transferir (COM DATA)", 0, 11, 0);
+  writeText("3 - Transferir", 0, 8, 0);
+  writeText("4 - Transferir (COM DATA)", 0, 9, 0);
   if (account->data.type == 'p')
     setDefaultColor();
-  writeText("5 - Registar Entrada (COM DATA)", 0, 7, 0);
-  writeText("6 - Registar Saida (COM DATA)", 0, 9, 0);
+  writeText("5 - Registar Entrada (COM DATA)", 0, 10, 0);
+  writeText("6 - Registar Saida (COM DATA)", 0, 11, 0);
 
   writeText("7 - Consultar Transacoes", 0, 12, 0);
 
