@@ -40,6 +40,17 @@ AccountListItemPointer mergeTwoLists(AccountListItemPointer l1,
   return head->next;
 }
 
+void freeList(AccountListItemPointer head) {
+  AccountListItemPointer current = head;
+  AccountListItemPointer next;
+
+  while (current != NULL) {
+    next = current->next;
+    free(current);
+    current = next;
+  }
+}
+
 AccountListItemPointer sortList(AccountListItemPointer head) {
   if (head == NULL || head->next == NULL) {
     return head;
@@ -64,8 +75,7 @@ void listAccountsAlphabetic(AccountList *list) {
   AccountListItemPointer newTail = NULL;
 
   while (current != NULL) {
-    AccountListItemPointer newNode =
-        (AccountListItemPointer)malloc(sizeof(AccountListItem));
+    AccountListItemPointer newNode = (AccountListItemPointer)malloc(sizeof(AccountListItem));
     newNode->data = current->data;
     newNode->next = NULL;
 
@@ -121,4 +131,6 @@ void listAccountsAlphabetic(AccountList *list) {
     else
       page++;
   } while (continueListing != 'b');
+
+  freeList(newHead);
 }
