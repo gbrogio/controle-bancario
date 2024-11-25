@@ -22,7 +22,7 @@ Transaction createTransaction(TransactionList *list, AccountListItem *from,
 
   do {
     getInput("%lf", &transaction.value, 0,
-             "Digite um valor valido! Pressione 'Enter' para reescrever...", 22,
+             "Digite um valor valido! Pressione 'Enter' para reescrever...", SCREEN_WIDTH / 2,
              SCREEN_HEIGHT / 2, noValid, NULL);
 
     if (from->data.balance + from->data.limit < transaction.value &&
@@ -39,7 +39,7 @@ Transaction createTransaction(TransactionList *list, AccountListItem *from,
       getInput("%s", dateFormated, 12,
                "Digite uma data valida (ex. dd/mm/aaaa)! Pressione 'Enter' "
                "para reescrever...",
-               22, SCREEN_HEIGHT / 2 + 1, validationDate, NULL);
+               SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 1, validationDate, NULL);
 
       if (list->tail == NULL)
         break;
