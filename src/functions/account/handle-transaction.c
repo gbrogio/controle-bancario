@@ -22,8 +22,8 @@ Transaction createTransaction(TransactionList *list, AccountListItem *from,
 
   do {
     getInput("%lf", &transaction.value, 0,
-             "Digite um valor valido! Pressione 'Enter' para reescrever...", SCREEN_WIDTH / 2,
-             SCREEN_HEIGHT / 2, noValid, NULL);
+             "Digite um valor valido! Pressione 'Enter' para reescrever...",
+             SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, noValid, NULL);
 
     if (from->data.balance + from->data.limit < transaction.value &&
         type == 'd') {

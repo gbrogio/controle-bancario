@@ -19,16 +19,14 @@ AccountListItemPointer findMiddle(AccountListItemPointer head) {
 }
 
 AccountListItemPointer mergeTwoLists(AccountListItemPointer l1,
-                                     AccountListItemPointer l2,
-                                     int byNumber) {
+                                     AccountListItemPointer l2, int byNumber) {
   AccountListItemPointer head =
       (AccountListItemPointer)malloc(sizeof(AccountListItem));
   AccountListItemPointer tail = head;
 
-
   while (l1 != NULL && l2 != NULL) {
     int comparison = byNumber ? strcmp(l1->data.number, l2->data.number)
-                              : strcmp(l1->data.bank, l2->data.bank); 
+                              : strcmp(l1->data.bank, l2->data.bank);
     if (comparison < 0) {
       tail->next = l1;
       l1 = l1->next;
@@ -79,7 +77,8 @@ void listAccountsOrdered(AccountList *list, int byNumber) {
   AccountListItemPointer newTail = NULL;
 
   while (current != NULL) {
-    AccountListItemPointer newNode = (AccountListItemPointer)malloc(sizeof(AccountListItem));
+    AccountListItemPointer newNode =
+        (AccountListItemPointer)malloc(sizeof(AccountListItem));
     newNode->data = current->data;
     newNode->next = NULL;
 
