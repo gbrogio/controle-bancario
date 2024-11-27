@@ -21,6 +21,7 @@ char listAccountsScreen(AccountList *list, TransactionList *_,
   writeText("3 - Listagem de Contas Inativas", 0, 8, 0);
   writeText("4 - Listagem de Contas-correntes", 0, 9, 0);
   writeText("5 - Consulta pelo Numero da Conta", 0, 10, 0);
+  writeText("6 - Consulta por Ordem de Numero da Conta", 0, 11, 0);
 
   buildScreen();
   char option = command();
@@ -32,7 +33,7 @@ char listAccountsScreen(AccountList *list, TransactionList *_,
   }
 
   if (option == '2') {
-    listAccountsAlphabetic(list);
+    listAccountsOrdered(list, 0);
     option = '8';
     return option;
   }
@@ -51,6 +52,12 @@ char listAccountsScreen(AccountList *list, TransactionList *_,
 
   if (option == '5') {
     listAccountsByNumber(list);
+    option = '8';
+    return option;
+  }
+
+  if (option == '6') {
+    listAccountsOrdered(list, 1);
     option = '8';
     return option;
   }

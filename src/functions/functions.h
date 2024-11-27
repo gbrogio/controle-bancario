@@ -303,8 +303,9 @@ void listAccountsChecking(AccountList *list);
  * @brief Lists all the accounts in the list in alphabetical order.
  * 
  * @param list Pointer to the AccountList structure.
+ * @param byNumber Flag to indicate if the list should be ordered by number.
  */
-void listAccountsAlphabetic(AccountList *list);
+void listAccountsOrdered(AccountList *list, int byNumber);
 
 /**
  * @brief Lists a unique account in the list by number.

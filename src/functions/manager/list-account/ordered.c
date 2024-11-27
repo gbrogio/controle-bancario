@@ -19,13 +19,17 @@ AccountListItemPointer findMiddle(AccountListItemPointer head) {
 }
 
 AccountListItemPointer mergeTwoLists(AccountListItemPointer l1,
-                                     AccountListItemPointer l2) {
+                                     AccountListItemPointer l2,
+                                     int byNumber) {
   AccountListItemPointer head =
       (AccountListItemPointer)malloc(sizeof(AccountListItem));
   AccountListItemPointer tail = head;
 
+
   while (l1 != NULL && l2 != NULL) {
-    if (strcmp(l1->data.bank, l2->data.bank) < 0) {
+    int comparison = byNumber ? strcmp(l1->data.number, l2->data.number)
+                              : strcmp(l1->data.bank, l2->data.bank); 
+    if (comparison < 0) {
       tail->next = l1;
       l1 = l1->next;
     } else {
@@ -51,7 +55,7 @@ void freeList(AccountListItemPointer head) {
   }
 }
 
-AccountListItemPointer sortList(AccountListItemPointer head) {
+AccountListItemPointer sortList(AccountListItemPointer head, int byNumber) {
   if (head == NULL || head->next == NULL) {
     return head;
   }
@@ -60,13 +64,13 @@ AccountListItemPointer sortList(AccountListItemPointer head) {
   AccountListItemPointer afterMiddle = middle->next;
   middle->next = NULL;
 
-  AccountListItemPointer left = sortList(head);
-  AccountListItemPointer right = sortList(afterMiddle);
+  AccountListItemPointer left = sortList(head, byNumber);
+  AccountListItemPointer right = sortList(afterMiddle, byNumber);
 
-  return mergeTwoLists(left, right);
+  return mergeTwoLists(left, right, byNumber);
 }
 
-void listAccountsAlphabetic(AccountList *list) {
+void listAccountsOrdered(AccountList *list, int byNumber) {
   AccountListItemPointer account;
 
   // Copy list
@@ -90,7 +94,7 @@ void listAccountsAlphabetic(AccountList *list) {
     current = current->next;
   }
 
-  account = sortList(newHead);
+  account = sortList(newHead, byNumber);
 
   int page = 1;
   int noAccounts = 0;
