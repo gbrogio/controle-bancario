@@ -1,4 +1,4 @@
-# GCC VERSION
+# G.B.M.S. BANK
 
 Este projeto foi compilado usando a GCC v13.2.0.\
 Em casos de bug em funcionalidades do projeto ou outros ao executar os bashes (`./start-linux` ou `start-win.bat`), seus arquivos já compilados estarão dentro da pasta `/bin-production`
